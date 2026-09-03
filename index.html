@@ -468,7 +468,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ثالثاً: الإيرادات -->
+    <!-- ثالثاً: الإيرادات (مع التعديل المطلوب) -->
     <!-- ============================================================ -->
     <div class="section-block">
         <h2>ثالثاً: الإيرادات</h2>
@@ -580,15 +580,13 @@
                         <th>الشريك</th>
                         <th>إجمالي المدفوعات (ج.م)</th>
                         <th>العبء الفعلي (ج.م)</th>
-                        <th>صافي المصروفات (ج.م)</th>
-                        <th>حصة الإيرادات (ج.م)</th>
-                        <th>الصافي النهائي (ج.م)</th>
+                        <th>دائنًا بـ / مدينًا بـ (ج.م)</th>
                     </tr>
                 </thead>
                 <tbody id="finalSettlementBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong>، والقيمة السالبة تعني أنه <strong>مدين</strong> (هذا صافي المركز المالي الكلي).</div>
+        <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong>، والقيمة السالبة تعني أنه <strong>مدين</strong> (صافي المركز المالي).</div>
 
         <!-- الجدول الجديد: تفاصيل الديون النهائية (بعد المقاصة الثنائية) -->
         <h3>تفاصيل الديون النهائية (بعد المقاصة الثنائية)</h3>
@@ -818,9 +816,9 @@
             renderExpensesTable();
             renderBreakdownTable();
             renderDebtsTables();
-            renderRevenuesTable();
+            renderRevenuesTable(); // تم تعديل هذه الدالة
             renderFinalSettlement();
-            renderFinalDistribution(); // الجدول النهائي مع المقاصة الثنائية
+            renderFinalDistribution();
             updateAdminUI();
         }
 
@@ -982,7 +980,7 @@
         }
 
         // ============================================================
-        // 4. جدول الإيرادات
+        // 4. جدول الإيرادات (تم التعديل حسب الطلب)
         // ============================================================
         function renderRevenuesTable() {
             const tbody = document.getElementById('revenueTableBody');
@@ -998,6 +996,57 @@
                 const shareAhmedY = (r.total * partners.ahmed_yassin.percent) / 100;
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteRevenue(${r.id})">حذف</button></td>` : '';
                 const receiverName = r.receiver === 'all' ? 'الجميع (بدون مقاصة)' : partners[r.receiver]?.name || r.receiver;
+
+                // تحديد الألوان والعلامات حسب المستلم
+                let drColor = '';
+                let yahiaColor = '';
+                let mostafaColor = '';
+                let ahmedYColor = '';
+                let drSign = '';
+                let yahiaSign = '';
+                let mostafaSign = '';
+                let ahmedYSign = '';
+
+                if (r.receiver === 'dr_ahmed') {
+                    // د. أحمد هو المستلم → باقي الشركاء مدينون له (يظهر بالسالب والأحمر)
+                    drColor = '';
+                    drSign = '';
+                    yahiaColor = 'creditor-dr_ahmed';
+                    yahiaSign = '-';
+                    mostafaColor = 'creditor-dr_ahmed';
+                    mostafaSign = '-';
+                    ahmedYColor = 'creditor-dr_ahmed';
+                    ahmedYSign = '-';
+                } else if (r.receiver === 'yahia') {
+                    yahiaColor = '';
+                    yahiaSign = '';
+                    drColor = 'creditor-yahia';
+                    drSign = '-';
+                    mostafaColor = 'creditor-yahia';
+                    mostafaSign = '-';
+                    ahmedYColor = 'creditor-yahia';
+                    ahmedYSign = '-';
+                } else if (r.receiver === 'mostafa') {
+                    mostafaColor = '';
+                    mostafaSign = '';
+                    drColor = 'creditor-mostafa';
+                    drSign = '-';
+                    yahiaColor = 'creditor-mostafa';
+                    yahiaSign = '-';
+                    ahmedYColor = 'creditor-mostafa';
+                    ahmedYSign = '-';
+                } else {
+                    // المستلم = 'all' أو أي حالة أخرى → لا توجد علامات سالب ولا ألوان خاصة
+                    drColor = '';
+                    drSign = '';
+                    yahiaColor = '';
+                    yahiaSign = '';
+                    mostafaColor = '';
+                    mostafaSign = '';
+                    ahmedYColor = '';
+                    ahmedYSign = '';
+                }
+
                 tbody.innerHTML += `
                     <tr>
                         <td>${r.id}</td>
@@ -1006,10 +1055,10 @@
                         <td>${r.price.toFixed(2)}</td>
                         <td><strong>${r.total.toFixed(2)}</strong></td>
                         <td>${receiverName}</td>
-                        <td>${shareDr.toFixed(2)}</td>
-                        <td>${shareYahia.toFixed(2)}</td>
-                        <td>${shareMostafa.toFixed(2)}</td>
-                        <td>${shareAhmedY.toFixed(2)}</td>
+                        <td class="${drColor}">${drSign}${shareDr.toFixed(2)}</td>
+                        <td class="${yahiaColor}">${yahiaSign}${shareYahia.toFixed(2)}</td>
+                        <td class="${mostafaColor}">${mostafaSign}${shareMostafa.toFixed(2)}</td>
+                        <td class="${ahmedYColor}">${ahmedYSign}${shareAhmedY.toFixed(2)}</td>
                         ${deleteBtn}
                     </tr>
                 `;
@@ -1017,13 +1066,12 @@
         }
 
         // ============================================================
-        // 5. المقاصة النهائية (صافي المركز)
+        // 5. صافي المركز المالي
         // ============================================================
         function renderFinalSettlement() {
             const tbody = document.getElementById('finalSettlementBody');
             
             const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
-            const totalRevenues = revenues.reduce((sum, r) => sum + r.total, 0);
             
             const paid = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
             expenses.forEach(e => paid[e.payer] += e.amount);
@@ -1032,32 +1080,23 @@
             let grandTotalPaid = 0;
             let grandTotalShareExp = 0;
             let grandTotalNetExp = 0;
-            let grandTotalShareRev = 0;
-            let grandTotalFinal = 0;
 
             Object.keys(partners).forEach(key => {
                 const shareExp = (totalExpenses * partners[key].percent) / 100;
-                const shareRev = (totalRevenues * partners[key].percent) / 100;
                 const netExp = paid[key] - shareExp;
-                const finalBalance = netExp + shareRev;
 
                 grandTotalPaid += paid[key];
                 grandTotalShareExp += shareExp;
                 grandTotalNetExp += netExp;
-                grandTotalShareRev += shareRev;
-                grandTotalFinal += finalBalance;
 
                 const netExpColor = netExp >= 0 ? creditorColorMap[key] : '';
-                const finalColor = finalBalance >= 0 ? creditorColorMap[key] : '';
 
                 html += `
                     <tr>
                         <td><strong>${partners[key].name}</strong></td>
                         <td>${paid[key].toFixed(2)}</td>
                         <td>${shareExp.toFixed(2)}</td>
-                        <td class="${netExpColor}">${netExp.toFixed(2)}</td>
-                        <td>${shareRev.toFixed(2)}</td>
-                        <td class="${finalColor}"><strong>${finalBalance.toFixed(2)}</strong></td>
+                        <td class="${netExpColor}"><strong>${netExp.toFixed(2)}</strong></td>
                     </tr>
                 `;
             });
@@ -1068,8 +1107,6 @@
                     <td><strong>${grandTotalPaid.toFixed(2)}</strong></td>
                     <td><strong>${grandTotalShareExp.toFixed(2)}</strong></td>
                     <td><strong>${grandTotalNetExp.toFixed(2)}</strong></td>
-                    <td><strong>${grandTotalShareRev.toFixed(2)}</strong></td>
-                    <td><strong>${grandTotalFinal.toFixed(2)}</strong></td>
                 </tr>
             `;
 
@@ -1136,7 +1173,6 @@
 
             Object.keys(netDebtRaw).forEach(debtorA => {
                 Object.keys(netDebtRaw[debtorA]).forEach(creditorB => {
-                    // نتأكد من أننا لم نعالج هذا الزوج مسبقاً
                     let pairKey = [debtorA, creditorB].sort().join('|');
                     if (processedPairs.has(pairKey)) return;
                     processedPairs.add(pairKey);
@@ -1145,15 +1181,12 @@
                     let debtB_on_A = (netDebtRaw[creditorB] && netDebtRaw[creditorB][debtorA]) || 0;
 
                     if (Math.abs(debtA_on_B - debtB_on_A) < 0.01) {
-                        // متساويان، لا يوجد دين
                         return;
                     } else if (debtA_on_B > debtB_on_A) {
-                        // debtorA هو المدين، creditorB هو الدائن
                         let net = debtA_on_B - debtB_on_A;
                         if (!finalDebt[debtorA]) finalDebt[debtorA] = {};
                         finalDebt[debtorA][creditorB] = net;
                     } else {
-                        // creditorB هو المدين، debtorA هو الدائن
                         let net = debtB_on_A - debtA_on_B;
                         if (!finalDebt[creditorB]) finalDebt[creditorB] = {};
                         finalDebt[creditorB][debtorA] = net;
@@ -1161,7 +1194,7 @@
                 });
             });
 
-            // 5. بناء جدول النتائج (صف واحد لكل مدين مع تفاصيل دائنيه)
+            // 5. بناء جدول النتائج
             let html = '';
             let grandTotalAll = 0;
             let hasDebt = false;
@@ -1198,7 +1231,6 @@
                 return;
             }
 
-            // صف الإجمالي
             html += `
                 <tr class="total-debt-row">
                     <td><strong>الإجمالي الكلي</strong></td>
