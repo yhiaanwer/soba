@@ -568,7 +568,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- سادساً: المقاصة النهائية + توزيع الديون الصافية -->
+    <!-- سادساً: المقاصة النهائية -->
     <!-- ============================================================ -->
     <div class="section-block">
         <h2>سادساً: المقاصة النهائية</h2>
@@ -588,24 +588,26 @@
                 <tbody id="finalSettlementBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong> (يستحق هذا المبلغ)، والقيمة السالبة تعني أنه <strong>مدين</strong> (عليه هذا المبلغ). يجب أن يتساوى مجموع الدائنين والمدينين بعد احتساب الإيرادات.</div>
+        <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong> (يستحق هذا المبلغ)، والقيمة السالبة تعني أنه <strong>مدين</strong> (عليه هذا المبلغ).</div>
 
-        <!-- القسم الجديد: توزيع الديون الصافية النهائية -->
-        <h3>توزيع الديون الصافية النهائية</h3>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول المبالغ النهائية المستحقة على كل شريك من الشركاء الآخرين بعد المقاصة الكاملة.</em></p>
+        <!-- القسم الجديد: توزيع الديون الصافية النهائية (بشكل تفصيلي) -->
+        <h3>تفاصيل الديون النهائية (بعد المقاصة)</h3>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول المبالغ النهائية المستحقة على كل شريك من الشركاء الآخرين بعد المقاصة الكاملة، مع تفصيل دقيق لكل مدين.</em></p>
         <div class="settlement-table-wrapper">
             <table>
                 <thead>
                     <tr>
-                        <th>الدائن (صاحب الحق)</th>
                         <th>المدين</th>
+                        <th>إجمالي الدين (ج.م)</th>
+                        <th>الدائن</th>
                         <th>المبلغ المستحق (ج.م)</th>
+                        <th>نسبة الدين</th>
                     </tr>
                 </thead>
                 <tbody id="finalDistributionBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص نتيجة المقاصة النهائية. على سبيل المثال، إذا كان "د. أحمد" دائناً بـ 10,000 ج.م، ومصطفى ويحيى مدينين بـ 6,000 و4,000 على التوالي، فسيظهر هنا أن مصطفى مدين لد. أحمد بـ 6,000 ويحيى مدين لد. أحمد بـ 4,000.</div>
+        <div class="note"><strong>تنبيه:</strong> هذا الجدول يوضح بالتفصيل كيف وزعت ديون كل مدين على الدائنين المستحقين. يتساوى إجمالي الديون مع إجمالي المستحقات.</div>
     </div>
 
     <!-- ============================================================ -->
@@ -819,8 +821,8 @@
             renderBreakdownTable();
             renderDebtsTables();
             renderRevenuesTable();
-            renderFinalSettlement(); // جدول المقاصة
-            renderFinalDistribution(); // جدول توزيع الديون الصافية (الجديد)
+            renderFinalSettlement();
+            renderFinalDistributionDetailed(); // الجدول التفصيلي الجديد
             updateAdminUI();
         }
 
@@ -1017,7 +1019,7 @@
         }
 
         // ============================================================
-        // 5. المقاصة النهائية (جدول صافي المركز)
+        // 5. المقاصة النهائية (صافي المركز)
         // ============================================================
         function renderFinalSettlement() {
             const tbody = document.getElementById('finalSettlementBody');
@@ -1077,9 +1079,9 @@
         }
 
         // ============================================================
-        // 6. توزيع الديون الصافية النهائية (الجدول الجديد)
+        // 6. توزيع الديون الصافية النهائية (تفصيلي)
         // ============================================================
-        function renderFinalDistribution() {
+        function renderFinalDistributionDetailed() {
             const tbody = document.getElementById('finalDistributionBody');
             
             const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
@@ -1090,9 +1092,6 @@
 
             // حساب الرصيد النهائي لكل شريك
             const balances = {};
-            let html = '';
-            let totalDistributed = 0;
-
             Object.keys(partners).forEach(key => {
                 const shareExp = (totalExpenses * partners[key].percent) / 100;
                 const shareRev = (totalRevenues * partners[key].percent) / 100;
@@ -1108,9 +1107,9 @@
                 else if (balances[key] < -0.01) debtors.push({ key, amount: Math.abs(balances[key]) });
             });
 
-            // إذا لم يكن هناك دائنون أو مدينون، اعرض رسالة
+            // إذا لم يكن هناك ديون
             if (creditors.length === 0 || debtors.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888; padding:12px;">لا توجد ديون متبادلة، جميع الحسابات متساوية.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888; padding:12px;">لا توجد ديون متبادلة، جميع الحسابات متساوية.</td></tr>`;
                 return;
             }
 
@@ -1118,67 +1117,95 @@
             let totalCredits = creditors.reduce((sum, c) => sum + c.amount, 0);
             let totalDebts = debtors.reduce((sum, d) => sum + d.amount, 0);
             
-            // معالجة فروق التقريب (بضبط أكبر مدين)
             if (Math.abs(totalCredits - totalDebts) > 0.01) {
-                // ضبط الفرق على أكبر مدين
                 if (totalCredits > totalDebts) {
-                    // إضافة الفرق لأكبر مدين
                     debtors.sort((a, b) => b.amount - a.amount);
                     debtors[0].amount += (totalCredits - totalDebts);
                 } else {
-                    // إضافة الفرق لأكبر دائن
                     creditors.sort((a, b) => b.amount - a.amount);
                     creditors[0].amount += (totalDebts - totalCredits);
                 }
             }
 
-            // توزيع الدائنين على المدينين
-            let remainingCreditors = creditors.map(c => ({ ...c }));
-            let remainingDebtors = debtors.map(d => ({ ...d }));
+            // توزيع الدائنين على المدينين بنسبة كل دائن من إجمالي الدائنين
+            let grandTotalDistributed = 0;
+            let rows = [];
 
-            let distributionRows = [];
+            debtors.forEach(debtor => {
+                let remainingDebt = debtor.amount;
+                let debtorRows = [];
+                let totalCreditorAmount = creditors.reduce((sum, c) => sum + c.amount, 0);
 
-            while (remainingCreditors.length > 0 && remainingDebtors.length > 0) {
-                let cred = remainingCreditors[0];
-                let deb = remainingDebtors[0];
-                
-                let amount = Math.min(cred.amount, deb.amount);
-                distributionRows.push({ creditor: cred.key, debtor: deb.key, amount: amount });
-                totalDistributed += amount;
-                
-                cred.amount -= amount;
-                deb.amount -= amount;
-                
-                if (cred.amount < 0.01) remainingCreditors.shift();
-                if (deb.amount < 0.01) remainingDebtors.shift();
-            }
+                creditors.forEach(creditor => {
+                    let share = (creditor.amount / totalCreditorAmount) * debtor.amount;
+                    let amount = Math.min(share, remainingDebt);
+                    if (amount > 0.01) {
+                        debtorRows.push({ creditor: creditor.key, amount: amount });
+                        remainingDebt -= amount;
+                        grandTotalDistributed += amount;
+                    }
+                });
 
-            // بناء جدول النتائج
-            if (distributionRows.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888; padding:12px;">الحسابات متساوية، لا توجد ديون متبادلة.</td></tr>`;
+                // إذا بقي شيء من الدين (بسبب التقريب)، أضفه لأكبر دائن
+                if (remainingDebt > 0.01) {
+                    let maxCreditor = debtorRows.reduce((a, b) => a.amount > b.amount ? a : b);
+                    maxCreditor.amount += remainingDebt;
+                    grandTotalDistributed += remainingDebt;
+                }
+
+                // إنشاء صف لكل دائن في هذا المدين
+                debtorRows.forEach(row => {
+                    rows.push({
+                        debtor: debtor.key,
+                        creditor: row.creditor,
+                        amount: row.amount,
+                        totalDebt: debtor.amount
+                    });
+                });
+            });
+
+            // إذا لم تنتج أي صفوف
+            if (rows.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#888; padding:12px;">الحسابات متساوية، لا توجد ديون متبادلة.</td></tr>`;
                 return;
             }
 
-            let grandTotal = 0;
-            distributionRows.forEach(row => {
-                const creditorName = partners[row.creditor]?.name || row.creditor;
+            // بناء جدول النتائج
+            let html = '';
+            let currentDebtor = '';
+            let debtorTotal = 0;
+
+            rows.forEach((row, index) => {
                 const debtorName = partners[row.debtor]?.name || row.debtor;
+                const creditorName = partners[row.creditor]?.name || row.creditor;
                 const colorClass = creditorColorMap[row.creditor] || '';
-                grandTotal += row.amount;
+                const percentage = (row.amount / row.totalDebt * 100);
+
+                // إذا تغير المدين، أضف صفاً فاصلاً (لتوضيح إجمالي كل مدين)
+                if (row.debtor !== currentDebtor && index > 0) {
+                    // لا حاجة لصف فاصل، بل نعرض إجمالي المدين في أول صف له
+                }
+                currentDebtor = row.debtor;
+                debtorTotal = row.totalDebt;
+
                 html += `
                     <tr>
+                        <td><strong>${debtorName}</strong></td>
+                        <td>${row.totalDebt.toFixed(2)}</td>
                         <td><strong class="${colorClass}">${creditorName}</strong></td>
-                        <td>${debtorName}</td>
                         <td><strong class="${colorClass}">${row.amount.toFixed(2)}</strong></td>
+                        <td>${percentage.toFixed(2)}%</td>
                     </tr>
                 `;
             });
 
-            // صف الإجمالي
+            // صف الإجمالي النهائي
             html += `
                 <tr class="total-debt-row">
-                    <td colspan="2"><strong>الإجمالي</strong></td>
-                    <td><strong>${grandTotal.toFixed(2)}</strong></td>
+                    <td colspan="2"><strong>الإجمالي الكلي للديون</strong></td>
+                    <td></td>
+                    <td><strong>${grandTotalDistributed.toFixed(2)}</strong></td>
+                    <td><strong>100%</strong></td>
                 </tr>
             `;
 
