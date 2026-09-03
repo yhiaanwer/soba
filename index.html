@@ -118,11 +118,6 @@
             font-weight: 700 !important; 
         }
 
-        /* للإرث في الجداول الأخرى (احتفظ بها للتوافق) */
-        .dr-ahmed-expense { color: #c62828 !important; font-weight: 700 !important; }
-        .debt-yahia { color: #1565c0 !important; font-weight: 700 !important; }
-        .debt-mustafa { color: #6a1b9a !important; font-weight: 700 !important; }
-
         .total-debt-row {
             background-color: #c8e6c9 !important;
             font-weight: 700;
@@ -772,7 +767,6 @@
             expenses.forEach(e => {
                 total += e.amount;
                 totalsByPayer[e.payer] += e.amount;
-                // نستخدم لون الدافع في عمود المبلغ
                 const colorClass = creditorColorMap[e.payer] || '';
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>` : '';
                 tbody.innerHTML += `
@@ -824,10 +818,8 @@
                 totals.mostafa += shareMostafa;
                 totals.ahmed_yassin += shareAhmedY;
 
-                // تحديد لون الدافع
                 const payerColor = creditorColorMap[e.payer] || '';
 
-                // الخلايا: نطبق لون الدافع على جميع الخلايا ما عدا خلية الدافع نفسه (نتركها بدون لون)
                 const colorDr = (e.payer !== 'dr_ahmed') ? payerColor : '';
                 const colorYahia = (e.payer !== 'yahia') ? payerColor : '';
                 const colorMostafa = (e.payer !== 'mostafa') ? payerColor : '';
@@ -858,12 +850,15 @@
         }
 
         // ============================================================
-        // 3. جداول المديونيات (تلوين حسب الدائن)
+        // 3. جداول المديونيات (تلوين حسب الدائن مع خلفيات مصححة)
         // ============================================================
         function renderDebtsTables() {
+            // dr_ahmed: خلفية حمراء فاتحة (#ffebee)
             renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'creditor-dr_ahmed', '#ffebee');
-            renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'creditor-mostafa', '#e3f2fd');
-            renderCreditorDebtTable('yahia', 'debtYahiaBody', 'creditor-yahia', '#f3e5f5');
+            // mostafa: خلفية بنفسجية فاتحة (#f3e5f5)
+            renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'creditor-mostafa', '#f3e5f5');
+            // yahia: خلفية زرقاء فاتحة (#e3f2fd)
+            renderCreditorDebtTable('yahia', 'debtYahiaBody', 'creditor-yahia', '#e3f2fd');
         }
 
         function renderCreditorDebtTable(creditorKey, tableBodyId, colorClass, bgColor) {
@@ -892,7 +887,6 @@
                 Object.keys(partners).forEach(pKey => {
                     if (pKey !== creditorKey) {
                         const debtFromExp = (e.amount * partners[pKey].percent) / 100;
-                        // هنا نطبق لون الدائن (colorClass) على جميع المبالغ المستحقة له
                         debtDetails += `<div class="debt-line">• ${partners[pKey].name} (${partners[pKey].percent}%) : <span class="${colorClass}">${debtFromExp.toFixed(2)}</span></div>`;
                         itemTotalDebt += debtFromExp;
                     }
