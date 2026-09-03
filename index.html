@@ -78,7 +78,6 @@
 
         .meta strong { color: #1b5e20; }
 
-        /* --- الأنماط الأساسية للجداول (بدون تمرير إجباري) --- */
         table { 
             width: 100%; 
             border-collapse: collapse;
@@ -105,44 +104,24 @@
         tr:nth-child(even) { background-color: #f4fcf4; }
         tr:nth-child(odd) { background-color: #ffffff; }
 
-        /* --- التعديل المخصص فقط لجدول الإيرادات (التمرير الأفقي) --- */
-        .revenue-table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin: 6px 0 10px 0;
-            border-radius: 6px;
-            border: 1px solid #a5d6a7;
+        /* الألوان الثابتة للمدفوعات حسب الشريك (لجميع الجداول) */
+        .payer-dr_ahmed { 
+            color: #c62828 !important; 
+            font-weight: 700 !important; 
         }
-        .revenue-table-wrapper table {
-            width: 100%;
-            min-width: 700px; /* يضمن عدم ضغط الأعمدة */
-            border-collapse: collapse;
-            font-size: 12px;
-            background: #ffffff;
-            margin: 0;
+        .payer-yahia { 
+            color: #1565c0 !important; 
+            font-weight: 700 !important; 
         }
-        .revenue-table-wrapper table th,
-        .revenue-table-wrapper table td {
-            border: 1px solid #a5d6a7;
-            padding: 6px 4px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
+        .payer-mostafa { 
+            color: #6a1b9a !important; 
+            font-weight: 700 !important; 
         }
-        .revenue-table-wrapper table th {
-            background-color: #2e7d32;
-            color: #ffffff;
-            font-weight: 700;
-            border-color: #1b5e20;
-            font-size: 12px;
-        }
-        .revenue-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
-        .revenue-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
-        /* ------------------------------------------------ */
 
+        /* للإرث في الجداول الأخرى */
         .dr-ahmed-expense { color: #c62828 !important; font-weight: 700 !important; }
-        .debt-mustafa { color: #1565c0 !important; font-weight: 700 !important; }
-        .debt-yahia { color: #6a1b9a !important; font-weight: 700 !important; }
+        .debt-yahia { color: #1565c0 !important; font-weight: 700 !important; }   /* يحيى = أزرق */
+        .debt-mustafa { color: #6a1b9a !important; font-weight: 700 !important; } /* مصطفى = بنفسجي */
 
         .total-debt-row {
             background-color: #c8e6c9 !important;
@@ -180,10 +159,8 @@
             gap: 20px;
             align-items: center;
         }
+        .summary-box .item { display: inline-block; font-size: 13px; } /* توحيد حجم الخط */
         .summary-box .item strong { font-weight: 700; }
-        .summary-box .dr-ahmed { color: #c62828; }
-        .summary-box .debt-mustafa { color: #1565c0; }
-        .summary-box .debt-yahia { color: #6a1b9a; }
 
         ul { margin: 6px 0 10px 20px; padding-right: 15px; }
         ul li { margin-bottom: 3px; font-size: 11.5px; color: #333333; }
@@ -208,7 +185,7 @@
         .debt-details-cell { text-align: right; padding: 5px 8px; }
         .debt-details-cell .debt-line { display: block; padding: 1px 0; }
 
-        /* لوحة التحكم التفاعلية */
+        /* لوحة التحكم */
         .control-panel {
             background: #f1f8e9;
             border: 2px solid #2e7d32;
@@ -306,6 +283,40 @@
 
         .no-print { display: inline-block; }
 
+        /* --- حاوية التمرير فقط لجدول الإيرادات --- */
+        .revenue-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 6px 0 10px 0;
+            border-radius: 6px;
+            border: 1px solid #a5d6a7;
+        }
+        .revenue-table-wrapper table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+            font-size: 12px;
+            background: #ffffff;
+            margin: 0;
+        }
+        .revenue-table-wrapper table th,
+        .revenue-table-wrapper table td {
+            border: 1px solid #a5d6a7;
+            padding: 6px 4px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .revenue-table-wrapper table th {
+            background-color: #2e7d32;
+            color: #ffffff;
+            font-weight: 700;
+            border-color: #1b5e20;
+            font-size: 12px;
+        }
+        .revenue-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
+        .revenue-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
+
         @media print {
             .no-print { display: none !important; }
             body { padding: 0 !important; margin: 0 !important; font-size: 10px; line-height: 1.35; max-width: 100% !important; background: #ffffff !important; } 
@@ -318,7 +329,6 @@
             th { background-color: #2e7d32 !important; color: #ffffff !important; } 
             .debt-details-cell { font-size: 8.5px !important; padding: 3px 5px !important; }
             .debt-details-cell .debt-line { display: block; padding: 1px 0; }
-            /* إلغاء التمرير عند الطباعة لجدول الإيرادات */
             .revenue-table-wrapper {
                 overflow-x: visible !important;
                 border: none !important;
@@ -340,10 +350,10 @@
     <p class="sub-title"><strong>بيان الحسابات، نسب الملكية، والمصروفات الموزعة على الشركاء</strong></p>
     <p class="meta">إعداد ومتابعة: <strong>يحيى أنور</strong> (المسؤول المالي) | تاريخ التحديث: <strong id="liveDate">3 سبتمبر 2026</strong></p>
 
-    <!-- حالة الأدمن وزر تسجيل الدخول/الخروج -->
+    <!-- حالة الأدمن -->
     <div id="adminStatusContainer" class="no-print"></div>
 
-    <!-- لوحة التحكم (تظهر فقط للأدمن) -->
+    <!-- لوحة التحكم -->
     <div id="controlPanel" class="control-panel no-print" style="display:none;">
         <h3>➕ إضافة مصروف جديد</h3>
         <div class="form-row">
@@ -386,9 +396,9 @@
                 <input type="number" id="revPrice" step="0.01" placeholder="0.00">
             </div>
             <div class="form-group">
-                <label>المستلم (من قبض النقود؟):</label>
+                <label>المستلم:</label>
                 <select id="revReceiver">
-                    <option value="all">الجميع (توزيع بدون مقاصة)</option>
+                    <option value="all">الجميع (بدون مقاصة)</option>
                     <option value="dr_ahmed">د. أحمد</option>
                     <option value="yahia">يحيى أنور</option>
                     <option value="mostafa">مصطفى ياسين</option>
@@ -436,7 +446,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ثالثاً: الإيرادات (هنا فقط التمرير الأفقي) -->
+    <!-- ثالثاً: الإيرادات -->
     <!-- ============================================================ -->
     <div class="section-block">
         <h2>ثالثاً: الإيرادات</h2>
@@ -563,9 +573,9 @@
         // البيانات الأساسية (نسب الشركاء والمصروفات الافتراضية)
         // ============================================================
         const partners = {
-            dr_ahmed: { name: 'د. أحمد', percent: 45.25, colorClass: 'dr-ahmed-expense' },
-            yahia: { name: 'يحيى أنور', percent: 23.08, colorClass: 'debt-yahia' },
-            mostafa: { name: 'مصطفى ياسين', percent: 21.42, colorClass: 'debt-mustafa' },
+            dr_ahmed: { name: 'د. أحمد', percent: 45.25, colorClass: 'payer-dr_ahmed' },
+            yahia: { name: 'يحيى أنور', percent: 23.08, colorClass: 'payer-yahia' },
+            mostafa: { name: 'مصطفى ياسين', percent: 21.42, colorClass: 'payer-mostafa' },
             ahmed_yassin: { name: 'أحمد ياسين', percent: 10.25, colorClass: '' }
         };
 
@@ -764,19 +774,21 @@
                 `;
             });
 
-            const deleteHeaderCol = isAdmin ? 2 : 1;
-            tbody.innerHTML += `
+            // تعديل: إجمالي المصروفات تحت عمود المبلغ مباشرة
+            const totalRow = `
                 <tr>
-                    <td colspan="${deleteHeaderCol}"><strong>إجمالي المصروفات المدفوعة الشاملة</strong></td>
-                    <td colspan="${isAdmin ? 2 : 1}"><strong>${total.toLocaleString('en-US', {minimumFractionDigits: 2})} ج.م</strong></td>
+                    <td colspan="2"><strong>إجمالي المصروفات المدفوعة الشاملة</strong></td>
+                    <td><strong>${total.toLocaleString('en-US', {minimumFractionDigits: 2})} ج.م</strong></td>
+                    ${isAdmin ? '<td></td>' : ''}
                 </tr>
             `;
+            tbody.innerHTML += totalRow;
 
             document.getElementById('summaryBoxContainer').innerHTML = `
                 <span class="item"><strong>إجمالي المدفوعات النقدية:</strong></span>
-                <span class="item dr-ahmed"><strong>د. أحمد:</strong> ${totalsByPayer.dr_ahmed.toLocaleString('en-US')} ج.م</span>
-                <span class="item debt-mustafa"><strong>مصطفى ياسين:</strong> ${totalsByPayer.mostafa.toLocaleString('en-US')} ج.م</span>
-                <span class="item debt-yahia"><strong>يحيى:</strong> ${totalsByPayer.yahia.toLocaleString('en-US')} ج.م</span>
+                <span class="item payer-dr_ahmed"><strong>د. أحمد:</strong> ${totalsByPayer.dr_ahmed.toLocaleString('en-US')} ج.م</span>
+                <span class="item payer-yahia"><strong>يحيى:</strong> ${totalsByPayer.yahia.toLocaleString('en-US')} ج.م</span>
+                <span class="item payer-mostafa"><strong>مصطفى ياسين:</strong> ${totalsByPayer.mostafa.toLocaleString('en-US')} ج.م</span>
                 <span class="item"><strong>أحمد ياسين:</strong> ${totalsByPayer.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
             `;
         }
@@ -799,13 +811,18 @@
                 totals.mostafa += shareMostafa;
                 totals.ahmed_yassin += shareAhmedY;
 
+                // تطبيق الألوان حسب الدافع في خلايا الحصص
+                const colorDr = e.payer === 'dr_ahmed' ? '' : 'payer-dr_ahmed';
+                const colorYahia = e.payer === 'yahia' ? '' : 'payer-yahia';
+                const colorMostafa = e.payer === 'mostafa' ? '' : 'payer-mostafa';
+
                 tbody.innerHTML += `
                     <tr>
                         <td style="text-align:right; padding-right:8px; font-weight:600;">${e.dateTitle} [دفعها ${partners[e.payer].name}]</td>
-                        <td class="${e.payer !== 'dr_ahmed' ? partners[e.payer].colorClass : ''}">${shareDr.toFixed(2)}</td>
-                        <td class="${e.payer !== 'yahia' ? partners[e.payer].colorClass : ''}">${shareYahia.toFixed(2)}</td>
-                        <td class="${e.payer !== 'mostafa' ? partners[e.payer].colorClass : ''}">${shareMostafa.toFixed(2)}</td>
-                        <td class="${e.payer !== 'ahmed_yassin' ? partners[e.payer].colorClass : ''}">${shareAhmedY.toFixed(2)}</td>
+                        <td class="${colorDr}">${shareDr.toFixed(2)}</td>
+                        <td class="${colorYahia}">${shareYahia.toFixed(2)}</td>
+                        <td class="${colorMostafa}">${shareMostafa.toFixed(2)}</td>
+                        <td>${shareAhmedY.toFixed(2)}</td>
                         <td><strong>${e.amount.toFixed(2)}</strong></td>
                     </tr>
                 `;
@@ -827,21 +844,19 @@
         // دالة حساب المديونيات مع خصم الإيرادات
         // ============================================================
         function renderDebtsTables() {
-            renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'dr-ahmed-expense', '#ffebee');
-            renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'debt-mustafa', '#e3f2fd');
-            renderCreditorDebtTable('yahia', 'debtYahiaBody', 'debt-yahia', '#f3e5f5');
+            renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'payer-dr_ahmed', '#ffebee');
+            renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'payer-mostafa', '#e3f2fd');
+            renderCreditorDebtTable('yahia', 'debtYahiaBody', 'payer-yahia', '#f3e5f5');
         }
 
         function renderCreditorDebtTable(creditorKey, tableBodyId, colorClass, bgColor) {
             const tbody = document.getElementById(tableBodyId);
             tbody.innerHTML = '';
             
-            // 1. حساب الديون من المصروفات
             const creditorExpenses = expenses.filter(e => e.payer === creditorKey);
             const totalsOwed = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
             let grandDebtTotal = 0;
 
-            // 2. حساب المبالغ التي سيتم خصمها من الديون (بسبب الإيرادات التي استلمها هذا الدائن)
             const revenuesReceivedByCreditor = revenues.filter(r => r.receiver === creditorKey);
             const revenueCredits = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
             
@@ -860,7 +875,9 @@
                 Object.keys(partners).forEach(pKey => {
                     if (pKey !== creditorKey) {
                         const debtFromExp = (e.amount * partners[pKey].percent) / 100;
-                        debtDetails += `<div class="debt-line">• ${partners[pKey].name} (${partners[pKey].percent}%) : <span class="${colorClass}">${debtFromExp.toFixed(2)}</span></div>`;
+                        // استخدام اللون الثابت للمدين (حسب pKey)
+                        const debtorColor = partners[pKey].colorClass || '';
+                        debtDetails += `<div class="debt-line">• ${partners[pKey].name} (${partners[pKey].percent}%) : <span class="${debtorColor}">${debtFromExp.toFixed(2)}</span></div>`;
                         itemTotalDebt += debtFromExp;
                     }
                 });
@@ -895,7 +912,8 @@
             Object.keys(partners).forEach(pKey => {
                 if (pKey !== creditorKey) {
                     const netVal = netTotals[pKey] || 0;
-                    summaryLines += `• ${partners[pKey].name}: ${netVal.toFixed(2)} ج.م<br>`;
+                    const debtorColor = partners[pKey].colorClass || '';
+                    summaryLines += `• ${partners[pKey].name}: <span class="${debtorColor}">${netVal.toFixed(2)}</span> ج.م<br>`;
                 }
             });
 
