@@ -820,7 +820,7 @@
             renderDebtsTables();
             renderRevenuesTable();
             renderFinalSettlement();
-            renderFinalDistribution(); // الجدول النهائي بالمنطق الجديد
+            renderFinalDistribution(); // الجدول النهائي بالمنطق الصحيح
             updateAdminUI();
         }
 
@@ -1077,7 +1077,7 @@
         }
 
         // ============================================================
-        // 6. توزيع الديون النهائية (مع خصم الإيرادات كتسديد)
+        // 6. توزيع الديون النهائية (المنطق الصحيح)
         // ============================================================
         function renderFinalDistribution() {
             const tbody = document.getElementById('finalDistributionBody');
@@ -1099,7 +1099,7 @@
                 });
             });
 
-            // 2. حساب الإيرادات التي استلمها كل دائن (وتوزيعها على المدينين بنسبة ديونهم)
+            // 2. حساب إجمالي الإيرادات التي استلمها كل دائن
             let revenueReceived = {};
             revenues.filter(r => r.receiver !== 'all').forEach(r => {
                 let receiver = r.receiver;
@@ -1107,14 +1107,14 @@
                 revenueReceived[receiver] += r.total;
             });
 
-            // 3. خصم الإيرادات من الديون الخام
+            // 3. خصم الإيرادات من الديون الخام (توزيع الإيرادات على المدينين كنسبة من ديونهم)
             let netDebt = {};
             Object.keys(grossDebt).forEach(debtor => {
                 Object.keys(grossDebt[debtor]).forEach(creditor => {
                     let debtAmount = grossDebt[debtor][creditor];
                     let creditorRevenue = revenueReceived[creditor] || 0;
                     
-                    // حساب نسبة هذا المدين من إجمالي ديون هذا الدائن
+                    // حساب إجمالي ديون هذا الدائن (لحساب النسبة)
                     let totalCreditorDebt = 0;
                     Object.keys(grossDebt).forEach(d => {
                         if (grossDebt[d] && grossDebt[d][creditor]) {
@@ -1122,11 +1122,13 @@
                         }
                     });
                     
+                    // نسبة هذا المدين من إجمالي ديون الدائن
                     let share = 0;
                     if (totalCreditorDebt > 0) {
                         share = (debtAmount / totalCreditorDebt) * creditorRevenue;
                     }
                     
+                    // صافي الدين بعد الخصم
                     let net = debtAmount - share;
                     if (net > 0.01) {
                         if (!netDebt[debtor]) netDebt[debtor] = {};
@@ -1135,7 +1137,7 @@
                 });
             });
 
-            // 4. بناء جدول النتائج
+            // 4. بناء جدول النتائج (كل مدين في صف واحد)
             let html = '';
             let grandTotalAll = 0;
             let hasDebt = false;
