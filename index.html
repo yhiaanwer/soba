@@ -104,19 +104,11 @@
         tr:nth-child(even) { background-color: #f4fcf4; }
         tr:nth-child(odd) { background-color: #ffffff; }
 
-        /* ألوان الدائنين (المستحق لهم) */
-        .creditor-dr_ahmed { 
-            color: #c62828 !important; 
-            font-weight: 700 !important; 
-        }
-        .creditor-yahia { 
-            color: #1565c0 !important; 
-            font-weight: 700 !important; 
-        }
-        .creditor-mostafa { 
-            color: #6a1b9a !important; 
-            font-weight: 700 !important; 
-        }
+        /* ألوان الدائنين */
+        .creditor-dr_ahmed { color: #c62828 !important; font-weight: 700 !important; }
+        .creditor-yahia { color: #1565c0 !important; font-weight: 700 !important; }
+        .creditor-mostafa { color: #6a1b9a !important; font-weight: 700 !important; }
+        .creditor-ahmed_yassin { color: #2e7d32 !important; font-weight: 700 !important; } /* أخضر لأحمد ياسين إن دفع شيئاً */
 
         .total-debt-row {
             background-color: #c8e6c9 !important;
@@ -312,6 +304,42 @@
         .revenue-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
         .revenue-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
 
+        /* حاوية التمرير لجدول المقاصة (لأنه قد يكون عريضاً) */
+        .settlement-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 6px 0 10px 0;
+            border-radius: 6px;
+            border: 1px solid #a5d6a7;
+        }
+        .settlement-table-wrapper table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+            font-size: 12px;
+            background: #ffffff;
+            margin: 0;
+        }
+        .settlement-table-wrapper table th,
+        .settlement-table-wrapper table td {
+            border: 1px solid #a5d6a7;
+            padding: 6px 4px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .settlement-table-wrapper table th {
+            background-color: #2e7d32;
+            color: #ffffff;
+            font-weight: 700;
+            border-color: #1b5e20;
+            font-size: 12px;
+        }
+        .settlement-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
+        .settlement-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
+        .settlement-table-wrapper table tr.total-row { background-color: #c8e6c9 !important; font-weight: 700; }
+        .settlement-table-wrapper table tr.total-row td { border-top: 2px solid #2e7d32; }
+
         @media print {
             .no-print { display: none !important; }
             body { padding: 0 !important; margin: 0 !important; font-size: 10px; line-height: 1.35; max-width: 100% !important; background: #ffffff !important; } 
@@ -324,16 +352,16 @@
             th { background-color: #2e7d32 !important; color: #ffffff !important; } 
             .debt-details-cell { font-size: 8.5px !important; padding: 3px 5px !important; }
             .debt-details-cell .debt-line { display: block; padding: 1px 0; }
-            .revenue-table-wrapper {
+            .revenue-table-wrapper, .settlement-table-wrapper {
                 overflow-x: visible !important;
                 border: none !important;
             }
-            .revenue-table-wrapper table {
+            .revenue-table-wrapper table, .settlement-table-wrapper table {
                 min-width: auto !important;
                 width: 100% !important;
             }
-            .revenue-table-wrapper table th,
-            .revenue-table-wrapper table td {
+            .revenue-table-wrapper table th, .revenue-table-wrapper table td,
+            .settlement-table-wrapper table th, .settlement-table-wrapper table td {
                 white-space: normal !important;
             }
         }
@@ -491,7 +519,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- خامساً: تفاصيل الديون (بدون مقاصة) - تم تعديل العنوان وحذف التنبيه -->
+    <!-- خامساً: تفاصيل الديون (بدون مقاصة) -->
     <!-- ============================================================ -->
     <div class="section-block">
         <h2>خامساً: تفاصيل الديون (بدون مقاصة)</h2>
@@ -538,14 +566,37 @@
             </thead>
             <tbody id="debtYahiaBody"></tbody>
         </table>
-        <!-- تم حذف التنبيه بالكامل بناءً على طلبك -->
     </div>
 
     <!-- ============================================================ -->
-    <!-- سادساً: تعليمات عامة -->
+    <!-- سادساً: المقاصة النهائية (جديد) -->
     <!-- ============================================================ -->
     <div class="section-block">
-        <h2>سادساً: تعليمات عامة</h2>
+        <h2>سادساً: المقاصة النهائية</h2>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>صافي المركز المالي لكل شريك بعد توزيع الإيرادات.</em></p>
+        <div class="settlement-table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>الشريك</th>
+                        <th>إجمالي المدفوعات (ج.م)</th>
+                        <th>العبء الفعلي (ج.م)</th>
+                        <th>صافي المصروفات (ج.م)</th>
+                        <th>حصة الإيرادات (ج.م)</th>
+                        <th>الصافي النهائي (ج.م)</th>
+                    </tr>
+                </thead>
+                <tbody id="finalSettlementBody"></tbody>
+            </table>
+        </div>
+        <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong> (يستحق هذا المبلغ)، والقيمة السالبة تعني أنه <strong>مدين</strong> (عليه هذا المبلغ). يجب أن يتساوى مجموع الدائنين والمدينين بعد احتساب الإيرادات.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- سابعاً: تعليمات عامة (أصبح سابعاً بدلاً من سادساً) -->
+    <!-- ============================================================ -->
+    <div class="section-block">
+        <h2>سابعاً: تعليمات عامة</h2>
         <ul>
             <li>يحيى أنور هو المسؤول الوحيد عن تسجيل المصروفات وكافة الحسابات.</li>
             <li>أي معاملة مالية توزع حسب نسب الشركاء.</li>
@@ -571,13 +622,14 @@
             dr_ahmed: { name: 'د. أحمد', percent: 45.25, creditorClass: 'creditor-dr_ahmed' },
             yahia: { name: 'يحيى أنور', percent: 23.08, creditorClass: 'creditor-yahia' },
             mostafa: { name: 'مصطفى ياسين', percent: 21.42, creditorClass: 'creditor-mostafa' },
-            ahmed_yassin: { name: 'أحمد ياسين', percent: 10.25, creditorClass: '' }
+            ahmed_yassin: { name: 'أحمد ياسين', percent: 10.25, creditorClass: 'creditor-ahmed_yassin' }
         };
 
         const creditorColorMap = {
             dr_ahmed: 'creditor-dr_ahmed',
             yahia: 'creditor-yahia',
-            mostafa: 'creditor-mostafa'
+            mostafa: 'creditor-mostafa',
+            ahmed_yassin: 'creditor-ahmed_yassin'
         };
 
         const initialExpenses = [
@@ -751,6 +803,7 @@
             renderBreakdownTable();
             renderDebtsTables();
             renderRevenuesTable();
+            renderFinalSettlement(); // دالة المقاصة النهائية الجديدة
             updateAdminUI();
         }
 
@@ -792,12 +845,12 @@
                 <span class="item creditor-dr_ahmed"><strong>د. أحمد:</strong> ${totalsByPayer.dr_ahmed.toLocaleString('en-US')} ج.م</span>
                 <span class="item creditor-yahia"><strong>يحيى:</strong> ${totalsByPayer.yahia.toLocaleString('en-US')} ج.م</span>
                 <span class="item creditor-mostafa"><strong>مصطفى ياسين:</strong> ${totalsByPayer.mostafa.toLocaleString('en-US')} ج.م</span>
-                <span class="item"><strong>أحمد ياسين:</strong> ${totalsByPayer.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
+                <span class="item creditor-ahmed_yassin"><strong>أحمد ياسين:</strong> ${totalsByPayer.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
             `;
         }
 
         // ============================================================
-        // 2. جدول أعباء الشركاء (تلوين حسب الدافع)
+        // 2. جدول أعباء الشركاء
         // ============================================================
         function renderBreakdownTable() {
             const tbody = document.getElementById('breakdownTableBody');
@@ -849,7 +902,7 @@
         }
 
         // ============================================================
-        // 3. جداول المديونيات (بدون مقاصة)
+        // 3. جداول المديونيات
         // ============================================================
         function renderDebtsTables() {
             renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'creditor-dr_ahmed', '#ffebee');
@@ -944,6 +997,70 @@
                     </tr>
                 `;
             });
+        }
+
+        // ============================================================
+        // 5. المقاصة النهائية (الجدول الجديد)
+        // ============================================================
+        function renderFinalSettlement() {
+            const tbody = document.getElementById('finalSettlementBody');
+            
+            // حساب الإجماليات
+            const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+            const totalRevenues = revenues.reduce((sum, r) => sum + r.total, 0);
+            
+            // حساب مدفوعات كل شريك
+            const paid = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
+            expenses.forEach(e => paid[e.payer] += e.amount);
+
+            let html = '';
+            let grandTotalPaid = 0;
+            let grandTotalShareExp = 0;
+            let grandTotalNetExp = 0;
+            let grandTotalShareRev = 0;
+            let grandTotalFinal = 0;
+
+            Object.keys(partners).forEach(key => {
+                const shareExp = (totalExpenses * partners[key].percent) / 100;
+                const shareRev = (totalRevenues * partners[key].percent) / 100;
+                const netExp = paid[key] - shareExp;
+                const finalBalance = netExp + shareRev;
+
+                grandTotalPaid += paid[key];
+                grandTotalShareExp += shareExp;
+                grandTotalNetExp += netExp;
+                grandTotalShareRev += shareRev;
+                grandTotalFinal += finalBalance;
+
+                // تحديد الألوان للصافي
+                const netExpColor = netExp >= 0 ? creditorColorMap[key] : '';
+                const finalColor = finalBalance >= 0 ? creditorColorMap[key] : '';
+
+                html += `
+                    <tr>
+                        <td><strong>${partners[key].name}</strong></td>
+                        <td>${paid[key].toFixed(2)}</td>
+                        <td>${shareExp.toFixed(2)}</td>
+                        <td class="${netExpColor}">${netExp.toFixed(2)}</td>
+                        <td>${shareRev.toFixed(2)}</td>
+                        <td class="${finalColor}"><strong>${finalBalance.toFixed(2)}</strong></td>
+                    </tr>
+                `;
+            });
+
+            // صف الإجمالي
+            html += `
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>${grandTotalPaid.toFixed(2)}</strong></td>
+                    <td><strong>${grandTotalShareExp.toFixed(2)}</strong></td>
+                    <td><strong>${grandTotalNetExp.toFixed(2)}</strong></td>
+                    <td><strong>${grandTotalShareRev.toFixed(2)}</strong></td>
+                    <td><strong>${grandTotalFinal.toFixed(2)}</strong></td>
+                </tr>
+            `;
+
+            tbody.innerHTML = html;
         }
 
         // ============================================================
