@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير حسابات صوبة أبو الشقاف</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-print-color-adjust: exact !important; 
+            print-color-adjust: exact !important; 
+        }
+
+        body { 
+            font-family: 'Cairo', 'Tahoma', 'Arial', sans-serif; 
+            background: #ffffff;
+            color: #1a1a1a; 
+            padding: 8px 12px; 
+            line-height: 1.4; 
+            font-size: 13px; 
+            max-width: 1100px;
+            margin: 0 auto; 
+        }
+
+        /* لوحة إدخال البيانات والتصاميم التفاعلية */
+        .control-panel {
+            background: #f1f8e9;
+            border: 2px solid #2e7d32;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+        .control-panel h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #1b5e20;
+            border-bottom: 1px solid #a5d6a7;
+            padding-bottom: 4px;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 130px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 2px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #a5d6a7;
+            border-radius: 4px;
+            font-family: 'Cairo';
+            font-size: 12px;
+        }
+        .btn-add {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Cairo';
+            margin-top: 18px;
+        }
+        .btn-add:hover { background: #1b5e20; }
+        .btn-danger {
+            background: #c62828;
+            color: white;
+            border: none;
+            padding: 2px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            font-family: 'Cairo';
+        }
+
+        h1 { 
+            font-size: 22px;
+            color: #ffffff;
+            background: #1b5e20;
+            text-align: center; 
+            padding: 10px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            border-radius: 8px; 
+        }
+
+        h2 { 
+            font-size: 16px;
+            padding: 5px 10px;
+            border-right: 5px solid #1b5e20;
+            margin-top: 16px;
+            margin-bottom: 6px;
+            border-radius: 4px 0 0 4px;
+            background: #ffffff; 
+            color: #1b5e20;
+        }
+
+        h3 { 
+            font-size: 13.5px;
+            border-bottom: 2px solid #4caf50;
+            padding-bottom: 3px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            color: #2e7d32;
+        }
+
+        p { margin-bottom: 4px; }
+
+        .sub-title { 
+            text-align: center; 
+            font-size: 13.5px;
+            margin-bottom: 3px;
+            color: #2c3e50; 
+            font-weight: 600; 
+        }
+
+        .meta { 
+            text-align: center; 
+            font-size: 11.5px; 
+            color: #5d6d7e; 
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .meta strong { color: #1b5e20; }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse;
+            margin: 6px 0 10px 0;
+            font-size: 12px; 
+            background: #ffffff;
+        }
+
+        th, td { 
+            border: 1px solid #a5d6a7;
+            padding: 6px;
+            text-align: center; 
+            vertical-align: middle; 
+        }
+
+        th { 
+            background-color: #2e7d32;
+            color: #ffffff; 
+            font-weight: 700; 
+            border-color: #1b5e20;
+            font-size: 12px;
+        }
+
+        tr:nth-child(even) { background-color: #f4fcf4; }
+        tr:nth-child(odd) { background-color: #ffffff; }
+
+        .dr-ahmed-expense { color: #c62828 !important; font-weight: 700 !important; }
+        .debt-mustafa { color: #1565c0 !important; font-weight: 700 !important; }
+        .debt-yahia { color: #6a1b9a !important; font-weight: 700 !important; }
+
+        .total-debt-row {
+            background-color: #c8e6c9 !important;
+            font-weight: 700;
+        }
+        .total-debt-row td {
+            border-top: 2px solid #2e7d32;
+            font-size: 12px;
+        }
+
+        .note { 
+            background: #f1f8e9;
+            border-right: 5px solid #43a047;
+            padding: 6px 12px;
+            margin: 6px 0;
+            font-size: 11.5px; 
+            border-radius: 4px;
+            color: #2c3e50; 
+            line-height: 1.5;
+        }
+
+        .note strong { color: #1b5e20; }
+
+        .summary-box {
+            background: #e8f5e9;
+            border: 2px solid #2e7d32;
+            border-radius: 8px;
+            padding: 10px 16px;
+            margin: 10px 0;
+            font-size: 13px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+        .summary-box .item strong { font-weight: 700; }
+        .summary-box .dr-ahmed { color: #c62828; }
+        .summary-box .debt-mustafa { color: #1565c0; }
+        .summary-box .debt-yahia { color: #6a1b9a; }
+
+        ul { margin: 6px 0 10px 20px; padding-right: 15px; }
+        ul li { margin-bottom: 3px; font-size: 11.5px; color: #333333; }
+
+        .footer { 
+            text-align: center; 
+            font-size: 10.5px; 
+            color: #5d6d7e; 
+            padding-top: 8px;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        table.distribution-table { width: 100%; border-collapse: collapse; }
+        table.distribution-table th, table.distribution-table td { border: 2px solid #1b5e20 !important; padding: 6px 4px; }
+        table.distribution-table th { background-color: #2e7d32; color: #ffffff; font-weight: 700; }
+        table.distribution-table tr.total-row { background-color: #c8e6c9 !important; font-weight: 700; }
+        table.distribution-table tr.total-row td { border-top: 3px solid #1b5e20 !important; }
+
+        .section-block { break-inside: avoid; page-break-inside: avoid; }
+
+        @media print { 
+            .no-print { display: none !important; }
+            body { padding: 0 !important; margin: 0 !important; font-size: 10px; line-height: 1.35; max-width: 100% !important; background: #ffffff !important; } 
+            h1 { font-size: 16px; padding: 6px; margin-bottom: 6px; background: #1b5e20 !important; color: #ffffff !important; } 
+            h2 { font-size: 13px; padding: 4px 6px; border-right: 4px solid #1b5e20 !important; margin-top: 10px !important; margin-bottom: 4px !important; } 
+            h3 { font-size: 11.5px; border-bottom: 1.5px solid #1b5e20 !important; margin-top: 8px !important; margin-bottom: 3px !important; } 
+            .summary-box { font-size: 11px; padding: 6px 10px; gap: 12px; border: 1.5px solid #2e7d32; }
+            table { font-size: 9.5px; margin: 4px 0 8px 0 !important; } 
+            th, td { padding: 4px 4px !important; border: 1px solid #81c784 !important; } 
+            th { background-color: #2e7d32 !important; color: #ffffff !important; } 
+            .debt-details-cell { font-size: 8.5px !important; text-align: right !important; padding: 3px 5px !important; }
+            .debt-details-cell .debt-line { display: block; padding: 1px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>تقرير حسابات صوبة أبو الشقاف</h1>
+    <p class="sub-title"><strong>بيان الحسابات، نسب الملكية، والمصروفات الموزعة على الشركاء</strong></p>
+    <p class="meta">إعداد ومتابعة: <strong>يحيى أنور</strong> (المسؤول المالي) | تاريخ التحديث: <strong id="liveDate">3 سبتمبر 2026</strong></p>
+
+    <!-- لوحة التحكم لإضافة البيانات والتعديل من الهاتف (تختفي عند الطباعة) -->
+    <div class="control-panel no-print">
+        <h3>➕ إضافة مصروف جديد</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>التاريخ والعنوان:</label>
+                <input type="text" id="expDateTitle" placeholder="مثال: 5 سبتمبر - شراء سماد">
+            </div>
+            <div class="form-group">
+                <label>التفاصيل الدقيقة:</label>
+                <input type="text" id="expDetails" placeholder="تفاصيل المصروف">
+            </div>
+            <div class="form-group">
+                <label>المبلغ (ج.م):</label>
+                <input type="number" id="expAmount" step="0.01" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label>الشريك المُسدد:</label>
+                <select id="expPayer">
+                    <option value="dr_ahmed">د. أحمد</option>
+                    <option value="yahia">يحيى أنور</option>
+                    <option value="mostafa">مصطفى ياسين</option>
+                    <option value="ahmed_yassin">أحمد ياسين</option>
+                </select>
+            </div>
+            <button class="btn-add" onclick="addExpense()">حفظ المصروف</button>
+        </div>
+
+        <h3 style="margin-top:12px;">📈 إضافة إيراد جديد</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>التاريخ:</label>
+                <input type="text" id="revDate" placeholder="مثال: 5 سبتمبر">
+            </div>
+            <div class="form-group">
+                <label>الوزن (كجم):</label>
+                <input type="number" id="revWeight" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label>سعر الكيلو (ج.م):</label>
+                <input type="number" id="revPrice" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label>المستلم:</label>
+                <select id="revReceiver">
+                    <option value="dr_ahmed">د. أحمد</option>
+                    <option value="yahia">يحيى أنور</option>
+                    <option value="mostafa">مصطفى ياسين</option>
+                    <option value="ahmed_yassin">أحمد ياسين</option>
+                </select>
+            </div>
+            <button class="btn-add" onclick="addRevenue()">تسجيل الإيراد</button>
+        </div>
+        <button class="btn-danger" onclick="resetToDefaultData()" style="margin-top:10px;">إعادة استعادة البيانات الأصلية للتقرير</button>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- أولاً: صوبة أبو الشقاف -->
+    <!-- ============================================================ -->
+    <h2>أولاً: صوبة أبو الشقاف (محصول الخيار)</h2>
+    <p><strong>المساحة:</strong> فدان ونصف | <strong>المحصول:</strong> خيار | <strong>الحالة:</strong> تم زراعة الشتلة</p>
+
+    <div class="section-block">
+        <h3>1. نسب ملكية الشركاء</h3>
+        <table>
+            <tr><th>اسم الشريك</th><th>نسبة الملكية</th></tr>
+            <tr><td>د. أحمد</td><td>45.25%</td></tr>
+            <tr><td>يحيى أنور</td><td>23.08%</td></tr>
+            <tr><td>مصطفى ياسين</td><td>21.42%</td></tr>
+            <tr><td>أحمد ياسين</td><td>10.25%</td></tr>
+            <tr><td><strong>المجموع الكلي</strong></td><td><strong>100.00%</strong></td></tr>
+        </table>
+    </div>
+
+    <div class="section-block">
+        <h3>2. جدول المصروفات الشامل (شمل عربون الشتلة وكافة المصروفات التشغيلية)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>التاريخ / العنوان</th>
+                    <th>التفاصيل الدقيقة للمصروف</th>
+                    <th>إجمالي المصروف (ج.م)</th>
+                    <th class="no-print">إجراء</th>
+                </tr>
+            </thead>
+            <tbody id="expensesTableBody"></tbody>
+        </table>
+
+        <div class="summary-box" id="summaryBoxContainer"></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ثالثاً: الإيرادات -->
+    <!-- ============================================================ -->
+    <div class="section-block">
+        <h2>ثالثاً: الإيرادات</h2>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>سجل مبيعات المحصول (خيار).</em></p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>التاريخ</th>
+                    <th>الوزن (كجم)</th>
+                    <th>سعر الكيلو (ج.م)</th>
+                    <th>المبلغ الكلي (ج.م)</th>
+                    <th>المستلم</th>
+                    <th>حصة د. أحمد (45.25%)</th>
+                    <th>حصة يحيى (23.08%)</th>
+                    <th>حصة مصطفى (21.42%)</th>
+                    <th>حصة أحمد ياسين (10.25%)</th>
+                    <th class="no-print">إجراء</th>
+                </tr>
+            </thead>
+            <tbody id="revenueTableBody"></tbody>
+        </table>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- رابعاً: الجدول التفصيلي لأعباء الشركاء -->
+    <!-- ============================================================ -->
+    <div class="section-block">
+        <h2>رابعاً: الجدول التفصيلي لأعباء الشركاء</h2>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل الالتزامات المالية لكل شريك بناءً على إجمالي المصروفات الفعلية.</em></p>
+        
+        <table class="distribution-table">
+            <thead>
+                <tr>
+                    <th>بند المصروف</th>
+                    <th>د. أحمد (45.25%)</th>
+                    <th>يحيى (23.08%)</th>
+                    <th>مصطفى ياسين (21.42%)</th>
+                    <th>أحمد ياسين (10.25%)</th>
+                    <th>إجمالي المصروف</th>
+                </tr>
+            </thead>
+            <tbody id="breakdownTableBody"></tbody>
+        </table>
+        <div class="note"><strong>ملحوظة:</strong> يتم توزيع أعباء المصروفات تلقائياً وحساب الحصص بدقة متناهية فور تسجيل أي بند.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- خامساً: المديونيات - بدون أي مقاصة -->
+    <!-- ============================================================ -->
+    <div class="section-block">
+        <h2>خامساً: تفاصيل الديون المستحقة حسب كل دائن (بدون مقاصة)</h2>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تم تقسيم الديون إلى ثلاثة جداول مستقلة، جميع الأرقام معروضة بدون أي تسوية أو مقاصة بين الدائنين.</em></p>
+
+        <!-- الجدول الأول: د. أحمد -->
+        <h3>أ- تفاصيل الديون المستحقة للدكتور أحمد (خام)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>إجمالي المصروف وتاريخه</th>
+                    <th>الدائن (صاحب الحق)</th>
+                    <th>تفصيل المصروف (السبب)</th>
+                    <th>المدينون وتفاصيل حصص الديون</th>
+                    <th>إجمالي الدَين</th>
+                </tr>
+            </thead>
+            <tbody id="debtDrAhmedBody"></tbody>
+        </table>
+
+        <!-- الجدول الثاني: مصطفى ياسين -->
+        <h3>ب- تفاصيل الديون المستحقة لمصطفى ياسين (خام)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>إجمالي المصروف وتاريخه</th>
+                    <th>الدائن (صاحب الحق)</th>
+                    <th>تفصيل المصروف (السبب)</th>
+                    <th>المدينون وتفاصيل حصص الديون</th>
+                    <th>إجمالي الدَين</th>
+                </tr>
+            </thead>
+            <tbody id="debtMostafaBody"></tbody>
+        </table>
+
+        <!-- الجدول الثالث: يحيى -->
+        <h3>ج- تفاصيل الديون المستحقة ليحيى (خام)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>إجمالي المصروف وتاريخه</th>
+                    <th>الدائن (صاحب الحق)</th>
+                    <th>تفصيل المصروف (السبب)</th>
+                    <th>المدينون وتفاصيل حصص الديون</th>
+                    <th>إجمالي الدَين</th>
+                </tr>
+            </thead>
+            <tbody id="debtYahiaBody"></tbody>
+        </table>
+        <div class="note"><strong>تنبيه:</strong> جميع الديون في هذا القسم معروضة <strong>بدون أي مقاصة</strong>، وتُحسب تلقائياً بجمع المبالغ الخام المستحقة لكل دائن على باقي الشركاء.</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- سادساً: تعليمات عامة -->
+    <!-- ============================================================ -->
+    <div class="section-block">
+        <h2>سادساً: تعليمات عامة</h2>
+        <ul>
+            <li>يحيى أنور هو المسؤول الوحيد عن تسجيل المصروفات وكافة الحسابات.</li>
+            <li>أي معاملة مالية توزع حسب نسب الشركاء.</li>
+            <li>أي تعديل في النسب أو الشركاء أو الأرقام لا يتم إلا بأمر من يحيى أنور.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        صفحة التقرير المحدث والنهائي - صادر عن النظام المالي لصوبة أبو الشقاف
+    </div>
+
+    <script>
+        // الشركاء ونسبهم
+        const partners = {
+            dr_ahmed: { name: 'د. أحمد', percent: 45.25, colorClass: 'dr-ahmed-expense' },
+            yahia: { name: 'يحيى أنور', percent: 23.08, colorClass: 'debt-yahia' },
+            mostafa: { name: 'مصطفى ياسين', percent: 21.42, colorClass: 'debt-mustafa' },
+            ahmed_yassin: { name: 'أحمد ياسين', percent: 10.25, colorClass: '' }
+        };
+
+        // البيانات الافتراضية المأخوذة من تقريرك الحالي بالتفصيل
+        const initialExpenses = [
+            { id: 1, dateTitle: '16 يوليو - عربون شتلة الخيار', details: 'دفعة عربون مقدمة للشتلة (دفعها د. أحمد)', amount: 20000.00, payer: 'dr_ahmed' },
+            { id: 2, dateTitle: '20 يوليو - عمال تجهيز الصوبة', details: 'أجور العمال والتجهيز (دفعها مصطفى ياسين)', amount: 1580.00, payer: 'mostafa' },
+            { id: 3, dateTitle: '21 يوليو - استكمال تجهيزات', details: '3 عمال وتروسيكل وفطار (دفعها مصطفى ياسين)', amount: 1100.00, payer: 'mostafa' },
+            { id: 4, dateTitle: '27 يوليو - حراثة الجرار', details: 'حراثة أرض الصوبة بالجرار (دفعها د. أحمد)', amount: 1700.00, payer: 'dr_ahmed' },
+            { id: 5, dateTitle: '29 يوليو - شراء سبلة', details: 'سبلة سماد عضوي لتسميد الأرض (دفعها مصطفى ياسين)', amount: 16350.00, payer: 'mostafa' },
+            { id: 6, dateTitle: '30 يوليو - عمال فرد السبلة', details: 'أجور عمال فرد وتوزيع السبلة (دفعها د. أحمد)', amount: 1570.00, payer: 'dr_ahmed' },
+            { id: 7, dateTitle: '31 يوليو - حساب العزاقة', details: 'عزاقة لتجهيز التربة بعد الحراثة (دفعها د. أحمد)', amount: 1650.00, payer: 'dr_ahmed' },
+            { id: 8, dateTitle: '31 يوليو - حساب العربة بحصان', details: 'تسطير الأرض وتسويتها بالعربة (دفعها د. أحمد)', amount: 1200.00, payer: 'dr_ahmed' },
+            { id: 9, dateTitle: '31 يوليو - شراء أسمدة', details: '9 شكاير فوسفات ناعم + 5 شكاير كبريت (دفعها د. أحمد)', amount: 4380.00, payer: 'dr_ahmed' },
+            { id: 10, dateTitle: '1 أغسطس - إنشاء مصاطب التربة', details: 'أجر عمال إنشاء مصاطب التربة (دفعها د. أحمد)', amount: 3100.00, payer: 'dr_ahmed' },
+            { id: 11, dateTitle: '2 أغسطس - فرد الشبكة وتنظيف المصرف', details: 'أجر عمال تنظيف المصرف وفرد شبكة الري (دفعها د. أحمد)', amount: 1250.00, payer: 'dr_ahmed' },
+            { id: 12, dateTitle: '2 أغسطس - أدوات شبكة الري', details: 'مفك + مسامير + كولة + تيفلون + سكينة منشار (دفعها د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
+            { id: 13, dateTitle: '3 أغسطس - أعمال تركيب الري', details: '3 عمال + تروسيكل + فطار + أدوات عم جمال (دفعها د. أحمد)', amount: 1360.00, payer: 'dr_ahmed' },
+            { id: 14, dateTitle: '3 أغسطس - شراء سولار وزيت', details: '9 لتر سولار + 4 لتر زيت (دفعها د. أحمد)', amount: 680.00, payer: 'dr_ahmed' },
+            { id: 15, dateTitle: '3 أغسطس - بقية عمال التجهيز', details: 'المتبقي من يومية 20 يوليو (سدده د. أحمد)', amount: 700.00, payer: 'dr_ahmed' },
+            { id: 16, dateTitle: '5 أغسطس - مسامير وخراطيم ري', details: '3 كيلو خراطيم + مسامير لقاعدة ماكينة الري (دفعها د. أحمد)', amount: 95.00, payer: 'dr_ahmed' },
+            { id: 17, dateTitle: '5 أغسطس - حساب الميكانيكي', details: 'أجر الميكانيكي لإصلاح ماكينة الري (دفعها د. أحمد)', amount: 1650.00, payer: 'dr_ahmed' },
+            { id: 18, dateTitle: '5 أغسطس - سولار وزيت', details: 'سولار وزيت لماكينة الري (دفعها د. أحمد)', amount: 500.00, payer: 'dr_ahmed' },
+            { id: 19, dateTitle: '5 أغسطس - غداء سلامة', details: 'وجبة غداء للعامل سلامة (دفعها د. أحمد)', amount: 20.00, payer: 'dr_ahmed' },
+            { id: 20, dateTitle: '6 أغسطس - فطار سلامة', details: 'وجبة فطار للعامل سلامة (دفعها د. أحمد)', amount: 30.00, payer: 'dr_ahmed' },
+            { id: 21, dateTitle: '6 أغسطس - مبيد يونيفورم', details: 'شراء مبيد يونيفورم للرش (دفعها د. أحمد)', amount: 2300.00, payer: 'dr_ahmed' },
+            { id: 22, dateTitle: '6 أغسطس - عربات نقل الشتلة', details: 'أجرة عربات نقل الشتلة (دفعها د. أحمد)', amount: 2400.00, payer: 'dr_ahmed' },
+            { id: 23, dateTitle: '6 أغسطس - أجر عمال زراعة الشتلة', details: 'أجر عمال زراعة الشتلة (دفعها د. أحمد)', amount: 2600.00, payer: 'dr_ahmed' },
+            { id: 24, dateTitle: '8 أغسطس - مستحقات سلامة', details: 'مبلغ مستحق لسلامة سعد الله (دفعه يحيى)', amount: 3000.00, payer: 'yahia' },
+            { id: 25, dateTitle: '18 أغسطس - فطار العمال', details: 'فطار العمال في الأسبوع الماضي (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 26, dateTitle: '23 أغسطس - فطار العمال', details: 'فطار عمال (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 27, dateTitle: '26 أغسطس - فطار العمال', details: 'فطار عمال (دفعه د. أحمد)', amount: 550.00, payer: 'dr_ahmed' },
+            { id: 28, dateTitle: '26 أغسطس - شراء خيط', details: 'خيط لربط النبات (دفعه يحيى)', amount: 1100.00, payer: 'yahia' },
+            { id: 29, dateTitle: '26 أغسطس - أجر عمال تربيط', details: 'أجر عمال تربيط الخيط (دفعه يحيى)', amount: 3900.00, payer: 'yahia' },
+            { id: 30, dateTitle: '26 أغسطس - سلفة محمود أنور', details: 'سلفة لمحمود أنور (دفعه د. أحمد)', amount: 1000.00, payer: 'dr_ahmed' },
+            { id: 31, dateTitle: '27 أغسطس - طلبيات الميكانيكي', details: 'إصلاح ماتور الرش وماكينة الري (دفعه د. أحمد)', amount: 500.00, payer: 'dr_ahmed' },
+            { id: 32, dateTitle: '28 أغسطس - مستحقات عمل', details: 'مستحقات عب ونيس وإيهاب (دفعه د. أحمد)', amount: 4100.00, payer: 'dr_ahmed' },
+            { id: 33, dateTitle: '29 أغسطس - جاز', details: 'وقود جاز (دفعه د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
+            { id: 34, dateTitle: '30 أغسطس - فطار العمال', details: 'فطار عمال (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 35, dateTitle: '30 أغسطس - أجر عمال ربط النبات', details: 'أجر عمال ربط النبات (دفعه د. أحمد)', amount: 2100.00, payer: 'dr_ahmed' },
+            { id: 36, dateTitle: '30 أغسطس - لوازم غرفة العمال', details: 'لوازم تجهيز غرفة العمال (دفعه د. أحمد)', amount: 700.00, payer: 'dr_ahmed' },
+            { id: 37, dateTitle: '31 أغسطس - حساب الميكانيكي', details: 'حساب صابر الميكانيكي (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 38, dateTitle: '1 سبتمبر - كراتين', details: 'كراتين لتعبئة الخيار (دفعه د. أحمد)', amount: 1100.00, payer: 'dr_ahmed' },
+            { id: 39, dateTitle: '3 سبتمبر - حساب التروسيكل', details: 'جلب أسمدة من البرنوجي (دفعه د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
+            { id: 40, dateTitle: '3 سبتمبر - فطار', details: 'فطار عمال (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' }
+        ];
+
+        let expenses = JSON.parse(localStorage.getItem('soba_expenses_v2')) || initialExpenses;
+        let revenues = JSON.parse(localStorage.getItem('soba_revenues_v2')) || [];
+
+        function saveData() {
+            localStorage.setItem('soba_expenses_v2', JSON.stringify(expenses));
+            localStorage.setItem('soba_revenues_v2', JSON.stringify(revenues));
+            renderAll();
+        }
+
+        function resetToDefaultData() {
+            if(confirm("هل أنت تأكد من إعادة استعادة البيانات الأساسية للتقرير؟")) {
+                expenses = [...initialExpenses];
+                revenues = [];
+                saveData();
+            }
+        }
+
+        function addExpense() {
+            const dateTitle = document.getElementById('expDateTitle').value.trim();
+            const details = document.getElementById('expDetails').value.trim();
+            const amount = parseFloat(document.getElementById('expAmount').value);
+            const payer = document.getElementById('expPayer').value;
+
+            if(!dateTitle || !details || isNaN(amount) || amount <= 0) {
+                alert("يرجى إدخال جميع بيانات المصروف بالشكل الصحيح.");
+                return;
+            }
+
+            expenses.push({ id: Date.now(), dateTitle, details, amount, payer });
+            document.getElementById('expDateTitle').value = '';
+            document.getElementById('expDetails').value = '';
+            document.getElementById('expAmount').value = '';
+            saveData();
+        }
+
+        function deleteExpense(id) {
+            if(confirm("هل تريد حذف هذا المصروف؟")) {
+                expenses = expenses.filter(e => e.id !== id);
+                saveData();
+            }
+        }
+
+        function addRevenue() {
+            const date = document.getElementById('revDate').value.trim();
+            const weight = parseFloat(document.getElementById('revWeight').value);
+            const price = parseFloat(document.getElementById('revPrice').value);
+            const receiver = document.getElementById('revReceiver').value;
+
+            if(!date || isNaN(weight) || isNaN(price) || weight <= 0 || price <= 0) {
+                alert("يرجى إدخال بيانات الإيراد بالشكل الصحيح.");
+                return;
+            }
+
+            const total = weight * price;
+            revenues.push({ id: revenues.length + 1, date, weight, price, total, receiver });
+            document.getElementById('revDate').value = '';
+            document.getElementById('revWeight').value = '';
+            document.getElementById('revPrice').value = '';
+            saveData();
+        }
+
+        function deleteRevenue(id) {
+            if(confirm("هل تريد حذف هذا الإيراد؟")) {
+                revenues = revenues.filter(r => r.id !== id);
+                saveData();
+            }
+        }
+
+        function renderAll() {
+            renderExpensesTable();
+            renderBreakdownTable();
+            renderDebtsTables();
+            renderRevenuesTable();
+        }
+
+        function renderExpensesTable() {
+            const tbody = document.getElementById('expensesTableBody');
+            tbody.innerHTML = '';
+            let total = 0;
+            let totalsByPayer = { dr_ahmed: 0, mostafa: 0, yahia: 0, ahmed_yassin: 0 };
+
+            expenses.forEach(e => {
+                total += e.amount;
+                totalsByPayer[e.payer] += e.amount;
+                const pInfo = partners[e.payer];
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${e.dateTitle}</strong></td>
+                        <td>${e.details}</td>
+                        <td><strong class="${pInfo.colorClass}">${e.amount.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
+                        <td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML += `
+                <tr>
+                    <td colspan="2"><strong>إجمالي المصروفات المدفوعة الشاملة</strong></td>
+                    <td colspan="2"><strong>${total.toLocaleString('en-US', {minimumFractionDigits: 2})} ج.م</strong></td>
+                </tr>
+            `;
+
+            // تحديث صندوق الملخص
+            document.getElementById('summaryBoxContainer').innerHTML = `
+                <span class="item"><strong>إجمالي المدفوعات النقدية:</strong></span>
+                <span class="item dr-ahmed"><strong>د. أحمد:</strong> ${totalsByPayer.dr_ahmed.toLocaleString('en-US')} ج.م</span>
+                <span class="item debt-mustafa"><strong>مصطفى ياسين:</strong> ${totalsByPayer.mostafa.toLocaleString('en-US')} ج.م</span>
+                <span class="item debt-yahia"><strong>يحيى:</strong> ${totalsByPayer.yahia.toLocaleString('en-US')} ج.م</span>
+                <span class="item"><strong>أحمد ياسين:</strong> ${totalsByPayer.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
+            `;
+        }
+
+        function renderBreakdownTable() {
+            const tbody = document.getElementById('breakdownTableBody');
+            tbody.innerHTML = '';
+
+            let totalExp = 0;
+            let totals = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
+
+            expenses.forEach(e => {
+                totalExp += e.amount;
+                const shareDr = (e.amount * partners.dr_ahmed.percent) / 100;
+                const shareYahia = (e.amount * partners.yahia.percent) / 100;
+                const shareMostafa = (e.amount * partners.mostafa.percent) / 100;
+                const shareAhmedY = (e.amount * partners.ahmed_yassin.percent) / 100;
+
+                totals.dr_ahmed += shareDr;
+                totals.yahia += shareYahia;
+                totals.mostafa += shareMostafa;
+                totals.ahmed_yassin += shareAhmedY;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="text-align:right; padding-right:8px; font-weight:600;">${e.dateTitle} [دفعها ${partners[e.payer].name}]</td>
+                        <td class="${e.payer !== 'dr_ahmed' ? partners[e.payer].colorClass : ''}">${shareDr.toFixed(2)}</td>
+                        <td class="${e.payer !== 'yahia' ? partners[e.payer].colorClass : ''}">${shareYahia.toFixed(2)}</td>
+                        <td class="${e.payer !== 'mostafa' ? partners[e.payer].colorClass : ''}">${shareMostafa.toFixed(2)}</td>
+                        <td class="${e.payer !== 'ahmed_yassin' ? partners[e.payer].colorClass : ''}">${shareAhmedY.toFixed(2)}</td>
+                        <td><strong>${e.amount.toFixed(2)}</strong></td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML += `
+                <tr class="total-row">
+                    <td style="text-align:right; padding-right:8px; font-weight:700;">إجمالي الحصص (مطابق للإجمالي الكلي)</td>
+                    <td><strong>${totals.dr_ahmed.toFixed(2)}</strong></td>
+                    <td><strong>${totals.yahia.toFixed(2)}</strong></td>
+                    <td><strong>${totals.mostafa.toFixed(2)}</strong></td>
+                    <td><strong>${totals.ahmed_yassin.toFixed(2)}</strong></td>
+                    <td><strong>${totalExp.toFixed(2)}</strong></td>
+                </tr>
+            `;
+        }
+
+        function renderDebtsTables() {
+            renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'dr-ahmed-expense', '#ffebee');
+            renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'debt-mustafa', '#e3f2fd');
+            renderCreditorDebtTable('yahia', 'debtYahiaBody', 'debt-yahia', '#f3e5f5');
+        }
+
+        function renderCreditorDebtTable(creditorKey, tableBodyId, colorClass, bgColor) {
+            const tbody = document.getElementById(tableBodyId);
+            tbody.innerHTML = '';
+
+            const creditorExpenses = expenses.filter(e => e.payer === creditorKey);
+            let totalsOwed = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
+            let grandDebtTotal = 0;
+
+            creditorExpenses.forEach(e => {
+                let debtDetails = '';
+                let itemTotalDebt = 0;
+
+                Object.keys(partners).forEach(pKey => {
+                    if(pKey !== creditorKey) {
+                        const share = (e.amount * partners[pKey].percent) / 100;
+                        totalsOwed[pKey] += share;
+                        itemTotalDebt += share;
+                        debtDetails += `<div class="debt-line">• ${partners[pKey].name} (${partners[pKey].percent}%) : <span class="${colorClass}">${share.toFixed(2)}</span></div>`;
+                    }
+                });
+
+                grandDebtTotal += itemTotalDebt;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${e.amount.toLocaleString('en-US')} ج.م</strong><br>${e.dateTitle.split('-')[0]}</td>
+                        <td style="background-color: ${bgColor};">${partners[creditorKey].name}</td>
+                        <td>${e.details}</td>
+                        <td class="debt-details-cell" style="text-align:right; padding:5px 8px;">${debtDetails}</td>
+                        <td class="${colorClass}" style="font-weight:700;">${itemTotalDebt.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+
+            let summaryLines = '';
+            Object.keys(partners).forEach(pKey => {
+                if(pKey !== creditorKey) {
+                    summaryLines += `• ${partners[pKey].name}: ${totalsOwed[pKey].toFixed(2)} ج.م<br>`;
+                }
+            });
+
+            tbody.innerHTML += `
+                <tr class="total-debt-row">
+                    <td colspan="4" style="text-align: left; padding-right: 10px;">
+                        <strong>🔹 إجمالي الديون المستحقة لـ ${partners[creditorKey].name} (خام، بدون مقاصة)</strong>
+                    </td>
+                    <td class="${colorClass}" style="font-weight:700; font-size:11.5px; text-align:right; line-height: 1.6; padding: 6px;">
+                        ${summaryLines}
+                        <div style="border-top: 1px dashed; margin-top: 3px; padding-top: 2px;"><strong>الإجمالي: ${grandDebtTotal.toFixed(2)} ج.م</strong></div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        function renderRevenuesTable() {
+            const tbody = document.getElementById('revenueTableBody');
+            tbody.innerHTML = '';
+
+            if(revenues.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color:#888; padding:12px;">لا توجد إيرادات مسجلة حتى الآن</td></tr>`;
+                return;
+            }
+
+            revenues.forEach(r => {
+                const shareDr = (r.total * partners.dr_ahmed.percent) / 100;
+                const shareYahia = (r.total * partners.yahia.percent) / 100;
+                const shareMostafa = (r.total * partners.mostafa.percent) / 100;
+                const shareAhmedY = (r.total * partners.ahmed_yassin.percent) / 100;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${r.id}</td>
+                        <td>${r.date}</td>
+                        <td>${r.weight}</td>
+                        <td>${r.price.toFixed(2)}</td>
+                        <td><strong>${r.total.toFixed(2)}</strong></td>
+                        <td>${partners[r.receiver].name}</td>
+                        <td>${shareDr.toFixed(2)}</td>
+                        <td>${shareYahia.toFixed(2)}</td>
+                        <td>${shareMostafa.toFixed(2)}</td>
+                        <td>${shareAhmedY.toFixed(2)}</td>
+                        <td class="no-print"><button class="btn-danger" onclick="deleteRevenue(${r.id})">حذف</button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // تشغيل المحرك عند الفتح
+        renderAll();
+    </script>
+</body>
+</html>
