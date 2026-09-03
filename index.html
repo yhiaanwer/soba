@@ -78,40 +78,67 @@
 
         .meta strong { color: #1b5e20; }
 
-        /* ======== التعديل الأساسي على الجداول (لجعلها قابلة للتمرير) ======== */
-        .table-wrapper {
+        /* --- الأنماط الأساسية للجداول (بدون تمرير إجباري) --- */
+        table { 
+            width: 100%; 
+            border-collapse: collapse;
+            margin: 6px 0 10px 0;
+            font-size: 12px; 
+            background: #ffffff;
+        }
+
+        th, td { 
+            border: 1px solid #a5d6a7;
+            padding: 6px;
+            text-align: center; 
+            vertical-align: middle; 
+        }
+
+        th { 
+            background-color: #2e7d32;
+            color: #ffffff; 
+            font-weight: 700; 
+            border-color: #1b5e20;
+            font-size: 12px;
+        }
+
+        tr:nth-child(even) { background-color: #f4fcf4; }
+        tr:nth-child(odd) { background-color: #ffffff; }
+
+        /* --- التعديل المخصص فقط لجدول الإيرادات (التمرير الأفقي) --- */
+        .revenue-table-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             margin: 6px 0 10px 0;
             border-radius: 6px;
             border: 1px solid #a5d6a7;
         }
-        .table-wrapper table {
+        .revenue-table-wrapper table {
             width: 100%;
-            min-width: 700px; /* هذا يضمن أن الأعمدة لا تضغط على بعضها */
+            min-width: 700px; /* يضمن عدم ضغط الأعمدة */
             border-collapse: collapse;
             font-size: 12px;
             background: #ffffff;
             margin: 0;
         }
-        .table-wrapper table th,
-        .table-wrapper table td {
+        .revenue-table-wrapper table th,
+        .revenue-table-wrapper table td {
             border: 1px solid #a5d6a7;
             padding: 6px 4px;
             text-align: center;
             vertical-align: middle;
             white-space: nowrap;
         }
-        .table-wrapper table th {
+        .revenue-table-wrapper table th {
             background-color: #2e7d32;
             color: #ffffff;
             font-weight: 700;
             border-color: #1b5e20;
             font-size: 12px;
         }
-        .table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
-        .table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
-        /* ================================================================ */
+        .revenue-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
+        .revenue-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
+        /* ------------------------------------------------ */
 
         .dr-ahmed-expense { color: #c62828 !important; font-weight: 700 !important; }
         .debt-mustafa { color: #1565c0 !important; font-weight: 700 !important; }
@@ -291,16 +318,17 @@
             th { background-color: #2e7d32 !important; color: #ffffff !important; } 
             .debt-details-cell { font-size: 8.5px !important; padding: 3px 5px !important; }
             .debt-details-cell .debt-line { display: block; padding: 1px 0; }
-            .table-wrapper {
+            /* إلغاء التمرير عند الطباعة لجدول الإيرادات */
+            .revenue-table-wrapper {
                 overflow-x: visible !important;
                 border: none !important;
             }
-            .table-wrapper table {
+            .revenue-table-wrapper table {
                 min-width: auto !important;
                 width: 100% !important;
             }
-            .table-wrapper table th,
-            .table-wrapper table td {
+            .revenue-table-wrapper table th,
+            .revenue-table-wrapper table td {
                 white-space: normal !important;
             }
         }
@@ -393,29 +421,27 @@
 
     <div class="section-block">
         <h3>2. جدول المصروفات الشامل</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>التاريخ / العنوان</th>
-                        <th>التفاصيل الدقيقة</th>
-                        <th>المبلغ (ج.م)</th>
-                        <th class="no-print" id="expenseActionHeader">إجراء</th>
-                    </tr>
-                </thead>
-                <tbody id="expensesTableBody"></tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>التاريخ / العنوان</th>
+                    <th>التفاصيل الدقيقة</th>
+                    <th>المبلغ (ج.م)</th>
+                    <th class="no-print" id="expenseActionHeader">إجراء</th>
+                </tr>
+            </thead>
+            <tbody id="expensesTableBody"></tbody>
+        </table>
         <div class="summary-box" id="summaryBoxContainer"></div>
     </div>
 
     <!-- ============================================================ -->
-    <!-- ثالثاً: الإيرادات -->
+    <!-- ثالثاً: الإيرادات (هنا فقط التمرير الأفقي) -->
     <!-- ============================================================ -->
     <div class="section-block">
         <h2>ثالثاً: الإيرادات</h2>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>سجل مبيعات المحصول (خيار) مع توزيع الحصص وإمكانية المقاصة التلقائية.</em></p>
-        <div class="table-wrapper">
+        <div class="revenue-table-wrapper">
             <table>
                 <thead>
                     <tr>
@@ -443,21 +469,19 @@
     <div class="section-block">
         <h2>رابعاً: الجدول التفصيلي لأعباء الشركاء</h2>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل الالتزامات المالية لكل شريك بناءً على إجمالي المصروفات الفعلية.</em></p>
-        <div class="table-wrapper">
-            <table class="distribution-table">
-                <thead>
-                    <tr>
-                        <th>بند المصروف</th>
-                        <th>د. أحمد (45.25%)</th>
-                        <th>يحيى (23.08%)</th>
-                        <th>مصطفى (21.42%)</th>
-                        <th>أحمد ياسين (10.25%)</th>
-                        <th>إجمالي المصروف</th>
-                    </tr>
-                </thead>
-                <tbody id="breakdownTableBody"></tbody>
-            </table>
-        </div>
+        <table class="distribution-table">
+            <thead>
+                <tr>
+                    <th>بند المصروف</th>
+                    <th>د. أحمد (45.25%)</th>
+                    <th>يحيى (23.08%)</th>
+                    <th>مصطفى (21.42%)</th>
+                    <th>أحمد ياسين (10.25%)</th>
+                    <th>إجمالي المصروف</th>
+                </tr>
+            </thead>
+            <tbody id="breakdownTableBody"></tbody>
+        </table>
         <div class="note"><strong>ملحوظة:</strong> يتم توزيع أعباء المصروفات تلقائياً وحساب الحصص بدقة فور تسجيل أي بند.</div>
     </div>
 
@@ -469,52 +493,46 @@
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يتم خصم حصص الشركاء من الإيرادات التي استلمها كل دائن نيابة عنهم من ديونهم المستحقة له.</em></p>
 
         <h3>أ- صافي الديون المستحقة لد. أحمد</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>إجمالي المصروف وتاريخه</th>
-                        <th>الدائن</th>
-                        <th>تفصيل المصروف</th>
-                        <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
-                        <th>إجمالي الدَين</th>
-                    </tr>
-                </thead>
-                <tbody id="debtDrAhmedBody"></tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>إجمالي المصروف وتاريخه</th>
+                    <th>الدائن</th>
+                    <th>تفصيل المصروف</th>
+                    <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
+                    <th>إجمالي الدَين</th>
+                </tr>
+            </thead>
+            <tbody id="debtDrAhmedBody"></tbody>
+        </table>
 
         <h3>ب- صافي الديون المستحقة لمصطفى ياسين</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>إجمالي المصروف وتاريخه</th>
-                        <th>الدائن</th>
-                        <th>تفصيل المصروف</th>
-                        <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
-                        <th>إجمالي الدَين</th>
-                    </tr>
-                </thead>
-                <tbody id="debtMostafaBody"></tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>إجمالي المصروف وتاريخه</th>
+                    <th>الدائن</th>
+                    <th>تفصيل المصروف</th>
+                    <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
+                    <th>إجمالي الدَين</th>
+                </tr>
+            </thead>
+            <tbody id="debtMostafaBody"></tbody>
+        </table>
 
         <h3>ج- صافي الديون المستحقة ليحيى</h3>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>إجمالي المصروف وتاريخه</th>
-                        <th>الدائن</th>
-                        <th>تفصيل المصروف</th>
-                        <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
-                        <th>إجمالي الدَين</th>
-                    </tr>
-                </thead>
-                <tbody id="debtYahiaBody"></tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>إجمالي المصروف وتاريخه</th>
+                    <th>الدائن</th>
+                    <th>تفصيل المصروف</th>
+                    <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
+                    <th>إجمالي الدَين</th>
+                </tr>
+            </thead>
+            <tbody id="debtYahiaBody"></tbody>
+        </table>
         <div class="note"><strong>تنبيه:</strong> الديون معروضة <strong>بعد خصم حصص الإيرادات</strong> التي استلمها الدائن نيابة عن باقي الشركاء. اختيار "الجميع" في الإيرادات لا يُحدث أي خصم.</div>
     </div>
 
