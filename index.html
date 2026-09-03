@@ -104,7 +104,7 @@
         tr:nth-child(even) { background-color: #f4fcf4; }
         tr:nth-child(odd) { background-color: #ffffff; }
 
-        /* ألوان الدائنين (المستحق لهم) – تُستخدم لتلوين المبالغ المستحقة لهم */
+        /* ألوان الدائنين (المستحق لهم) */
         .creditor-dr_ahmed { 
             color: #c62828 !important; 
             font-weight: 700 !important; 
@@ -491,54 +491,54 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- خامساً: المديونيات (مع خصم حصص الإيرادات المستلمة) -->
+    <!-- خامساً: تفاصيل الديون (بدون مقاصة) - تم تعديل العنوان وحذف التنبيه -->
     <!-- ============================================================ -->
     <div class="section-block">
-        <h2>خامساً: تفاصيل الديون الصافية (بعد خصم الإيرادات المستلمة)</h2>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يتم خصم حصص الشركاء من الإيرادات التي استلمها كل دائن نيابة عنهم من ديونهم المستحقة له.</em></p>
+        <h2>خامساً: تفاصيل الديون (بدون مقاصة)</h2>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تم تقسيم الديون إلى ثلاثة جداول مستقلة حسب كل دائن.</em></p>
 
-        <h3>أ- صافي الديون المستحقة لد. أحمد</h3>
+        <h3>أ- تفاصيل الديون المستحقة لد. أحمد</h3>
         <table>
             <thead>
                 <tr>
                     <th>إجمالي المصروف وتاريخه</th>
                     <th>الدائن</th>
                     <th>تفصيل المصروف</th>
-                    <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
+                    <th>المدينون وتفاصيل الديون</th>
                     <th>إجمالي الدَين</th>
                 </tr>
             </thead>
             <tbody id="debtDrAhmedBody"></tbody>
         </table>
 
-        <h3>ب- صافي الديون المستحقة لمصطفى ياسين</h3>
+        <h3>ب- تفاصيل الديون المستحقة لمصطفى ياسين</h3>
         <table>
             <thead>
                 <tr>
                     <th>إجمالي المصروف وتاريخه</th>
                     <th>الدائن</th>
                     <th>تفصيل المصروف</th>
-                    <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
+                    <th>المدينون وتفاصيل الديون</th>
                     <th>إجمالي الدَين</th>
                 </tr>
             </thead>
             <tbody id="debtMostafaBody"></tbody>
         </table>
 
-        <h3>ج- صافي الديون المستحقة ليحيى</h3>
+        <h3>ج- تفاصيل الديون المستحقة ليحيى</h3>
         <table>
             <thead>
                 <tr>
                     <th>إجمالي المصروف وتاريخه</th>
                     <th>الدائن</th>
                     <th>تفصيل المصروف</th>
-                    <th>المدينون وتفاصيل الديون (بعد خصم الإيرادات)</th>
+                    <th>المدينون وتفاصيل الديون</th>
                     <th>إجمالي الدَين</th>
                 </tr>
             </thead>
             <tbody id="debtYahiaBody"></tbody>
         </table>
-        <div class="note"><strong>تنبيه:</strong> الديون معروضة <strong>بعد خصم حصص الإيرادات</strong> التي استلمها الدائن نيابة عن باقي الشركاء. اختيار "الجميع" في الإيرادات لا يُحدث أي خصم.</div>
+        <!-- تم حذف التنبيه بالكامل بناءً على طلبك -->
     </div>
 
     <!-- ============================================================ -->
@@ -574,7 +574,6 @@
             ahmed_yassin: { name: 'أحمد ياسين', percent: 10.25, creditorClass: '' }
         };
 
-        // خريطة اختصار للدائن (للاستخدام السريع)
         const creditorColorMap = {
             dr_ahmed: 'creditor-dr_ahmed',
             yahia: 'creditor-yahia',
@@ -691,7 +690,7 @@
         }
 
         // ============================================================
-        // إضافة وحذف المصروفات والإيرادات (مع التحقق من الصلاحية)
+        // إضافة وحذف المصروفات والإيرادات
         // ============================================================
         function addExpense() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن لإضافة مصروفات.'); return; }
@@ -749,14 +748,14 @@
         // ============================================================
         function renderAll() {
             renderExpensesTable();
-            renderBreakdownTable();   // تم تعديل منطق الألوان هنا
-            renderDebtsTables();      // تم تعديل منطق الألوان هنا
+            renderBreakdownTable();
+            renderDebtsTables();
             renderRevenuesTable();
             updateAdminUI();
         }
 
         // ============================================================
-        // 1. جدول المصروفات (بدون تغيير في الألوان – يظهر لون الدافع)
+        // 1. جدول المصروفات
         // ============================================================
         function renderExpensesTable() {
             const tbody = document.getElementById('expensesTableBody');
@@ -850,14 +849,11 @@
         }
 
         // ============================================================
-        // 3. جداول المديونيات (تلوين حسب الدائن مع خلفيات مصححة)
+        // 3. جداول المديونيات (بدون مقاصة)
         // ============================================================
         function renderDebtsTables() {
-            // dr_ahmed: خلفية حمراء فاتحة (#ffebee)
             renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'creditor-dr_ahmed', '#ffebee');
-            // mostafa: خلفية بنفسجية فاتحة (#f3e5f5)
             renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'creditor-mostafa', '#f3e5f5');
-            // yahia: خلفية زرقاء فاتحة (#e3f2fd)
             renderCreditorDebtTable('yahia', 'debtYahiaBody', 'creditor-yahia', '#e3f2fd');
         }
 
@@ -866,20 +862,7 @@
             tbody.innerHTML = '';
             
             const creditorExpenses = expenses.filter(e => e.payer === creditorKey);
-            const totalsOwed = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
             let grandDebtTotal = 0;
-
-            const revenuesReceivedByCreditor = revenues.filter(r => r.receiver === creditorKey);
-            const revenueCredits = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
-            
-            revenuesReceivedByCreditor.forEach(r => {
-                Object.keys(partners).forEach(pKey => {
-                    if (pKey !== creditorKey) {
-                        const share = (r.total * partners[pKey].percent) / 100;
-                        revenueCredits[pKey] += share;
-                    }
-                });
-            });
 
             creditorExpenses.forEach(e => {
                 let debtDetails = '';
@@ -903,48 +886,33 @@
                 `;
             });
 
-            let netTotals = {};
-            let grandNetTotal = 0;
-            Object.keys(partners).forEach(pKey => {
-                if (pKey !== creditorKey) {
-                    let totalDebtFromExp = 0;
-                    creditorExpenses.forEach(e => {
-                        totalDebtFromExp += (e.amount * partners[pKey].percent) / 100;
-                    });
-                    const creditFromRev = revenueCredits[pKey] || 0;
-                    const net = totalDebtFromExp - creditFromRev;
-                    netTotals[pKey] = net;
-                    grandNetTotal += net;
-                }
-            });
-
             let summaryLines = '';
             Object.keys(partners).forEach(pKey => {
                 if (pKey !== creditorKey) {
-                    const netVal = netTotals[pKey] || 0;
-                    summaryLines += `• ${partners[pKey].name}: <span class="${colorClass}">${netVal.toFixed(2)}</span> ج.م<br>`;
+                    let totalDebt = 0;
+                    creditorExpenses.forEach(e => {
+                        totalDebt += (e.amount * partners[pKey].percent) / 100;
+                    });
+                    summaryLines += `• ${partners[pKey].name}: <span class="${colorClass}">${totalDebt.toFixed(2)}</span> ج.م<br>`;
+                    grandDebtTotal += totalDebt;
                 }
             });
-
-            let hasRevenueDeduction = false;
-            Object.keys(revenueCredits).forEach(k => { if (revenueCredits[k] > 0) hasRevenueDeduction = true; });
 
             tbody.innerHTML += `
                 <tr class="total-debt-row">
                     <td colspan="4" style="text-align: left; padding-right: 10px;">
-                        <strong>🔹 صافي الديون المستحقة لـ ${partners[creditorKey].name} ${hasRevenueDeduction ? '(بعد خصم الإيرادات المستلمة)' : ''}</strong>
+                        <strong>🔹 إجمالي الديون المستحقة لـ ${partners[creditorKey].name}</strong>
                     </td>
                     <td class="${colorClass}" style="font-weight:700; font-size:11.5px; text-align:right; line-height: 1.6; padding: 6px;">
                         ${summaryLines}
-                        <div style="border-top: 1px dashed; margin-top: 3px; padding-top: 2px;"><strong>الإجمالي الصافي: ${grandNetTotal.toFixed(2)} ج.م</strong></div>
-                        ${hasRevenueDeduction ? `<div style="font-size:10px; color:#555; margin-top:4px;">(تم خصم حصص الشركاء من الإيرادات التي استلمها ${partners[creditorKey].name})</div>` : ''}
+                        <div style="border-top: 1px dashed; margin-top: 3px; padding-top: 2px;"><strong>الإجمالي: ${grandDebtTotal.toFixed(2)} ج.م</strong></div>
                     </td>
                 </tr>
             `;
         }
 
         // ============================================================
-        // 4. جدول الإيرادات (بدون تغيير في الألوان)
+        // 4. جدول الإيرادات
         // ============================================================
         function renderRevenuesTable() {
             const tbody = document.getElementById('revenueTableBody');
