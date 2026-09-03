@@ -590,22 +590,22 @@
         </div>
         <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong>، والقيمة السالبة تعني أنه <strong>مدين</strong> (هذا صافي المركز المالي الكلي).</div>
 
-        <!-- الجدول الجديد: تفاصيل الديون النهائية (بعد المقاصة) -->
-        <h3>تفاصيل الديون النهائية (بعد المقاصة)</h3>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول صافي الديون المستحقة على كل مدين لكل دائن، بعد خصم الإيرادات التي استلمها الدائن (كأنها تسديد من المدينين).</em></p>
+        <!-- الجدول الجديد: تفاصيل الديون النهائية (بعد المقاصة الثنائية) -->
+        <h3>تفاصيل الديون النهائية (بعد المقاصة الثنائية)</h3>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول صافي الديون بين كل زوج من الشركاء بعد خصم الديون المتبادلة (المقاصة).</em></p>
         <div class="settlement-table-wrapper">
             <table>
                 <thead>
                     <tr>
-                        <th>المدين</th>
-                        <th>إجمالي الدين (ج.م)</th>
-                        <th>تفاصيل الدائنين والمبالغ المستحقة</th>
+                        <th>المدين النهائي</th>
+                        <th>الدائن النهائي</th>
+                        <th>صافي المبلغ المستحق (ج.م)</th>
                     </tr>
                 </thead>
                 <tbody id="finalDistributionBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص العلاقة النهائية بين الشركاء. تم توزيع الإيرادات التي استلمها كل دائن على المدينين كنسبة من ديونهم، مما يقلل من المبالغ المستحقة لهم.</div>
+        <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص العلاقة النهائية بين كل زوج من الشركاء. تم خصم الديون المتبادلة (أي إذا كان "أ" مديناً لـ "ب" بمبلغ X، و "ب" مديناً لـ "أ" بمبلغ Y، فإن الصافي هو الفرق بينهما).</div>
     </div>
 
     <!-- ============================================================ -->
@@ -820,7 +820,7 @@
             renderDebtsTables();
             renderRevenuesTable();
             renderFinalSettlement();
-            renderFinalDistribution(); // الجدول النهائي بالمنطق الصحيح
+            renderFinalDistribution(); // الجدول النهائي مع المقاصة الثنائية
             updateAdminUI();
         }
 
@@ -1077,12 +1077,12 @@
         }
 
         // ============================================================
-        // 6. توزيع الديون النهائية (المنطق الصحيح)
+        // 6. توزيع الديون النهائية (مع المقاصة الثنائية)
         // ============================================================
         function renderFinalDistribution() {
             const tbody = document.getElementById('finalDistributionBody');
             
-            // 1. حساب الديون الخام (من المصروفات) بين كل زوج
+            // 1. حساب إجمالي الديون الخام من المصروفات بين كل زوج
             let grossDebt = {};
             Object.keys(partners).forEach(a => {
                 Object.keys(partners).forEach(b => {
@@ -1099,56 +1099,80 @@
                 });
             });
 
-            // 2. حساب إجمالي الإيرادات التي استلمها كل دائن
-            let revenueReceived = {};
-            revenues.filter(r => r.receiver !== 'all').forEach(r => {
-                let receiver = r.receiver;
-                if (!revenueReceived[receiver]) revenueReceived[receiver] = 0;
-                revenueReceived[receiver] += r.total;
-            });
-
-            // 3. خصم الإيرادات من الديون الخام (توزيع الإيرادات على المدينين كنسبة من ديونهم)
-            let netDebt = {};
-            Object.keys(grossDebt).forEach(debtor => {
-                Object.keys(grossDebt[debtor]).forEach(creditor => {
-                    let debtAmount = grossDebt[debtor][creditor];
-                    let creditorRevenue = revenueReceived[creditor] || 0;
-                    
-                    // حساب إجمالي ديون هذا الدائن (لحساب النسبة)
-                    let totalCreditorDebt = 0;
-                    Object.keys(grossDebt).forEach(d => {
-                        if (grossDebt[d] && grossDebt[d][creditor]) {
-                            totalCreditorDebt += grossDebt[d][creditor];
+            // 2. حساب تأثير الإيرادات (تُخصم من ديون المدينين للدائن المستلم)
+            let revenueImpact = {};
+            Object.keys(partners).forEach(a => {
+                Object.keys(partners).forEach(b => {
+                    if (a !== b) {
+                        let impact = 0;
+                        revenues.filter(r => r.receiver === a).forEach(r => {
+                            impact += (r.total * partners[b].percent) / 100;
+                        });
+                        if (impact > 0.01) {
+                            if (!revenueImpact[b]) revenueImpact[b] = {};
+                            revenueImpact[b][a] = impact;
                         }
-                    });
-                    
-                    // نسبة هذا المدين من إجمالي ديون الدائن
-                    let share = 0;
-                    if (totalCreditorDebt > 0) {
-                        share = (debtAmount / totalCreditorDebt) * creditorRevenue;
-                    }
-                    
-                    // صافي الدين بعد الخصم
-                    let net = debtAmount - share;
-                    if (net > 0.01) {
-                        if (!netDebt[debtor]) netDebt[debtor] = {};
-                        netDebt[debtor][creditor] = net;
                     }
                 });
             });
 
-            // 4. بناء جدول النتائج (كل مدين في صف واحد)
+            // 3. دمج GrossDebt و RevenueImpact للحصول على صافي الدين الخام
+            let netDebtRaw = {};
+            Object.keys(grossDebt).forEach(debtor => {
+                Object.keys(grossDebt[debtor]).forEach(creditor => {
+                    let amount = grossDebt[debtor][creditor];
+                    let revImpact = (revenueImpact[debtor] && revenueImpact[debtor][creditor]) || 0;
+                    let net = amount - revImpact;
+                    if (net > 0.01) {
+                        if (!netDebtRaw[debtor]) netDebtRaw[debtor] = {};
+                        netDebtRaw[debtor][creditor] = net;
+                    }
+                });
+            });
+
+            // 4. المقاصة الثنائية: خصم الديون المتبادلة بين كل زوج
+            let finalDebt = {};
+            let processedPairs = new Set();
+
+            Object.keys(netDebtRaw).forEach(debtorA => {
+                Object.keys(netDebtRaw[debtorA]).forEach(creditorB => {
+                    // نتأكد من أننا لم نعالج هذا الزوج مسبقاً
+                    let pairKey = [debtorA, creditorB].sort().join('|');
+                    if (processedPairs.has(pairKey)) return;
+                    processedPairs.add(pairKey);
+
+                    let debtA_on_B = netDebtRaw[debtorA][creditorB] || 0;
+                    let debtB_on_A = (netDebtRaw[creditorB] && netDebtRaw[creditorB][debtorA]) || 0;
+
+                    if (Math.abs(debtA_on_B - debtB_on_A) < 0.01) {
+                        // متساويان، لا يوجد دين
+                        return;
+                    } else if (debtA_on_B > debtB_on_A) {
+                        // debtorA هو المدين، creditorB هو الدائن
+                        let net = debtA_on_B - debtB_on_A;
+                        if (!finalDebt[debtorA]) finalDebt[debtorA] = {};
+                        finalDebt[debtorA][creditorB] = net;
+                    } else {
+                        // creditorB هو المدين، debtorA هو الدائن
+                        let net = debtB_on_A - debtA_on_B;
+                        if (!finalDebt[creditorB]) finalDebt[creditorB] = {};
+                        finalDebt[creditorB][debtorA] = net;
+                    }
+                });
+            });
+
+            // 5. بناء جدول النتائج (صف واحد لكل مدين مع تفاصيل دائنيه)
             let html = '';
             let grandTotalAll = 0;
             let hasDebt = false;
 
-            Object.keys(netDebt).forEach(debtorKey => {
+            Object.keys(finalDebt).forEach(debtorKey => {
                 let totalDebt = 0;
                 let creditorsDetails = '';
-                let creditorKeys = Object.keys(netDebt[debtorKey]).sort();
+                let creditorKeys = Object.keys(finalDebt[debtorKey]).sort();
 
                 creditorKeys.forEach(creditorKey => {
-                    let amount = netDebt[debtorKey][creditorKey];
+                    let amount = finalDebt[debtorKey][creditorKey];
                     if (amount > 0.01) {
                         totalDebt += amount;
                         const colorClass = creditorColorMap[creditorKey] || '';
@@ -1162,8 +1186,8 @@
                     html += `
                         <tr>
                             <td><strong>${partners[debtorKey].name}</strong></td>
+                            <td style="text-align:right; padding-left:10px;">${creditorsDetails}</td>
                             <td><strong>${totalDebt.toFixed(2)}</strong></td>
-                            <td style="text-align:right; padding-right:10px;">${creditorsDetails}</td>
                         </tr>
                     `;
                 }
@@ -1174,11 +1198,12 @@
                 return;
             }
 
+            // صف الإجمالي
             html += `
                 <tr class="total-debt-row">
                     <td><strong>الإجمالي الكلي</strong></td>
-                    <td><strong>${grandTotalAll.toFixed(2)}</strong></td>
                     <td></td>
+                    <td><strong>${grandTotalAll.toFixed(2)}</strong></td>
                 </tr>
             `;
 
