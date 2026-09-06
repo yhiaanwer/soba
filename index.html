@@ -398,6 +398,7 @@
                     <option value="yahia">يحيى أنور</option>
                     <option value="mostafa">مصطفى ياسين</option>
                     <option value="ahmed_yassin">أحمد ياسين</option>
+                    <option value="all">الجميع (بدون ديون)</option> <!-- الخيار الجديد -->
                 </select>
             </div>
             <button class="btn-add" onclick="addExpense()">حفظ المصروف</button>
@@ -468,7 +469,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ثالثاً: الإيرادات (مع التعديل المطلوب) -->
+    <!-- ثالثاً: الإيرادات -->
     <!-- ============================================================ -->
     <div class="section-block">
         <h2>ثالثاً: الإيرادات</h2>
@@ -816,7 +817,7 @@
             renderExpensesTable();
             renderBreakdownTable();
             renderDebtsTables();
-            renderRevenuesTable(); // تم تعديل هذه الدالة
+            renderRevenuesTable();
             renderFinalSettlement();
             renderFinalDistribution();
             updateAdminUI();
@@ -829,13 +830,18 @@
             const tbody = document.getElementById('expensesTableBody');
             tbody.innerHTML = '';
             let total = 0;
-            const totalsByPayer = { dr_ahmed: 0, mostafa: 0, yahia: 0, ahmed_yassin: 0 };
+            const totalsByPayer = { dr_ahmed: 0, mostafa: 0, yahia: 0, ahmed_yassin: 0, all: 0 };
 
             expenses.forEach(e => {
                 total += e.amount;
-                totalsByPayer[e.payer] += e.amount;
-                const colorClass = creditorColorMap[e.payer] || '';
+                if (e.payer === 'all') {
+                    totalsByPayer.all += e.amount;
+                } else {
+                    totalsByPayer[e.payer] += e.amount;
+                }
+                const colorClass = (e.payer === 'all') ? '' : (creditorColorMap[e.payer] || '');
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>` : '';
+                const payerName = e.payer === 'all' ? 'الجميع' : partners[e.payer].name;
                 tbody.innerHTML += `
                     <tr>
                         <td><strong>${e.dateTitle}</strong></td>
@@ -861,6 +867,7 @@
                 <span class="item creditor-yahia"><strong>يحيى:</strong> ${totalsByPayer.yahia.toLocaleString('en-US')} ج.م</span>
                 <span class="item creditor-mostafa"><strong>مصطفى ياسين:</strong> ${totalsByPayer.mostafa.toLocaleString('en-US')} ج.م</span>
                 <span class="item creditor-ahmed_yassin"><strong>أحمد ياسين:</strong> ${totalsByPayer.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
+                <span class="item"><strong>الجميع:</strong> ${totalsByPayer.all.toLocaleString('en-US')} ج.م</span>
             `;
         }
 
@@ -885,16 +892,19 @@
                 totals.mostafa += shareMostafa;
                 totals.ahmed_yassin += shareAhmedY;
 
-                const payerColor = creditorColorMap[e.payer] || '';
+                // إذا كان الدافع هو "الجميع"، فلا نطبق أي لون (أسود عادي)
+                const payerColor = (e.payer === 'all') ? '' : (creditorColorMap[e.payer] || '');
+                // نطبق اللون على جميع الخلايا ما عدا خلية الدافع نفسه (أو نتركها كلها بدون لون إذا كان الدافع "الجميع")
+                const colorDr = (e.payer !== 'dr_ahmed' && e.payer !== 'all') ? payerColor : '';
+                const colorYahia = (e.payer !== 'yahia' && e.payer !== 'all') ? payerColor : '';
+                const colorMostafa = (e.payer !== 'mostafa' && e.payer !== 'all') ? payerColor : '';
+                const colorAhmedY = (e.payer !== 'ahmed_yassin' && e.payer !== 'all') ? payerColor : '';
 
-                const colorDr = (e.payer !== 'dr_ahmed') ? payerColor : '';
-                const colorYahia = (e.payer !== 'yahia') ? payerColor : '';
-                const colorMostafa = (e.payer !== 'mostafa') ? payerColor : '';
-                const colorAhmedY = (e.payer !== 'ahmed_yassin') ? payerColor : '';
+                const payerDisplay = e.payer === 'all' ? 'الجميع' : partners[e.payer].name;
 
                 tbody.innerHTML += `
                     <tr>
-                        <td style="text-align:right; padding-right:8px; font-weight:600;">${e.dateTitle} [دفعها ${partners[e.payer].name}]</td>
+                        <td style="text-align:right; padding-right:8px; font-weight:600;">${e.dateTitle} [دفعها ${payerDisplay}]</td>
                         <td class="${colorDr}">${shareDr.toFixed(2)}</td>
                         <td class="${colorYahia}">${shareYahia.toFixed(2)}</td>
                         <td class="${colorMostafa}">${shareMostafa.toFixed(2)}</td>
@@ -917,7 +927,7 @@
         }
 
         // ============================================================
-        // 3. جداول المديونيات
+        // 3. جداول المديونيات (نتخطى المصروفات التي دافعها "الجميع")
         // ============================================================
         function renderDebtsTables() {
             renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'creditor-dr_ahmed', '#ffebee');
@@ -929,6 +939,7 @@
             const tbody = document.getElementById(tableBodyId);
             tbody.innerHTML = '';
             
+            // تصفية المصروفات التي دفعها هذا الدائن فقط (تجاهل "الجميع")
             const creditorExpenses = expenses.filter(e => e.payer === creditorKey);
             let grandDebtTotal = 0;
 
@@ -980,7 +991,7 @@
         }
 
         // ============================================================
-        // 4. جدول الإيرادات (تم التعديل حسب الطلب)
+        // 4. جدول الإيرادات
         // ============================================================
         function renderRevenuesTable() {
             const tbody = document.getElementById('revenueTableBody');
@@ -997,7 +1008,6 @@
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteRevenue(${r.id})">حذف</button></td>` : '';
                 const receiverName = r.receiver === 'all' ? 'الجميع (بدون مقاصة)' : partners[r.receiver]?.name || r.receiver;
 
-                // تحديد الألوان والعلامات حسب المستلم
                 let drColor = '';
                 let yahiaColor = '';
                 let mostafaColor = '';
@@ -1008,9 +1018,6 @@
                 let ahmedYSign = '';
 
                 if (r.receiver === 'dr_ahmed') {
-                    // د. أحمد هو المستلم → باقي الشركاء مدينون له (يظهر بالسالب والأحمر)
-                    drColor = '';
-                    drSign = '';
                     yahiaColor = 'creditor-dr_ahmed';
                     yahiaSign = '-';
                     mostafaColor = 'creditor-dr_ahmed';
@@ -1018,8 +1025,6 @@
                     ahmedYColor = 'creditor-dr_ahmed';
                     ahmedYSign = '-';
                 } else if (r.receiver === 'yahia') {
-                    yahiaColor = '';
-                    yahiaSign = '';
                     drColor = 'creditor-yahia';
                     drSign = '-';
                     mostafaColor = 'creditor-yahia';
@@ -1027,8 +1032,6 @@
                     ahmedYColor = 'creditor-yahia';
                     ahmedYSign = '-';
                 } else if (r.receiver === 'mostafa') {
-                    mostafaColor = '';
-                    mostafaSign = '';
                     drColor = 'creditor-mostafa';
                     drSign = '-';
                     yahiaColor = 'creditor-mostafa';
@@ -1036,15 +1039,7 @@
                     ahmedYColor = 'creditor-mostafa';
                     ahmedYSign = '-';
                 } else {
-                    // المستلم = 'all' أو أي حالة أخرى → لا توجد علامات سالب ولا ألوان خاصة
-                    drColor = '';
-                    drSign = '';
-                    yahiaColor = '';
-                    yahiaSign = '';
-                    mostafaColor = '';
-                    mostafaSign = '';
-                    ahmedYColor = '';
-                    ahmedYSign = '';
+                    // المستلم = 'all' → لا توجد علامات سالب ولا ألوان خاصة
                 }
 
                 tbody.innerHTML += `
@@ -1066,15 +1061,26 @@
         }
 
         // ============================================================
-        // 5. صافي المركز المالي
+        // 5. صافي المركز المالي (يتم احتساب "الجميع" كمدفوعات من جميع الشركاء)
         // ============================================================
         function renderFinalSettlement() {
             const tbody = document.getElementById('finalSettlementBody');
             
             const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
             
+            // حساب المدفوعات الفعلية مع توزيع مصروفات "الجميع" على الشركاء حسب نسبهم
             const paid = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
-            expenses.forEach(e => paid[e.payer] += e.amount);
+            expenses.forEach(e => {
+                if (e.payer === 'all') {
+                    // توزيع مبلغ المصروف على جميع الشركاء حسب نسبهم
+                    paid.dr_ahmed += (e.amount * partners.dr_ahmed.percent) / 100;
+                    paid.yahia += (e.amount * partners.yahia.percent) / 100;
+                    paid.mostafa += (e.amount * partners.mostafa.percent) / 100;
+                    paid.ahmed_yassin += (e.amount * partners.ahmed_yassin.percent) / 100;
+                } else {
+                    paid[e.payer] += e.amount;
+                }
+            });
 
             let html = '';
             let grandTotalPaid = 0;
@@ -1114,12 +1120,12 @@
         }
 
         // ============================================================
-        // 6. توزيع الديون النهائية (مع المقاصة الثنائية)
+        // 6. توزيع الديون النهائية (مع المقاصة الثنائية) - نتخطى "الجميع"
         // ============================================================
         function renderFinalDistribution() {
             const tbody = document.getElementById('finalDistributionBody');
             
-            // 1. حساب إجمالي الديون الخام من المصروفات بين كل زوج
+            // 1. حساب إجمالي الديون الخام من المصروفات بين كل زوج (نتجاهل "الجميع")
             let grossDebt = {};
             Object.keys(partners).forEach(a => {
                 Object.keys(partners).forEach(b => {
