@@ -44,34 +44,15 @@
         .section-block { break-inside: avoid; page-break-inside: avoid; }
         .debt-details-cell { text-align: right; padding: 5px 8px; }
         .debt-details-cell .debt-line { display: block; padding: 1px 0; }
-        .control-panel { background: #f1f8e9; border: 2px solid #2e7d32; border-radius: 8px; padding: 12px; margin-bottom: 15px; }
-        .control-panel h3 { margin-top: 0; margin-bottom: 8px; color: #1b5e20; border-bottom: 1px solid #a5d6a7; padding-bottom: 4px; }
-        .form-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-        .form-group { flex: 1; min-width: 130px; }
-        .form-group label { display: block; font-size: 11px; font-weight: bold; color: #2e7d32; margin-bottom: 2px; }
-        .form-group input, .form-group select { width: 100%; padding: 6px; border: 1px solid #a5d6a7; border-radius: 4px; font-family: 'Cairo'; font-size: 12px; }
-        .btn-add { background: #2e7d32; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'Cairo'; margin-top: 18px; }
-        .btn-add:hover { background: #1b5e20; }
-        .btn-danger { background: #c62828; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 10px; font-family: 'Cairo'; margin: 1px; }
-        .btn-danger:hover { background: #b71c1c; }
-        .btn-edit { background: #1565c0 !important; }
-        .btn-edit:hover { background: #0d47a1 !important; }
-        .btn-login { background: #1565c0; color: white; border: none; padding: 6px 18px; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
-        .btn-login:hover { background: #0d47a1; }
-        .btn-logout { background: #e65100; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
-        .btn-logout:hover { background: #bf360c; }
-        .admin-status { font-weight: bold; padding: 6px 12px; border-radius: 6px; margin-bottom: 10px; text-align: center; }
-        .admin-status.viewer { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
-        .admin-status.editor { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-        .no-print { display: inline-block; }
         .revenue-table-wrapper, .settlement-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 6px 0 10px 0; border-radius: 6px; border: 1px solid #a5d6a7; }
-        .revenue-table-wrapper table, .settlement-table-wrapper table { width: 100%; min-width: 800px; border-collapse: collapse; font-size: 12px; background: #ffffff; margin: 0; }
+        .revenue-table-wrapper table, .settlement-table-wrapper table { width: 100%; min-width: 900px; border-collapse: collapse; font-size: 12px; background: #ffffff; margin: 0; }
         .revenue-table-wrapper table th, .revenue-table-wrapper table td, .settlement-table-wrapper table th, .settlement-table-wrapper table td { border: 1px solid #a5d6a7; padding: 6px 4px; text-align: center; vertical-align: middle; white-space: nowrap; }
         .revenue-table-wrapper table th, .settlement-table-wrapper table th { background-color: #2e7d32; color: #ffffff; font-weight: 700; border-color: #1b5e20; font-size: 12px; }
         .revenue-table-wrapper table tr:nth-child(even), .settlement-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
         .revenue-table-wrapper table tr:nth-child(odd), .settlement-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
         .settlement-table-wrapper table tr.total-row { background-color: #c8e6c9 !important; font-weight: 700; }
         .settlement-table-wrapper table tr.total-row td { border-top: 2px solid #2e7d32; }
+        /* ===== صور الفواتير ===== */
         .invoice-images-section { margin-top: 8px; padding: 8px 10px; background: #f9fef9; border: 1px dashed #a5d6a7; border-radius: 6px; }
         .invoice-images-section h4 { font-size: 12px; color: #2e7d32; margin-bottom: 6px; font-weight: 700; }
         .invoice-images-gallery { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -87,10 +68,6 @@
         .lightbox-overlay img { max-width: 95%; max-height: 90%; border-radius: 6px; box-shadow: 0 6px 30px rgba(0,0,0,0.6); background: #fff; }
         .lightbox-close { position: absolute; top: 18px; left: 18px; background: #c62828; color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 22px; font-weight: bold; cursor: pointer; z-index: 10000; }
         .lightbox-close:hover { background: #b71c1c; }
-        .upload-area { border: 2px dashed #a5d6a7; border-radius: 6px; padding: 10px; text-align: center; background: #f9fff9; cursor: pointer; transition: background 0.2s; }
-        .upload-area:hover { background: #e8f5e9; border-color: #2e7d32; }
-        .upload-area input[type="file"] { display: none; }
-        .upload-area label { cursor: pointer; font-weight: bold; color: #2e7d32; font-size: 12px; display: block; }
         .sync-status { text-align: center; font-size: 11px; padding: 4px 8px; border-radius: 4px; margin-bottom: 8px; font-weight: 600; }
         .sync-status.loading { background: #fff3e0; color: #e65100; }
         .sync-status.ok { background: #e8f5e9; color: #2e7d32; }
@@ -98,8 +75,86 @@
         .info-badge { display: inline-block; background: #fff3e0; color: #e65100; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 6px; }
         .transfer-badge { display: inline-block; background: #e3f2fd; color: #1565c0; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 4px; }
         .transfer-out-badge { display: inline-block; background: #fff3e0; color: #e65100; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 4px; }
+        .admin-status { font-weight: bold; padding: 8px 12px; border-radius: 6px; margin-bottom: 10px; text-align: center; }
+        .admin-status.viewer { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+        .admin-status.editor { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+        .btn-login { background: #1565c0; color: white; border: none; padding: 8px 18px; border-radius: 6px; font-weight: bold; cursor: pointer; font-family: 'Cairo'; font-size: 13px; margin-right: 8px; }
+        .btn-login:hover { background: #0d47a1; }
+
+        /* ========== لوحة التحكم الجديدة ========== */
+        .cp-panel { background: #ffffff; border: 2px solid #2e7d32; border-radius: 12px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 3px 12px rgba(46,125,50,0.12); }
+        .cp-header { background: linear-gradient(135deg, #2e7d32, #1b5e20); color: #fff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+        .cp-header-title { font-size: 15px; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px; }
+        .cp-user-badge { background: rgba(255,255,255,0.22); padding: 4px 12px; border-radius: 14px; font-size: 11px; font-weight: 700; }
+        .cp-tabs { display: flex; background: #e8f5e9; border-bottom: 2px solid #a5d6a7; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+        .cp-tabs::-webkit-scrollbar { height: 4px; }
+        .cp-tabs::-webkit-scrollbar-thumb { background: #a5d6a7; border-radius: 2px; }
+        .cp-tab { flex: 1; min-width: 100px; padding: 12px 10px; background: transparent; border: none; border-bottom: 3px solid transparent; font-family: 'Cairo'; font-size: 12.5px; font-weight: 700; color: #2e7d32; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+        .cp-tab.active { background: #fff; border-bottom-color: #2e7d32; color: #1b5e20; }
+        .cp-tab:hover:not(.active) { background: rgba(255,255,255,0.6); }
+        .cp-body { padding: 14px; background: #fafdf9; }
+        .cp-pane { display: none; animation: cpFade 0.2s ease; }
+        .cp-pane.active { display: block; }
+        @keyframes cpFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+        .cp-card { background: #fff; border: 1px solid #c8e6c9; border-radius: 10px; padding: 14px; margin-bottom: 12px; transition: box-shadow 0.2s ease; }
+        .cp-card:hover { box-shadow: 0 2px 8px rgba(46,125,50,0.08); }
+        .cp-card:last-child { margin-bottom: 0; }
+        .cp-card h4 { font-size: 13px; color: #1b5e20; margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 1px dashed #c8e6c9; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+        .cp-form { display: flex; flex-direction: column; gap: 10px; }
+        .cp-field { display: flex; flex-direction: column; gap: 4px; }
+        .cp-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .cp-field label { font-size: 11.5px; font-weight: 700; color: #2e7d32; }
+        .cp-field input, .cp-field select { width: 100%; padding: 10px 12px; border: 1.5px solid #a5d6a7; border-radius: 7px; font-family: 'Cairo'; font-size: 13px; background: #fff; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; min-height: 42px; color: #1a1a1a; }
+        .cp-field input:focus, .cp-field select:focus { outline: none; border-color: #2e7d32; box-shadow: 0 0 0 3px rgba(46,125,50,0.12); }
+        .cp-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+        .cp-btn { padding: 11px 18px; border: none; border-radius: 7px; font-family: 'Cairo'; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.15s ease; min-height: 44px; flex: 1; min-width: 110px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .cp-btn:active { transform: scale(0.98); }
+        .cp-btn-primary { background: #2e7d32; color: #fff; }
+        .cp-btn-primary:hover { background: #1b5e20; }
+        .cp-btn-secondary { background: #1565c0; color: #fff; }
+        .cp-btn-secondary:hover { background: #0d47a1; }
+        .cp-btn-danger { background: #c62828; color: #fff; }
+        .cp-btn-danger:hover { background: #b71c1c; }
+        .cp-btn-warning { background: #e65100; color: #fff; }
+        .cp-btn-warning:hover { background: #bf360c; }
+        .cp-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch; }
+        .cp-row select { flex: 2; min-width: 130px; padding: 10px 12px; border: 1.5px solid #a5d6a7; border-radius: 7px; font-family: 'Cairo'; font-size: 13px; min-height: 44px; background: #fff; color: #1a1a1a; }
+        .cp-row select:focus { outline: none; border-color: #2e7d32; box-shadow: 0 0 0 3px rgba(46,125,50,0.12); }
+        .cp-row .cp-btn { flex: 0 1 auto; min-width: 80px; padding: 10px 14px; }
+        .cp-upload-area { border: 2px dashed #a5d6a7; border-radius: 10px; padding: 20px; text-align: center; background: #f9fff9; cursor: pointer; transition: all 0.2s ease; }
+        .cp-upload-area:hover { background: #e8f5e9; border-color: #2e7d32; transform: translateY(-1px); }
+        .cp-upload-area input[type="file"] { display: none; }
+        .cp-upload-area .cp-upload-icon { font-size: 32px; display: block; margin-bottom: 6px; }
+        .cp-upload-area .cp-upload-text { font-weight: 700; color: #2e7d32; font-size: 13px; display: block; }
+        .cp-upload-area .cp-upload-hint { color: #666; font-size: 11px; margin-top: 4px; display: block; }
+        .cp-empty { text-align: center; color: #999; font-size: 12px; padding: 16px; font-style: italic; }
+        .cp-items-list { display: flex; flex-direction: column; gap: 6px; max-height: 400px; overflow-y: auto; padding-left: 4px; }
+        .cp-items-list::-webkit-scrollbar { width: 6px; }
+        .cp-items-list::-webkit-scrollbar-thumb { background: #c8e6c9; border-radius: 3px; }
+        .cp-item-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 11px; background: #fafdf9; border: 1px solid #e8f5e9; border-radius: 7px; font-size: 12px; transition: background 0.15s; }
+        .cp-item-row:hover { background: #f1f8e9; }
+        .cp-item-info { flex: 1; min-width: 0; }
+        .cp-item-desc { font-weight: 600; color: #1b5e20; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 2px; }
+        .cp-item-amount { font-size: 12px; font-weight: 700; }
+        .cp-item-amount.income { color: #2e7d32; }
+        .cp-item-amount.expense { color: #c62828; }
+        .cp-item-actions { display: flex; gap: 5px; flex-shrink: 0; }
+        .cp-mini-btn { width: 36px; height: 36px; border: none; border-radius: 7px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease; }
+        .cp-mini-btn:active { transform: scale(0.92); }
+        .cp-mini-btn.edit { background: #e3f2fd; color: #1565c0; }
+        .cp-mini-btn.edit:hover { background: #bbdefb; }
+        .cp-mini-btn.delete { background: #ffebee; color: #c62828; }
+        .cp-mini-btn.delete:hover { background: #ffcdd2; }
+        .cp-transfer-badge { display: inline-block; background: #e3f2fd; color: #1565c0; font-size: 9px; padding: 1px 6px; border-radius: 8px; font-weight: 700; margin-right: 4px; vertical-align: middle; }
+
+        @media (max-width: 420px) {
+            .cp-field-row { grid-template-columns: 1fr; }
+            .cp-btn { min-width: 90px; font-size: 12px; padding: 10px 14px; }
+        }
+
         @media print {
             .no-print { display: none !important; }
+            .cp-panel { display: none !important; }
             body { padding: 0 !important; margin: 0 !important; font-size: 10px; line-height: 1.35; max-width: 100% !important; background: #ffffff !important; } 
             h1 { font-size: 16px; padding: 6px; margin-bottom: 6px; background: #1b5e20 !important; color: #ffffff !important; } 
             h2 { font-size: 13px; padding: 4px 6px; border-right: 4px solid #1b5e20 !important; margin-top: 10px !important; margin-bottom: 4px !important; } 
@@ -111,9 +166,7 @@
             .revenue-table-wrapper, .settlement-table-wrapper { overflow-x: visible !important; border: none !important; }
             .revenue-table-wrapper table, .settlement-table-wrapper table { min-width: auto !important; width: 100% !important; }
             .revenue-table-wrapper table th, .revenue-table-wrapper table td, .settlement-table-wrapper table th, .settlement-table-wrapper table td { white-space: normal !important; }
-            .invoice-images-section { display: none !important; }
-            .lightbox-overlay { display: none !important; }
-            .sync-status { display: none !important; }
+            .invoice-images-section, .lightbox-overlay, .sync-status { display: none !important; }
         }
     </style>
 </head>
@@ -126,105 +179,158 @@
     <div id="syncStatus" class="sync-status no-print" style="display:none;"></div>
     <div id="adminStatusContainer" class="no-print"></div>
 
-    <div id="controlPanel" class="control-panel no-print" style="display:none;">
-        <h3>➕ إضافة مصروف جديد</h3>
-        <div class="form-row">
-            <div class="form-group">
-                <label>التاريخ والعنوان:</label>
-                <input type="text" id="expDateTitle" placeholder="مثال: 5 سبتمبر - شراء سماد">
-            </div>
-            <div class="form-group">
-                <label>التفاصيل الدقيقة:</label>
-                <input type="text" id="expDetails" placeholder="تفاصيل المصروف">
-            </div>
-            <div class="form-group">
-                <label>المبلغ (ج.م):</label>
-                <input type="number" id="expAmount" step="0.01" placeholder="0.00">
-            </div>
-            <div class="form-group">
-                <label>الشريك المُسدد:</label>
-                <select id="expPayer">
-                    <option value="dr_ahmed">د. أحمد</option>
-                    <option value="yahia">يحيى أنور</option>
-                    <option value="mostafa">مصطفى ياسين</option>
-                    <option value="ahmed_yassin">أحمد ياسين</option>
-                    <option value="all">الجميع (بدون ديون)</option>
-                </select>
-            </div>
-            <button class="btn-add" onclick="addExpense()">حفظ المصروف</button>
+    <!-- ============ لوحة التحكم ============ -->
+    <div id="controlPanel" class="cp-panel no-print" style="display:none;">
+        <div class="cp-header">
+            <h3 class="cp-header-title">🛠️ لوحة التحكم</h3>
+            <span class="cp-user-badge">✅ أدمن</span>
         </div>
 
-        <h3 style="margin-top:12px;">🧾 إدارة فواتير إيرادات الخيار</h3>
-        <div class="form-row">
-            <div class="form-group">
-                <label>الفاتورة:</label>
-                <select id="invSelect" onchange="onInvoiceSelectChange()"></select>
-            </div>
-            <div class="form-group">
-                <label>تاريخ الفاتورة:</label>
-                <input type="text" id="invDate" placeholder="مثال: 5 سبتمبر">
-            </div>
-            <div class="form-group">
-                <label>المتسلم:</label>
-                <select id="invReceiver">
-                    <option value="all">الجميع (بدون مقاصة)</option>
-                    <option value="dr_ahmed">د. أحمد</option>
-                    <option value="yahia">يحيى أنور</option>
-                    <option value="mostafa">مصطفى ياسين</option>
-                    <option value="ahmed_yassin">أحمد ياسين</option>
-                </select>
-            </div>
-            <button class="btn-add" onclick="saveInvoiceMeta()">حفظ بيانات الفاتورة</button>
+        <div class="cp-tabs">
+            <button class="cp-tab active" data-cp-tab="tab-expenses" onclick="switchCpTab('tab-expenses', this)">💰 المصروفات</button>
+            <button class="cp-tab" data-cp-tab="tab-invoices" onclick="switchCpTab('tab-invoices', this)">🧾 الفواتير</button>
+            <button class="cp-tab" data-cp-tab="tab-images" onclick="switchCpTab('tab-images', this)">🖼️ الصور</button>
+            <button class="cp-tab" data-cp-tab="tab-settings" onclick="switchCpTab('tab-settings', this)">⚙️ إعدادات</button>
         </div>
 
-        <h4 style="font-size:12px; color:#2e7d32; margin-top:8px; margin-bottom:4px;">🔹 إضافة بند جديد للفاتورة</h4>
-        <div class="form-row">
-            <div class="form-group">
-                <label>البيان:</label>
-                <input type="text" id="invItemDesc" placeholder="وصف البند">
-            </div>
-            <div class="form-group">
-                <label>الوارد (ج.م):</label>
-                <input type="number" id="invItemIncome" step="0.01" placeholder="0.00">
-            </div>
-            <div class="form-group">
-                <label>المنصرف (ج.م):</label>
-                <input type="number" id="invItemExpense" step="0.01" placeholder="0.00">
-            </div>
-            <div class="form-group">
-                <label>مُرحّل من فاتورة (اختياري):</label>
-                <select id="invItemFrom">
-                    <option value="">— ليس مُرحّلاً —</option>
-                </select>
-            </div>
-            <button class="btn-add" onclick="addInvoiceItem()">إضافة بند</button>
-        </div>
-        <div class="note" style="margin-top:4px; font-size:11px;">
-            <strong>معلومة:</strong> لو البند "وارد" ومُرحّل من فاتورة أخرى، النظام سيخصم المبلغ تلقائياً من الفاتورة المصدر.
-        </div>
+        <div class="cp-body">
 
-        <div class="form-row" style="margin-top:8px;">
-            <button class="btn-add" onclick="addNewInvoice()" style="background:#1565c0; margin-top:0;">➕ فاتورة جديدة</button>
-            <button class="btn-danger" onclick="deleteCurrentInvoice()" style="margin-top:0; padding:8px 14px; font-size:12px;">🗑️ حذف الفاتورة الحالية</button>
-        </div>
-
-        <h3 style="margin-top:12px;">🖼️ صور فواتير الخيار</h3>
-        <div class="form-row">
-            <div class="form-group">
-                <label>اختر الفاتورة:</label>
-                <select id="imgInvSelect"></select>
-            </div>
-            <div class="form-group" style="flex:2; min-width:220px;">
-                <label>رفع صور (يمكن اختيار أكثر من صورة):</label>
-                <div class="upload-area" onclick="document.getElementById('invImagesInput').click()">
-                    <input type="file" id="invImagesInput" accept="image/*" multiple onchange="handleInvoiceImagesUpload()">
-                    <label>📷 اضغط لاختيار الصور</label>
+            <!-- تبويب: المصروفات -->
+            <div id="tab-expenses" class="cp-pane active">
+                <div class="cp-card">
+                    <h4>➕ إضافة مصروف جديد</h4>
+                    <div class="cp-form">
+                        <div class="cp-field">
+                            <label>التاريخ والعنوان</label>
+                            <input type="text" id="expDateTitle" placeholder="مثال: 5 سبتمبر - شراء سماد">
+                        </div>
+                        <div class="cp-field">
+                            <label>التفاصيل الدقيقة</label>
+                            <input type="text" id="expDetails" placeholder="تفاصيل المصروف">
+                        </div>
+                        <div class="cp-field-row">
+                            <div class="cp-field">
+                                <label>المبلغ (ج.م)</label>
+                                <input type="number" id="expAmount" step="0.01" placeholder="0.00">
+                            </div>
+                            <div class="cp-field">
+                                <label>الشريك المُسدد</label>
+                                <select id="expPayer">
+                                    <option value="dr_ahmed">د. أحمد</option>
+                                    <option value="yahia">يحيى أنور</option>
+                                    <option value="mostafa">مصطفى ياسين</option>
+                                    <option value="ahmed_yassin">أحمد ياسين</option>
+                                    <option value="all">الجميع (بدون ديون)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="cp-actions">
+                            <button class="cp-btn cp-btn-primary" onclick="addExpense()">➕ إضافة المصروف</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <button class="btn-danger" onclick="resetToDefaultData()" style="margin-top:10px;">↩️ استعادة البيانات الأساسية</button>
-        <button class="btn-logout" onclick="logout()" style="margin-top:10px; margin-right:8px;">🚪 تسجيل الخروج</button>
+            <!-- تبويب: الفواتير -->
+            <div id="tab-invoices" class="cp-pane">
+                <div class="cp-card">
+                    <h4>📄 اختيار الفاتورة</h4>
+                    <div class="cp-row">
+                        <select id="invSelect" onchange="onInvoiceSelectChange()"></select>
+                        <button class="cp-btn cp-btn-secondary" onclick="addNewInvoice()">🆕 جديدة</button>
+                        <button class="cp-btn cp-btn-danger" onclick="deleteCurrentInvoice()">🗑️</button>
+                    </div>
+                </div>
+
+                <div class="cp-card">
+                    <h4>📝 بيانات الفاتورة الحالية</h4>
+                    <div class="cp-form">
+                        <div class="cp-field-row">
+                            <div class="cp-field">
+                                <label>تاريخ الفاتورة</label>
+                                <input type="text" id="invDate" placeholder="مثال: 5 سبتمبر">
+                            </div>
+                            <div class="cp-field">
+                                <label>المتسلم</label>
+                                <select id="invReceiver">
+                                    <option value="all">الجميع (بدون مقاصة)</option>
+                                    <option value="dr_ahmed">د. أحمد</option>
+                                    <option value="yahia">يحيى أنور</option>
+                                    <option value="mostafa">مصطفى ياسين</option>
+                                    <option value="ahmed_yassin">أحمد ياسين</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="cp-actions">
+                            <button class="cp-btn cp-btn-primary" onclick="saveInvoiceMeta()">💾 حفظ البيانات</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cp-card">
+                    <h4>➕ إضافة بند للفاتورة</h4>
+                    <div class="cp-form">
+                        <div class="cp-field">
+                            <label>البيان</label>
+                            <input type="text" id="invItemDesc" placeholder="وصف البند">
+                        </div>
+                        <div class="cp-field-row">
+                            <div class="cp-field">
+                                <label>الوارد (ج.م)</label>
+                                <input type="number" id="invItemIncome" step="0.01" placeholder="0.00">
+                            </div>
+                            <div class="cp-field">
+                                <label>المنصرف (ج.م)</label>
+                                <input type="number" id="invItemExpense" step="0.01" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="cp-field">
+                            <label>مُرحّل من (اختياري)</label>
+                            <select id="invItemFrom"></select>
+                        </div>
+                        <div class="cp-actions">
+                            <button class="cp-btn cp-btn-primary" onclick="addInvoiceItem()">➕ إضافة البند</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cp-card">
+                    <h4>📋 بنود الفاتورة الحالية</h4>
+                    <div id="cpItemsList" class="cp-items-list"></div>
+                </div>
+            </div>
+
+            <!-- تبويب: الصور -->
+            <div id="tab-images" class="cp-pane">
+                <div class="cp-card">
+                    <h4>🖼️ صور الفاتورة</h4>
+                    <div class="cp-form">
+                        <div class="cp-field">
+                            <label>اختر الفاتورة</label>
+                            <select id="imgInvSelect"></select>
+                        </div>
+                        <div class="cp-upload-area" onclick="document.getElementById('invImagesInput').click()">
+                            <input type="file" id="invImagesInput" accept="image/*" multiple onchange="handleInvoiceImagesUpload()">
+                            <span class="cp-upload-icon">📷</span>
+                            <span class="cp-upload-text">اضغط لاختيار الصور</span>
+                            <span class="cp-upload-hint">يمكن اختيار أكثر من صورة في وقت واحد</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- تبويب: الإعدادات -->
+            <div id="tab-settings" class="cp-pane">
+                <div class="cp-card">
+                    <h4>⚠️ إجراءات متقدمة</h4>
+                    <div class="cp-actions">
+                        <button class="cp-btn cp-btn-warning" onclick="resetToDefaultData()">↩️ استعادة البيانات الأساسية</button>
+                        <button class="cp-btn cp-btn-danger" onclick="logout()">🚪 تسجيل الخروج</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <h2>أولاً: صوبة أبو الشقاف (محصول الخيار)</h2>
@@ -260,15 +366,15 @@
 
     <div class="section-block">
         <h2>ثالثاً: الإيرادات (ملخص الفواتير)</h2>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>ملخص كل فاتورة: إجمالي الوارد، إجمالي المنصرف، المُرحّل منها إلى فواتير أخرى، والمتبقي الفعلي الذي استلمه الدائن؛ ثم توزيعه على الشركاء.</em></p>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>ملخص كل فاتورة: إجمالي الوارد (بما فيه المُرحّل إليها)، المنصرف، المُرحّل منها، ثم المتبقي الفعلي؛ وتوزيعه على الشركاء.</em></p>
         <div class="revenue-table-wrapper">
             <table>
                 <thead>
                     <tr>
                         <th>رقم الفاتورة</th>
                         <th>تاريخ الفاتورة</th>
-                        <th>إجمالي الفاتورة</th>
-                        <th>المنصرف منها</th>
+                        <th>إجمالي الوارد</th>
+                        <th>المنصرف</th>
                         <th>مُرحّل منها</th>
                         <th>المتبقي الفعلي</th>
                         <th>المتسلم</th>
@@ -281,12 +387,12 @@
                 <tbody id="revenueTableBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>ملحوظة:</strong> الحصص تُحسب من <strong>المتبقي الفعلي</strong> بعد خصم المنصرف والمُرحّل منها إلى فواتير أخرى.</div>
+        <div class="note"><strong>ملحوظة:</strong> "إجمالي الوارد" يشمل الأصلي + المُرحّل إليها. "المتبقي الفعلي" = إجمالي الوارد − المنصرف − المُرحّل منها. الحصص تُحسب من المتبقي الفعلي.</div>
     </div>
 
     <div class="section-block">
         <h2>ثالثاً-ب: تفاصيل فواتير إيرادات الخيار</h2>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل كل فاتورة من فواتير بيع الخيار، مع بيان الوارد والمنصرف والرصيد المتبقي لكل بند، وبيان الترحيلات بين الفواتير.</em></p>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل كل فاتورة، مع بيان الوارد والمنصرف والرصيد المتبقي لكل بند، وبيان الترحيلات بين الفواتير والشركاء.</em></p>
         <div id="invoiceDetailsContainer"></div>
     </div>
 
@@ -349,10 +455,10 @@
                 <tbody id="finalSettlementBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong>، والقيمة السالبة تعني أنه <strong>مدين</strong> (صافي المركز المالي).</div>
+        <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong>، والقيمة السالبة تعني أنه <strong>مدين</strong>.</div>
 
         <h3>تفاصيل الديون النهائية (بعد المقاصة الثنائية)</h3>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول صافي الديون بين كل زوج من الشركاء بعد خصم الديون المتبادلة (المقاصة) وخصم حصص الشركاء من المتبقي الفعلي بالإيرادات.</em></p>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول صافي الديون بين كل زوج من الشركاء بعد المقاصة الكاملة.</em></p>
         <div class="settlement-table-wrapper">
             <table>
                 <thead>
@@ -361,7 +467,7 @@
                 <tbody id="finalDistributionBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص العلاقة النهائية بين كل زوج من الشركاء بعد المقاصة الكاملة.</div>
+        <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص العلاقة النهائية بين كل زوج من الشركاء.</div>
     </div>
 
     <div class="section-block">
@@ -380,7 +486,6 @@
         <img id="lightboxImg" src="" alt="صورة الفاتورة">
     </div>
 
-    <!-- ================= Firebase + منطق التطبيق ================= -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -455,7 +560,7 @@
             { id: 40, dateTitle: '3 سبتمبر - فطار', details: 'فطار (دفعها د. أحمد)', amount: 300.00, payer: 'dr_ahmed' }
         ];
 
-        // ملاحظة: البنود التي تحمل transferredFrom تشير إلى الفاتورة المصدر
+        // transferredFrom: null | {type:'invoice', id:number} | {type:'partner', id:string}
         const initialInvoices = [
             { id: 1, name: 'الفاتورة الأولى', date: '', receiver: 'all', images: [], items: [
                 { id: 101, description: 'المبلغ الأساسي للفاتورة', income: 5270, expense: 0, transferredFrom: null },
@@ -473,10 +578,10 @@
                 { id: 113, description: 'فطار العمال (عم حامد - يوم 7 سبتمبر)', income: 0, expense: 80 },
                 { id: 114, description: 'فطار (الأربعاء 9 سبتمبر)', income: 0, expense: 90 },
                 { id: 115, description: 'حساب جركن جاز قديم (عم سلامة)', income: 0, expense: 120 },
-                { id: 116, description: 'مُرحّل من الفاتورة الثانية', income: 260, expense: 0, transferredFrom: 2 },
-                { id: 117, description: 'مُرحّل من الفاتورة الثالثة', income: 60, expense: 0, transferredFrom: 3 },
+                { id: 116, description: 'مُرحّل من الفاتورة الثانية', income: 260, expense: 0, transferredFrom: { type: 'invoice', id: 2 } },
+                { id: 117, description: 'مُرحّل من الفاتورة الثالثة', income: 60, expense: 0, transferredFrom: { type: 'invoice', id: 3 } },
                 { id: 118, description: 'فطار يومي 13 و 14 سبتمبر', income: 0, expense: 200 },
-                { id: 119, description: 'متبقي من فلوس (د. أحمد)', income: 10, expense: 0, transferredFrom: null }
+                { id: 119, description: 'مُرحّل من د. أحمد', income: 15, expense: 0, transferredFrom: { type: 'partner', id: 'dr_ahmed' } }
             ]},
             { id: 2, name: 'الفاتورة الثانية', date: '', receiver: 'all', images: [], items: [
                 { id: 201, description: 'المبلغ الأساسي للفاتورة الثانية', income: 11480, expense: 0, transferredFrom: null },
@@ -541,23 +646,48 @@
                 if (typeof inv.receiver !== 'string') inv.receiver = 'all';
                 inv.items.forEach(it => {
                     if (it.transferredFrom === undefined) it.transferredFrom = null;
+                    // تحويل الصيغة القديمة (رقم) إلى الصيغة الجديدة
+                    if (typeof it.transferredFrom === 'number') {
+                        it.transferredFrom = { type: 'invoice', id: it.transferredFrom };
+                    }
                 });
             });
         }
 
-        // الحسابات: income - expense - (المُرحّل منها إلى فواتير أخرى)
+        function transferToValue(tf) {
+            if (!tf) return '';
+            if (tf.type === 'invoice') return 'inv:' + tf.id;
+            if (tf.type === 'partner') return 'prt:' + tf.id;
+            return '';
+        }
+
+        function parseTransferValue(val) {
+            if (!val) return null;
+            const parts = val.split(':');
+            if (parts.length !== 2) return null;
+            const [type, id] = parts;
+            if (type === 'inv') return { type: 'invoice', id: parseInt(id) };
+            if (type === 'prt') return { type: 'partner', id };
+            return null;
+        }
+
+        function isTransferFromInvoice(tf, invoiceId) {
+            if (!tf) return false;
+            if (tf.type === 'invoice') return tf.id === invoiceId;
+            return false;
+        }
+
+        // الحساب: income - expense - (المُرحّل منها إلى فواتير أخرى فقط)
         function calcInvoiceTotals(inv, allInvoices) {
             const income = inv.items.reduce((s, it) => s + (it.income || 0), 0);
             const expense = inv.items.reduce((s, it) => s + (it.expense || 0), 0);
             
-            // المُرحّل منها: مجموع البنود في الفواتير الأخرى التي transferredFrom === هذه الفاتورة
             let transferredOut = 0;
-            const transfersList = [];
             (allInvoices || invoices).forEach(otherInv => {
+                if (otherInv.id === inv.id) return;
                 otherInv.items.forEach(it => {
-                    if (it.transferredFrom === inv.id && (it.income || 0) > 0) {
+                    if (isTransferFromInvoice(it.transferredFrom, inv.id) && (it.income || 0) > 0) {
                         transferredOut += it.income;
-                        transfersList.push({ toInvoice: otherInv, amount: it.income });
                     }
                 });
             });
@@ -566,8 +696,7 @@
                 income, 
                 expense, 
                 transferredOut,
-                balance: income - expense - transferredOut,
-                transfersList
+                balance: income - expense - transferredOut
             };
         }
 
@@ -616,7 +745,7 @@
                 setSyncStatus('ok', '✅ تم الحفظ في السحابة');
             } catch (err) {
                 console.error('Sync failed:', err);
-                setSyncStatus('error', '⚠️ فشل الحفظ في السحابة: ' + err.message);
+                setSyncStatus('error', '⚠️ فشل الحفظ: ' + err.message);
             }
         }
 
@@ -662,7 +791,7 @@
             const statusContainer = document.getElementById('adminStatusContainer');
             if (isAdmin) {
                 panel.style.display = 'block';
-                statusContainer.innerHTML = `<div class="admin-status editor">✅ أنت الآن في وضع التحرير الكامل (أدمن). يمكنك إضافة وحذف البنود.</div>`;
+                statusContainer.innerHTML = '';
             } else {
                 panel.style.display = 'none';
                 statusContainer.innerHTML = `
@@ -673,6 +802,14 @@
                 `;
             }
         }
+
+        /* ========= Tabs ========= */
+        window.switchCpTab = function(tabId, btnEl) {
+            document.querySelectorAll('.cp-pane').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.cp-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btnEl.classList.add('active');
+        };
 
         /* ========= Expenses ========= */
         window.addExpense = function() {
@@ -689,6 +826,7 @@
             document.getElementById('expDetails').value = '';
             document.getElementById('expAmount').value = '';
             saveData();
+            setSyncStatus('ok', '✅ تم إضافة المصروف');
         };
 
         window.deleteExpense = function(id) {
@@ -707,18 +845,30 @@
             document.getElementById('invDate').value = inv.date || '';
             document.getElementById('invReceiver').value = inv.receiver || 'all';
             populateTransferSelect(invId);
+            renderCpItemsList();
         };
 
         function populateTransferSelect(excludeId) {
             const sel = document.getElementById('invItemFrom');
             if (!sel) return;
             const prev = sel.value;
-            sel.innerHTML = '<option value="">— ليس مُرحّلاً —</option>';
+
+            let invoiceOpts = '';
             invoices.forEach(inv => {
                 if (inv.id !== excludeId) {
-                    sel.innerHTML += `<option value="${inv.id}">${inv.name}</option>`;
+                    invoiceOpts += `<option value="inv:${inv.id}">${inv.name}</option>`;
                 }
             });
+            let partnerOpts = '';
+            Object.keys(partners).forEach(p => {
+                partnerOpts += `<option value="prt:${p}">${partners[p].name}</option>`;
+            });
+
+            sel.innerHTML = `
+                <option value="">— لا يوجد ترحيل —</option>
+                ${invoiceOpts ? `<optgroup label="من فواتير">${invoiceOpts}</optgroup>` : ''}
+                <optgroup label="من شركاء">${partnerOpts}</optgroup>
+            `;
             if (prev) sel.value = prev;
         }
 
@@ -740,13 +890,13 @@
             const income = parseFloat(document.getElementById('invItemIncome').value) || 0;
             const expense = parseFloat(document.getElementById('invItemExpense').value) || 0;
             const fromVal = document.getElementById('invItemFrom').value;
-            const transferredFrom = fromVal ? parseInt(fromVal) : null;
+            const transferredFrom = parseTransferValue(fromVal);
             
             if (!description || (income === 0 && expense === 0)) {
                 alert('يرجى إدخال البيان وقيمة الوارد أو المنصرف.'); return;
             }
             if (transferredFrom && income <= 0) {
-                alert('الترحيل يكون من فاتورة إلى بند "وارد" فقط. يرجى إدخال قيمة في الوارد أو إلغاء الترحيل.');
+                alert('الترحيل يكون على بند "وارد" فقط. أضف قيمة في الوارد أو ألغِ الترحيل.');
                 return;
             }
             const inv = invoices.find(i => i.id === invId);
@@ -757,6 +907,7 @@
             document.getElementById('invItemExpense').value = '';
             document.getElementById('invItemFrom').value = '';
             saveData();
+            setSyncStatus('ok', '✅ تم إضافة البند');
         };
 
         window.deleteInvoiceItem = function(invId, itemId) {
@@ -781,16 +932,22 @@
             const newExpense = prompt('المنصرف (ج.م):', item.expense);
             if (newExpense === null) return;
             
-            // عرض قائمة الترحيل
-            const invOptions = invoices.filter(i => i.id !== invId).map(i => i.id + '=' + i.name).join('\n');
-            const currentFrom = item.transferredFrom || '';
-            const fromPrompt = prompt('مُرحّل من فاتورة (رقم) — أو اتركه فارغاً:\n' + invOptions, currentFrom);
+            // عرض خيارات الترحيل
+            let opts = '— لا يوجد ترحيل —\n';
+            invoices.forEach(i => {
+                if (i.id !== invId) opts += `inv:${i.id} = ${i.name}\n`;
+            });
+            Object.keys(partners).forEach(p => {
+                opts += `prt:${p} = ${partners[p].name}\n`;
+            });
+            const currentVal = transferToValue(item.transferredFrom);
+            const fromPrompt = prompt('اختر مصدر الترحيل بكتابة الكود (أو اتركه فارغاً):\n' + opts, currentVal);
             if (fromPrompt === null) return;
             
             item.description = newDesc.trim() || item.description;
             item.income = parseFloat(newIncome) || 0;
             item.expense = parseFloat(newExpense) || 0;
-            item.transferredFrom = fromPrompt ? parseInt(fromPrompt) : null;
+            item.transferredFrom = parseTransferValue(fromPrompt.trim());
             saveData();
         };
 
@@ -809,12 +966,11 @@
             const inv = invoices.find(i => i.id === invId);
             if (!inv) return;
             
-            // فحص: هل هذه الفاتورة مصدر ترحيل لبند آخر؟
             let usedAsSource = false;
             invoices.forEach(other => {
                 if (other.id !== invId) {
                     other.items.forEach(it => {
-                        if (it.transferredFrom === invId) usedAsSource = true;
+                        if (isTransferFromInvoice(it.transferredFrom, invId)) usedAsSource = true;
                     });
                 }
             });
@@ -822,10 +978,9 @@
             if (usedAsSource) msg += '\n\n⚠️ تنبيه: هناك بنود في فواتير أخرى مُرَحّلة من هذه الفاتورة. سيتم إلغاء الترحيل تلقائياً.';
             
             if (confirm(msg)) {
-                // حذف أي إشارات ترحيل من هذه الفاتورة
                 invoices.forEach(other => {
                     other.items.forEach(it => {
-                        if (it.transferredFrom === invId) it.transferredFrom = null;
+                        if (isTransferFromInvoice(it.transferredFrom, invId)) it.transferredFrom = null;
                     });
                 });
                 invoices = invoices.filter(i => i.id !== invId);
@@ -993,453 +1148,4 @@
                 const colorAhmedY = (e.payer !== 'ahmed_yassin' && e.payer !== 'all') ? payerColor : '';
                 const payerDisplay = e.payer === 'all' ? 'الجميع' : partners[e.payer].name;
 
-                tbody.innerHTML += `
-                    <tr>
-                        <td style="text-align:right; padding-right:8px; font-weight:600;">${e.dateTitle} [دفعها ${payerDisplay}]</td>
-                        <td class="${colorDr}">${shareDr.toFixed(2)}</td>
-                        <td class="${colorYahia}">${shareYahia.toFixed(2)}</td>
-                        <td class="${colorMostafa}">${shareMostafa.toFixed(2)}</td>
-                        <td class="${colorAhmedY}">${shareAhmedY.toFixed(2)}</td>
-                        <td><strong>${e.amount.toFixed(2)}</strong></td>
-                    </tr>
-                `;
-            });
-
-            tbody.innerHTML += `
-                <tr class="total-row">
-                    <td style="text-align:right; padding-right:8px; font-weight:700;">إجمالي الحصص</td>
-                    <td><strong>${totals.dr_ahmed.toFixed(2)}</strong></td>
-                    <td><strong>${totals.yahia.toFixed(2)}</strong></td>
-                    <td><strong>${totals.mostafa.toFixed(2)}</strong></td>
-                    <td><strong>${totals.ahmed_yassin.toFixed(2)}</strong></td>
-                    <td><strong>${totalExp.toFixed(2)}</strong></td>
-                </tr>
-            `;
-        }
-
-        function renderDebtsTables() {
-            renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'creditor-dr_ahmed', '#ffebee');
-            renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'creditor-mostafa', '#f3e5f5');
-            renderCreditorDebtTable('yahia', 'debtYahiaBody', 'creditor-yahia', '#e3f2fd');
-        }
-
-        function renderCreditorDebtTable(creditorKey, tableBodyId, colorClass, bgColor) {
-            const tbody = document.getElementById(tableBodyId);
-            tbody.innerHTML = '';
-            const creditorExpenses = expenses.filter(e => e.payer === creditorKey);
-            let grandDebtTotal = 0;
-
-            creditorExpenses.forEach(e => {
-                let debtDetails = '';
-                let itemTotalDebt = 0;
-                Object.keys(partners).forEach(pKey => {
-                    if (pKey !== creditorKey) {
-                        const debtFromExp = (e.amount * partners[pKey].percent) / 100;
-                        debtDetails += `<div class="debt-line">• ${partners[pKey].name} (${partners[pKey].percent}%) : <span class="${colorClass}">${debtFromExp.toFixed(2)}</span></div>`;
-                        itemTotalDebt += debtFromExp;
-                    }
-                });
-                const datePart = e.dateTitle.split('-')[0].trim();
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>${e.amount.toLocaleString('en-US')} ج.م</strong><br>${datePart}</td>
-                        <td style="background-color: ${bgColor};">${partners[creditorKey].name}</td>
-                        <td>${e.details}</td>
-                        <td class="debt-details-cell">${debtDetails}</td>
-                        <td class="${colorClass}" style="font-weight:700;">${itemTotalDebt.toFixed(2)}</td>
-                    </tr>
-                `;
-            });
-
-            let summaryLines = '';
-            Object.keys(partners).forEach(pKey => {
-                if (pKey !== creditorKey) {
-                    let totalDebt = 0;
-                    creditorExpenses.forEach(e => { totalDebt += (e.amount * partners[pKey].percent) / 100; });
-                    summaryLines += `• ${partners[pKey].name}: <span class="${colorClass}">${totalDebt.toFixed(2)}</span> ج.م<br>`;
-                    grandDebtTotal += totalDebt;
-                }
-            });
-
-            tbody.innerHTML += `
-                <tr class="total-debt-row">
-                    <td colspan="4" style="text-align: left; padding-right: 10px;">
-                        <strong>🔹 إجمالي الديون المستحقة لـ ${partners[creditorKey].name}</strong>
-                    </td>
-                    <td class="${colorClass}" style="font-weight:700; font-size:11.5px; text-align:right; line-height: 1.6; padding: 6px;">
-                        ${summaryLines}
-                        <div style="border-top: 1px dashed; margin-top: 3px; padding-top: 2px;"><strong>الإجمالي: ${grandDebtTotal.toFixed(2)} ج.م</strong></div>
-                    </td>
-                </tr>
-            `;
-        }
-
-        function renderRevenuesTable() {
-            const tbody = document.getElementById('revenueTableBody');
-            tbody.innerHTML = '';
-            if (invoices.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color:#888; padding:12px;">لا توجد فواتير مسجلة حتى الآن</td></tr>`;
-                return;
-            }
-
-            let grandIncome = 0, grandExpense = 0, grandTransferOut = 0, grandBalance = 0;
-            const grandShares = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
-
-            invoices.forEach(inv => {
-                const { income, expense, transferredOut, balance } = calcInvoiceTotals(inv, invoices);
-                grandIncome += income;
-                grandExpense += expense;
-                grandTransferOut += transferredOut;
-                grandBalance += balance;
-
-                const receiverName = (inv.receiver === 'all' || !inv.receiver) ? '—' : (partners[inv.receiver] ? partners[inv.receiver].name : inv.receiver);
-
-                const shareDr = (balance * partners.dr_ahmed.percent) / 100;
-                const shareYahia = (balance * partners.yahia.percent) / 100;
-                const shareMostafa = (balance * partners.mostafa.percent) / 100;
-                const shareAhmedY = (balance * partners.ahmed_yassin.percent) / 100;
-
-                grandShares.dr_ahmed += shareDr;
-                grandShares.yahia += shareYahia;
-                grandShares.mostafa += shareMostafa;
-                grandShares.ahmed_yassin += shareAhmedY;
-
-                let drColor = '', yahiaColor = '', mostafaColor = '', ahmedYColor = '';
-                let drSign = '', yahiaSign = '', mostafaSign = '', ahmedYSign = '';
-
-                if (inv.receiver === 'dr_ahmed') {
-                    yahiaColor = 'creditor-dr_ahmed'; yahiaSign = '-';
-                    mostafaColor = 'creditor-dr_ahmed'; mostafaSign = '-';
-                    ahmedYColor = 'creditor-dr_ahmed'; ahmedYSign = '-';
-                } else if (inv.receiver === 'yahia') {
-                    drColor = 'creditor-yahia'; drSign = '-';
-                    mostafaColor = 'creditor-yahia'; mostafaSign = '-';
-                    ahmedYColor = 'creditor-yahia'; ahmedYSign = '-';
-                } else if (inv.receiver === 'mostafa') {
-                    drColor = 'creditor-mostafa'; drSign = '-';
-                    yahiaColor = 'creditor-mostafa'; yahiaSign = '-';
-                    ahmedYColor = 'creditor-mostafa'; ahmedYSign = '-';
-                } else if (inv.receiver === 'ahmed_yassin') {
-                    drColor = 'creditor-ahmed_yassin'; drSign = '-';
-                    yahiaColor = 'creditor-ahmed_yassin'; yahiaSign = '-';
-                    mostafaColor = 'creditor-ahmed_yassin'; mostafaSign = '-';
-                }
-
-                const transferOutDisplay = transferredOut > 0 ? `<span class="transfer-out-badge">${transferredOut.toFixed(2)}</span>` : '—';
-
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${inv.name}</td>
-                        <td>${inv.date || '—'}</td>
-                        <td><strong>${income.toFixed(2)}</strong></td>
-                        <td>${expense.toFixed(2)}</td>
-                        <td>${transferOutDisplay}</td>
-                        <td><strong style="color:#1b5e20;">${balance.toFixed(2)}</strong></td>
-                        <td>${receiverName}</td>
-                        <td class="${drColor}">${drSign}${shareDr.toFixed(2)}</td>
-                        <td class="${yahiaColor}">${yahiaSign}${shareYahia.toFixed(2)}</td>
-                        <td class="${mostafaColor}">${mostafaSign}${shareMostafa.toFixed(2)}</td>
-                        <td class="${ahmedYColor}">${ahmedYSign}${shareAhmedY.toFixed(2)}</td>
-                    </tr>
-                `;
-            });
-
-            tbody.innerHTML += `
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي العام</strong></td>
-                    <td></td>
-                    <td><strong>${grandIncome.toFixed(2)}</strong></td>
-                    <td><strong>${grandExpense.toFixed(2)}</strong></td>
-                    <td><strong>${grandTransferOut.toFixed(2)}</strong></td>
-                    <td><strong>${grandBalance.toFixed(2)}</strong></td>
-                    <td></td>
-                    <td><strong>${grandShares.dr_ahmed.toFixed(2)}</strong></td>
-                    <td><strong>${grandShares.yahia.toFixed(2)}</strong></td>
-                    <td><strong>${grandShares.mostafa.toFixed(2)}</strong></td>
-                    <td><strong>${grandShares.ahmed_yassin.toFixed(2)}</strong></td>
-                </tr>
-            `;
-        }
-
-        function renderInvoicesTables() {
-            const select = document.getElementById('invSelect');
-            const currentVal = select.value;
-            select.innerHTML = '';
-            invoices.forEach(inv => {
-                select.innerHTML += `<option value="${inv.id}">${inv.name}</option>`;
-            });
-            if (currentVal && invoices.find(i => i.id === parseInt(currentVal))) {
-                select.value = currentVal;
-            }
-            onInvoiceSelectChange();
-
-            const imgSelect = document.getElementById('imgInvSelect');
-            const imgCurrentVal = imgSelect.value;
-            imgSelect.innerHTML = '';
-            invoices.forEach(inv => {
-                imgSelect.innerHTML += `<option value="${inv.id}">${inv.name}</option>`;
-            });
-            if (imgCurrentVal && invoices.find(i => i.id === parseInt(imgCurrentVal))) {
-                imgSelect.value = imgCurrentVal;
-            }
-
-            const detailsContainer = document.getElementById('invoiceDetailsContainer');
-            detailsContainer.innerHTML = '';
-
-            invoices.forEach(inv => {
-                const receiverName = (inv.receiver === 'all' || !inv.receiver) ? 'الجميع (بدون مقاصة)' : (partners[inv.receiver] ? partners[inv.receiver].name : inv.receiver);
-                const { income: invIncome, expense: invExpense, transferredOut, balance: invBalance, transfersList } = calcInvoiceTotals(inv, invoices);
-
-                let transferInfo = '';
-                if (transferredOut > 0) {
-                    transferInfo = `<span class="transfer-out-badge">⬆️ مُرحّل منها: ${transferredOut.toFixed(2)} ج.م</span>`;
-                }
-
-                let html = `<h3>${inv.name} <span class="info-badge">📅 ${inv.date || 'بدون تاريخ'}</span> <span class="info-badge">👤 المتسلم: ${receiverName}</span> ${transferInfo}</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>البيان / بند المصروف</th>
-                                <th>الوارد (ج.م)</th>
-                                <th>المنصرف (ج.م)</th>
-                                <th>الرصيد المتبقي (ج.م)</th>
-                                ${isAdmin ? '<th class="no-print">إجراء</th>' : ''}
-                            </tr>
-                        </thead>
-                        <tbody>`;
-
-                let runningBalance = 0;
-                inv.items.forEach(item => {
-                    runningBalance += (item.income || 0) - (item.expense || 0);
-                    const incomeDisplay = (item.income || 0) > 0 ? item.income.toFixed(2) : '—';
-                    const expenseDisplay = (item.expense || 0) > 0 ? item.expense.toFixed(2) : '—';
-                    
-                    let descWithBadge = item.description;
-                    if (item.transferredFrom) {
-                        const srcInv = invoices.find(i => i.id === item.transferredFrom);
-                        const srcName = srcInv ? srcInv.name : ('#' + item.transferredFrom);
-                        descWithBadge += ` <span class="transfer-badge">⬇️ من: ${srcName}</span>`;
-                    }
-                    
-                    const actionBtns = isAdmin ? `<td class="no-print">
-                        <button class="btn-danger btn-edit" onclick="editInvoiceItem(${inv.id}, ${item.id})">تعديل</button>
-                        <button class="btn-danger" onclick="deleteInvoiceItem(${inv.id}, ${item.id})">حذف</button>
-                    </td>` : '';
-
-                    html += `
-                        <tr>
-                            <td style="text-align:right; padding-right:8px;">${descWithBadge}</td>
-                            <td>${incomeDisplay}</td>
-                            <td>${expenseDisplay}</td>
-                            <td>${runningBalance.toFixed(2)}</td>
-                            ${actionBtns}
-                        </tr>
-                    `;
-                });
-
-                html += `
-                        <tr class="total-debt-row">
-                            <td><strong>الإجمالي</strong></td>
-                            <td><strong>${invIncome.toFixed(2)}</strong></td>
-                            <td><strong>${invExpense.toFixed(2)}</strong></td>
-                            <td><strong>${invBalance.toFixed(2)}</strong></td>
-                            ${isAdmin ? '<td></td>' : ''}
-                        </tr>
-                    </tbody>
-                </table>`;
-
-                const imgCount = inv.images ? inv.images.length : 0;
-                const imagesHtml = imgCount === 0
-                    ? `<p class="invoice-images-empty">لا توجد صور مرفقة بعد${isAdmin ? ' — ارفعها من لوحة التحكم بالأعلى' : ''}.</p>`
-                    : `<div class="invoice-images-gallery">` +
-                      inv.images.map(img => `
-                          <div class="invoice-image-item" onclick="openLightboxById(${inv.id}, '${img.id}')" title="${img.name}">
-                              <img src="${img.data}" alt="${img.name}">
-                              ${isAdmin ? `<button class="img-delete-btn" onclick="event.stopPropagation(); deleteInvoiceImage(${inv.id}, '${img.id}')" title="حذف الصورة">✕</button>` : ''}
-                          </div>
-                      `).join('') + `</div>`;
-
-                html += `
-                    <div class="invoice-images-section">
-                        <h4>🖼️ صور الفاتورة ${imgCount > 0 ? `<span class="image-count-badge">${imgCount}</span>` : ''}</h4>
-                        ${imagesHtml}
-                    </div>
-                `;
-
-                detailsContainer.innerHTML += html;
-            });
-        }
-
-        function renderFinalSettlement() {
-            const tbody = document.getElementById('finalSettlementBody');
-            const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
-            const paid = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
-            expenses.forEach(e => {
-                if (e.payer === 'all') {
-                    paid.dr_ahmed += (e.amount * partners.dr_ahmed.percent) / 100;
-                    paid.yahia += (e.amount * partners.yahia.percent) / 100;
-                    paid.mostafa += (e.amount * partners.mostafa.percent) / 100;
-                    paid.ahmed_yassin += (e.amount * partners.ahmed_yassin.percent) / 100;
-                } else {
-                    paid[e.payer] += e.amount;
-                }
-            });
-
-            let html = '';
-            let grandTotalPaid = 0, grandTotalShareExp = 0, grandTotalNetExp = 0;
-
-            Object.keys(partners).forEach(key => {
-                const shareExp = (totalExpenses * partners[key].percent) / 100;
-                const netExp = paid[key] - shareExp;
-                grandTotalPaid += paid[key];
-                grandTotalShareExp += shareExp;
-                grandTotalNetExp += netExp;
-                const netExpColor = netExp >= 0 ? creditorColorMap[key] : '';
-                html += `
-                    <tr>
-                        <td><strong>${partners[key].name}</strong></td>
-                        <td>${paid[key].toFixed(2)}</td>
-                        <td>${shareExp.toFixed(2)}</td>
-                        <td class="${netExpColor}"><strong>${netExp.toFixed(2)}</strong></td>
-                    </tr>
-                `;
-            });
-
-            html += `
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>${grandTotalPaid.toFixed(2)}</strong></td>
-                    <td><strong>${grandTotalShareExp.toFixed(2)}</strong></td>
-                    <td><strong>${grandTotalNetExp.toFixed(2)}</strong></td>
-                </tr>
-            `;
-            tbody.innerHTML = html;
-        }
-
-        function renderFinalDistribution() {
-            const tbody = document.getElementById('finalDistributionBody');
-            
-            // 1. جمع الديون من المصروفات
-            let grossDebt = {};
-            Object.keys(partners).forEach(a => {
-                Object.keys(partners).forEach(b => {
-                    if (a !== b) {
-                        let debt = 0;
-                        expenses.filter(e => e.payer === a).forEach(e => { debt += (e.amount * partners[b].percent) / 100; });
-                        if (debt > 0.01) {
-                            if (!grossDebt[b]) grossDebt[b] = {};
-                            grossDebt[b][a] = debt;
-                        }
-                    }
-                });
-            });
-
-            // 2. تأثير الإيرادات (المتبقي الفعلي بعد خصم المُرحّل) - يُخصم من الديون
-            let revenueImpact = {};
-            invoices.forEach(inv => {
-                if (inv.receiver === 'all' || !inv.receiver) return;
-                const { balance } = calcInvoiceTotals(inv, invoices);
-                if (balance <= 0) return;
-                Object.keys(partners).forEach(p => {
-                    if (p !== inv.receiver) {
-                        const debt = (balance * partners[p].percent) / 100;
-                        if (debt > 0.01) {
-                            if (!revenueImpact[p]) revenueImpact[p] = {};
-                            revenueImpact[p][inv.receiver] = (revenueImpact[p][inv.receiver] || 0) + debt;
-                        }
-                    }
-                });
-            });
-
-            // 3. صافي الدين بعد خصم الإيرادات
-            let netDebtRaw = {};
-            Object.keys(grossDebt).forEach(debtor => {
-                Object.keys(grossDebt[debtor]).forEach(creditor => {
-                    let amount = grossDebt[debtor][creditor];
-                    let revImpact = (revenueImpact[debtor] && revenueImpact[debtor][creditor]) || 0;
-                    let net = amount - revImpact;
-                    if (net > 0.01) {
-                        if (!netDebtRaw[debtor]) netDebtRaw[debtor] = {};
-                        netDebtRaw[debtor][creditor] = net;
-                    }
-                });
-            });
-
-            // 4. المقاصة الثنائية
-            let finalDebt = {};
-            let processedPairs = new Set();
-
-            Object.keys(netDebtRaw).forEach(debtorA => {
-                Object.keys(netDebtRaw[debtorA]).forEach(creditorB => {
-                    let pairKey = [debtorA, creditorB].sort().join('|');
-                    if (processedPairs.has(pairKey)) return;
-                    processedPairs.add(pairKey);
-
-                    let debtA_on_B = netDebtRaw[debtorA][creditorB] || 0;
-                    let debtB_on_A = (netDebtRaw[creditorB] && netDebtRaw[creditorB][debtorA]) || 0;
-
-                    if (Math.abs(debtA_on_B - debtB_on_A) < 0.01) return;
-                    else if (debtA_on_B > debtB_on_A) {
-                        let net = debtA_on_B - debtB_on_A;
-                        if (!finalDebt[debtorA]) finalDebt[debtorA] = {};
-                        finalDebt[debtorA][creditorB] = net;
-                    } else {
-                        let net = debtB_on_A - debtA_on_B;
-                        if (!finalDebt[creditorB]) finalDebt[creditorB] = {};
-                        finalDebt[creditorB][debtorA] = net;
-                    }
-                });
-            });
-
-            let html = '';
-            let grandTotalAll = 0;
-            let hasDebt = false;
-
-            Object.keys(finalDebt).forEach(debtorKey => {
-                let totalDebt = 0;
-                let creditorsDetails = '';
-                Object.keys(finalDebt[debtorKey]).sort().forEach(creditorKey => {
-                    let amount = finalDebt[debtorKey][creditorKey];
-                    if (amount > 0.01) {
-                        totalDebt += amount;
-                        const colorClass = creditorColorMap[creditorKey] || '';
-                        creditorsDetails += `<span class="${colorClass}">${partners[creditorKey].name} : ${amount.toFixed(2)} ج.م</span><br>`;
-                        hasDebt = true;
-                    }
-                });
-                if (totalDebt > 0.01) {
-                    grandTotalAll += totalDebt;
-                    html += `
-                        <tr>
-                            <td><strong>${partners[debtorKey].name}</strong></td>
-                            <td style="text-align:right; padding-left:10px;">${creditorsDetails}</td>
-                            <td><strong>${totalDebt.toFixed(2)}</strong></td>
-                        </tr>
-                    `;
-                }
-            });
-
-            if (!hasDebt) {
-                tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#888; padding:12px;">لا توجد ديون متبادلة، جميع الحسابات متساوية.</td></tr>`;
-                return;
-            }
-
-            html += `
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي الكلي</strong></td>
-                    <td></td>
-                    <td><strong>${grandTotalAll.toFixed(2)}</strong></td>
-                </tr>
-            `;
-            tbody.innerHTML = html;
-        }
-
-        document.getElementById('liveDate').textContent = new Date().toLocaleDateString('ar-EG', {
-            year: 'numeric', month: 'long', day: 'numeric'
-        });
-
-        loadData();
-    </script>
-
-</body>
-</html>
+                tbody.innerHTML
