@@ -1110,5 +1110,47 @@
 
         renderAll();
     </script>
+
+    <!-- ================= Firebase Connection Test ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLzYi6UL7zSzQpS-ESDB6RhFiim4pfmJU",
+            authDomain: "soba-abo-alshokaf.firebaseapp.com",
+            projectId: "soba-abo-alshokaf",
+            storageBucket: "soba-abo-alshokaf.firebasestorage.app",
+            messagingSenderId: "575728580993",
+            appId: "1:575728580993:web:753299b9f3cbd81764d080"
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            (async () => {
+                try {
+                    const testDoc = doc(db, 'soba_test', 'connection');
+                    await setDoc(testDoc, {
+                        connected: true,
+                        timestamp: new Date().toISOString(),
+                        userAgent: navigator.userAgent.substring(0, 80)
+                    });
+                    const snap = await getDoc(testDoc);
+                    const data = snap.data();
+                    console.log('✅ Firebase connected:', data);
+                    alert('✅ تم الاتصال بـ Firebase بنجاح!\n\nالوقت: ' + data.timestamp);
+                } catch (err) {
+                    console.error('❌ Firebase error:', err);
+                    alert('❌ فشل الاتصال بـ Firestore:\n\n' + err.message + '\n\nتأكد أنك تفتح الصفحة عبر GitHub Pages وليس ملف محلي.');
+                }
+            })();
+        } catch (err) {
+            console.error('❌ Firebase init error:', err);
+            alert('❌ فشل تهيئة Firebase:\n\n' + err.message);
+        }
+    </script>
+
 </body>
 </html>
