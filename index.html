@@ -8,358 +8,83 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            -webkit-print-color-adjust: exact !important; 
-            print-color-adjust: exact !important; 
-        }
-
-        body { 
-            font-family: 'Cairo', 'Tahoma', 'Arial', sans-serif; 
-            background: #ffffff;
-            color: #1a1a1a; 
-            padding: 8px 12px; 
-            line-height: 1.4; 
-            font-size: 13px; 
-            max-width: 1100px;
-            margin: 0 auto; 
-        }
-
-        h1 { 
-            font-size: 22px;
-            color: #ffffff;
-            background: #1b5e20;
-            text-align: center; 
-            padding: 10px;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-            border-radius: 8px; 
-        }
-
-        h2 { 
-            font-size: 16px;
-            padding: 5px 10px;
-            border-right: 5px solid #1b5e20;
-            margin-top: 16px;
-            margin-bottom: 6px;
-            border-radius: 4px 0 0 4px;
-            background: #ffffff; 
-            color: #1b5e20;
-        }
-
-        h3 { 
-            font-size: 13.5px;
-            border-bottom: 2px solid #4caf50;
-            padding-bottom: 3px;
-            margin-top: 12px;
-            margin-bottom: 6px;
-            color: #2e7d32;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        body { font-family: 'Cairo', 'Tahoma', 'Arial', sans-serif; background: #ffffff; color: #1a1a1a; padding: 8px 12px; line-height: 1.4; font-size: 13px; max-width: 1100px; margin: 0 auto; }
+        h1 { font-size: 22px; color: #ffffff; background: #1b5e20; text-align: center; padding: 10px; margin-bottom: 8px; letter-spacing: 0.5px; border-radius: 8px; }
+        h2 { font-size: 16px; padding: 5px 10px; border-right: 5px solid #1b5e20; margin-top: 16px; margin-bottom: 6px; border-radius: 4px 0 0 4px; background: #ffffff; color: #1b5e20; }
+        h3 { font-size: 13.5px; border-bottom: 2px solid #4caf50; padding-bottom: 3px; margin-top: 12px; margin-bottom: 6px; color: #2e7d32; }
         p { margin-bottom: 4px; }
-
-        .sub-title { 
-            text-align: center; 
-            font-size: 13.5px;
-            margin-bottom: 3px;
-            color: #2c3e50; 
-            font-weight: 600; 
-        }
-
-        .meta { 
-            text-align: center; 
-            font-size: 11.5px; 
-            color: #5d6d7e; 
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
+        .sub-title { text-align: center; font-size: 13.5px; margin-bottom: 3px; color: #2c3e50; font-weight: 600; }
+        .meta { text-align: center; font-size: 11.5px; color: #5d6d7e; margin-bottom: 12px; font-weight: 500; }
         .meta strong { color: #1b5e20; }
-
-        table { 
-            width: 100%; 
-            border-collapse: collapse;
-            margin: 6px 0 10px 0;
-            font-size: 12px; 
-            background: #ffffff;
-        }
-
-        th, td { 
-            border: 1px solid #a5d6a7;
-            padding: 6px;
-            text-align: center; 
-            vertical-align: middle; 
-        }
-
-        th { 
-            background-color: #2e7d32;
-            color: #ffffff; 
-            font-weight: 700; 
-            border-color: #1b5e20;
-            font-size: 12px;
-        }
-
+        table { width: 100%; border-collapse: collapse; margin: 6px 0 10px 0; font-size: 12px; background: #ffffff; }
+        th, td { border: 1px solid #a5d6a7; padding: 6px; text-align: center; vertical-align: middle; }
+        th { background-color: #2e7d32; color: #ffffff; font-weight: 700; border-color: #1b5e20; font-size: 12px; }
         tr:nth-child(even) { background-color: #f4fcf4; }
         tr:nth-child(odd) { background-color: #ffffff; }
-
         .creditor-dr_ahmed { color: #c62828 !important; font-weight: 700 !important; }
         .creditor-yahia { color: #1565c0 !important; font-weight: 700 !important; }
         .creditor-mostafa { color: #6a1b9a !important; font-weight: 700 !important; }
         .creditor-ahmed_yassin { color: #2e7d32 !important; font-weight: 700 !important; }
-
-        .total-debt-row {
-            background-color: #c8e6c9 !important;
-            font-weight: 700;
-        }
-        .total-debt-row td {
-            border-top: 2px solid #2e7d32;
-            font-size: 12px;
-        }
-
-        .note { 
-            background: #f1f8e9;
-            border-right: 5px solid #43a047;
-            padding: 6px 12px;
-            margin: 6px 0;
-            font-size: 11.5px; 
-            border-radius: 4px;
-            color: #2c3e50; 
-            line-height: 1.5;
-        }
-
+        .total-debt-row { background-color: #c8e6c9 !important; font-weight: 700; }
+        .total-debt-row td { border-top: 2px solid #2e7d32; font-size: 12px; }
+        .note { background: #f1f8e9; border-right: 5px solid #43a047; padding: 6px 12px; margin: 6px 0; font-size: 11.5px; border-radius: 4px; color: #2c3e50; line-height: 1.5; }
         .note strong { color: #1b5e20; }
-
-        .summary-box {
-            background: #e8f5e9;
-            border: 2px solid #2e7d32;
-            border-radius: 8px;
-            padding: 10px 16px;
-            margin: 10px 0;
-            font-size: 13px;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            align-items: center;
-        }
+        .summary-box { background: #e8f5e9; border: 2px solid #2e7d32; border-radius: 8px; padding: 10px 16px; margin: 10px 0; font-size: 13px; text-align: center; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; align-items: center; }
         .summary-box .item { display: inline-block; font-size: 13px; }
         .summary-box .item strong { font-weight: 700; }
-
         ul { margin: 6px 0 10px 20px; padding-right: 15px; }
         ul li { margin-bottom: 3px; font-size: 11.5px; color: #333333; }
-
-        .footer { 
-            text-align: center; 
-            font-size: 10.5px; 
-            color: #5d6d7e; 
-            padding-top: 8px;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-
+        .footer { text-align: center; font-size: 10.5px; color: #5d6d7e; padding-top: 8px; margin-top: 15px; font-weight: 500; }
         table.distribution-table { width: 100%; border-collapse: collapse; }
         table.distribution-table th, table.distribution-table td { border: 2px solid #1b5e20 !important; padding: 6px 4px; }
         table.distribution-table th { background-color: #2e7d32; color: #ffffff; font-weight: 700; }
         table.distribution-table tr.total-row { background-color: #c8e6c9 !important; font-weight: 700; }
         table.distribution-table tr.total-row td { border-top: 3px solid #1b5e20 !important; }
-
         .section-block { break-inside: avoid; page-break-inside: avoid; }
-
         .debt-details-cell { text-align: right; padding: 5px 8px; }
         .debt-details-cell .debt-line { display: block; padding: 1px 0; }
-
-        .control-panel {
-            background: #f1f8e9;
-            border: 2px solid #2e7d32;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 15px;
-        }
-        .control-panel h3 {
-            margin-top: 0;
-            margin-bottom: 8px;
-            color: #1b5e20;
-            border-bottom: 1px solid #a5d6a7;
-            padding-bottom: 4px;
-        }
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-        .form-group {
-            flex: 1;
-            min-width: 130px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 11px;
-            font-weight: bold;
-            color: #2e7d32;
-            margin-bottom: 2px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 6px;
-            border: 1px solid #a5d6a7;
-            border-radius: 4px;
-            font-family: 'Cairo';
-            font-size: 12px;
-        }
-        .btn-add {
-            background: #2e7d32;
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Cairo';
-            margin-top: 18px;
-        }
+        .control-panel { background: #f1f8e9; border: 2px solid #2e7d32; border-radius: 8px; padding: 12px; margin-bottom: 15px; }
+        .control-panel h3 { margin-top: 0; margin-bottom: 8px; color: #1b5e20; border-bottom: 1px solid #a5d6a7; padding-bottom: 4px; }
+        .form-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+        .form-group { flex: 1; min-width: 130px; }
+        .form-group label { display: block; font-size: 11px; font-weight: bold; color: #2e7d32; margin-bottom: 2px; }
+        .form-group input, .form-group select { width: 100%; padding: 6px; border: 1px solid #a5d6a7; border-radius: 4px; font-family: 'Cairo'; font-size: 12px; }
+        .btn-add { background: #2e7d32; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'Cairo'; margin-top: 18px; }
         .btn-add:hover { background: #1b5e20; }
-        .btn-danger {
-            background: #c62828;
-            color: white;
-            border: none;
-            padding: 2px 6px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 10px;
-            font-family: 'Cairo';
-        }
+        .btn-danger { background: #c62828; color: white; border: none; padding: 4px 8px; border-radius: 3px; cursor: pointer; font-size: 10px; font-family: 'Cairo'; margin: 1px; }
         .btn-danger:hover { background: #b71c1c; }
-        .btn-login {
-            background: #1565c0;
-            color: white;
-            border: none;
-            padding: 6px 18px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Cairo';
-        }
+        .btn-edit { background: #1565c0 !important; }
+        .btn-edit:hover { background: #0d47a1 !important; }
+        .btn-login { background: #1565c0; color: white; border: none; padding: 6px 18px; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
         .btn-login:hover { background: #0d47a1; }
-        .btn-logout {
-            background: #e65100;
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Cairo';
-        }
+        .btn-logout { background: #e65100; color: white; border: none; padding: 6px 14px; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'Cairo'; }
         .btn-logout:hover { background: #bf360c; }
-
-        .admin-status {
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            text-align: center;
-        }
+        .admin-status { font-weight: bold; padding: 6px 12px; border-radius: 6px; margin-bottom: 10px; text-align: center; }
         .admin-status.viewer { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
         .admin-status.editor { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
-
         .no-print { display: inline-block; }
-
-        .revenue-table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin: 6px 0 10px 0;
-            border-radius: 6px;
-            border: 1px solid #a5d6a7;
-        }
-        .revenue-table-wrapper table {
-            width: 100%;
-            min-width: 700px;
-            border-collapse: collapse;
-            font-size: 12px;
-            background: #ffffff;
-            margin: 0;
-        }
-        .revenue-table-wrapper table th,
-        .revenue-table-wrapper table td {
-            border: 1px solid #a5d6a7;
-            padding: 6px 4px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-        .revenue-table-wrapper table th {
-            background-color: #2e7d32;
-            color: #ffffff;
-            font-weight: 700;
-            border-color: #1b5e20;
-            font-size: 12px;
-        }
-        .revenue-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
-        .revenue-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
-
-        .settlement-table-wrapper {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin: 6px 0 10px 0;
-            border-radius: 6px;
-            border: 1px solid #a5d6a7;
-        }
-        .settlement-table-wrapper table {
-            width: 100%;
-            min-width: 600px;
-            border-collapse: collapse;
-            font-size: 12px;
-            background: #ffffff;
-            margin: 0;
-        }
-        .settlement-table-wrapper table th,
-        .settlement-table-wrapper table td {
-            border: 1px solid #a5d6a7;
-            padding: 6px 4px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-        .settlement-table-wrapper table th {
-            background-color: #2e7d32;
-            color: #ffffff;
-            font-weight: 700;
-            border-color: #1b5e20;
-            font-size: 12px;
-        }
-        .settlement-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
-        .settlement-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
+        .revenue-table-wrapper, .settlement-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 6px 0 10px 0; border-radius: 6px; border: 1px solid #a5d6a7; }
+        .revenue-table-wrapper table, .settlement-table-wrapper table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 12px; background: #ffffff; margin: 0; }
+        .revenue-table-wrapper table th, .revenue-table-wrapper table td, .settlement-table-wrapper table th, .settlement-table-wrapper table td { border: 1px solid #a5d6a7; padding: 6px 4px; text-align: center; vertical-align: middle; white-space: nowrap; }
+        .revenue-table-wrapper table th, .settlement-table-wrapper table th { background-color: #2e7d32; color: #ffffff; font-weight: 700; border-color: #1b5e20; font-size: 12px; }
+        .revenue-table-wrapper table tr:nth-child(even), .settlement-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
+        .revenue-table-wrapper table tr:nth-child(odd), .settlement-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
         .settlement-table-wrapper table tr.total-row { background-color: #c8e6c9 !important; font-weight: 700; }
         .settlement-table-wrapper table tr.total-row td { border-top: 2px solid #2e7d32; }
-
         @media print {
             .no-print { display: none !important; }
             body { padding: 0 !important; margin: 0 !important; font-size: 10px; line-height: 1.35; max-width: 100% !important; background: #ffffff !important; } 
             h1 { font-size: 16px; padding: 6px; margin-bottom: 6px; background: #1b5e20 !important; color: #ffffff !important; } 
             h2 { font-size: 13px; padding: 4px 6px; border-right: 4px solid #1b5e20 !important; margin-top: 10px !important; margin-bottom: 4px !important; } 
             h3 { font-size: 11.5px; border-bottom: 1.5px solid #1b5e20 !important; margin-top: 8px !important; margin-bottom: 3px !important; } 
-            .summary-box { font-size: 11px; padding: 6px 10px; gap: 12px; border: 1.5px solid #2e7d32; }
             table { font-size: 9.5px; margin: 4px 0 8px 0 !important; } 
             th, td { padding: 4px 4px !important; border: 1px solid #81c784 !important; } 
             th { background-color: #2e7d32 !important; color: #ffffff !important; } 
             .debt-details-cell { font-size: 8.5px !important; padding: 3px 5px !important; }
-            .debt-details-cell .debt-line { display: block; padding: 1px 0; }
-            .revenue-table-wrapper, .settlement-table-wrapper {
-                overflow-x: visible !important;
-                border: none !important;
-            }
-            .revenue-table-wrapper table, .settlement-table-wrapper table {
-                min-width: auto !important;
-                width: 100% !important;
-            }
-            .revenue-table-wrapper table th, .revenue-table-wrapper table td,
-            .settlement-table-wrapper table th, .settlement-table-wrapper table td {
-                white-space: normal !important;
-            }
+            .revenue-table-wrapper, .settlement-table-wrapper { overflow-x: visible !important; border: none !important; }
+            .revenue-table-wrapper table, .settlement-table-wrapper table { min-width: auto !important; width: 100% !important; }
+            .revenue-table-wrapper table th, .revenue-table-wrapper table td, .settlement-table-wrapper table th, .settlement-table-wrapper table td { white-space: normal !important; }
         }
     </style>
 </head>
@@ -425,6 +150,32 @@
             </div>
             <button class="btn-add" onclick="addRevenue()">تسجيل الإيراد</button>
         </div>
+
+        <h3 style="margin-top:12px;">🧾 إدارة فواتير إيرادات الخيار</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>الفاتورة:</label>
+                <select id="invSelect"></select>
+            </div>
+            <div class="form-group">
+                <label>البيان:</label>
+                <input type="text" id="invItemDesc" placeholder="وصف البند">
+            </div>
+            <div class="form-group">
+                <label>الوارد (ج.م):</label>
+                <input type="number" id="invItemIncome" step="0.01" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label>المنصرف (ج.م):</label>
+                <input type="number" id="invItemExpense" step="0.01" placeholder="0.00">
+            </div>
+            <button class="btn-add" onclick="addInvoiceItem()">إضافة بند</button>
+        </div>
+        <div class="form-row">
+            <button class="btn-add" onclick="addNewInvoice()" style="background:#1565c0; margin-top:0;">➕ فاتورة جديدة</button>
+            <button class="btn-danger" onclick="deleteCurrentInvoice()" style="margin-top:0; padding:8px 14px; font-size:12px;">🗑️ حذف الفاتورة الحالية</button>
+        </div>
+
         <button class="btn-danger" onclick="resetToDefaultData()" style="margin-top:10px;">↩️ استعادة البيانات الأساسية</button>
         <button class="btn-logout" onclick="logout()" style="margin-top:10px; margin-right:8px;">🚪 تسجيل الخروج</button>
     </div>
@@ -485,9 +236,6 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ثالثاً-ب: تفاصيل فواتير إيرادات الخيار -->
-    <!-- ============================================================ -->
     <div class="section-block">
         <h2>ثالثاً-ب: تفاصيل فواتير إيرادات الخيار</h2>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل كل فاتورة من فواتير بيع الخيار، مع بيان الوارد والمنصرف والرصيد المتبقي لكل بند.</em></p>
@@ -502,211 +250,10 @@
                     <th>الرصيد المتبقي (ج.م)</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr><td>الفاتورة الأولى</td><td>5,600.00</td><td>5,410.00</td><td>190.00</td></tr>
-                <tr><td>الفاتورة الثانية</td><td>11,480.00</td><td>11,220.00</td><td>260.00</td></tr>
-                <tr><td>الفاتورة الثالثة</td><td>8,560.00</td><td>8,500.00</td><td>60.00</td></tr>
-                <tr><td>الفاتورة الرابعة</td><td>7,710.00</td><td>7,710.00</td><td>0.00</td></tr>
-                <tr><td>الفاتورة الخامسة</td><td>10,640.00</td><td>10,640.00</td><td>0.00</td></tr>
-                <tr><td>الفاتورة السادسة</td><td>9,520.00</td><td>9,520.00</td><td>0.00</td></tr>
-                <tr><td>الفاتورة السابعة</td><td>20,810.00</td><td>12,300.00</td><td>8,510.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي العام</strong></td>
-                    <td><strong>74,320.00</strong></td>
-                    <td><strong>65,300.00</strong></td>
-                    <td><strong>9,020.00</strong></td>
-                </tr>
-            </tbody>
+            <tbody id="invoiceSummaryBody"></tbody>
         </table>
 
-        <h3>الفاتورة الأولى</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>البيان / بند المصروف</th>
-                    <th>الوارد (ج.م)</th>
-                    <th>المنصرف (ج.م)</th>
-                    <th>الرصيد المتبقي (ج.م)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>المبلغ الأساسي للفاتورة</td><td>5,270.00</td><td>—</td><td>5,270.00</td></tr>
-                <tr><td>أجرة السائق</td><td>—</td><td>500.00</td><td>4,770.00</td></tr>
-                <tr><td>تفويل سيارة عم حامد</td><td>—</td><td>420.00</td><td>4,350.00</td></tr>
-                <tr><td>جاز وزيت لماكينة الري</td><td>—</td><td>500.00</td><td>3,850.00</td></tr>
-                <tr><td>كراتين (3 لفات × 180)</td><td>—</td><td>540.00</td><td>3,310.00</td></tr>
-                <tr><td>شريط لصق</td><td>—</td><td>270.00</td><td>3,040.00</td></tr>
-                <tr><td>بنزين موتوسيكل لعم مصطفى</td><td>—</td><td>250.00</td><td>2,790.00</td></tr>
-                <tr><td>كيلو سكر وربع شاي</td><td>—</td><td>85.00</td><td>2,705.00</td></tr>
-                <tr><td>إيجار سكن يحيى</td><td>—</td><td>1,000.00</td><td>1,705.00</td></tr>
-                <tr><td>إصلاح بوتاجاز</td><td>—</td><td>300.00</td><td>1,405.00</td></tr>
-                <tr><td>علبة سجائر للعامل مصطفى (دفعها عم حامد)</td><td>—</td><td>55.00</td><td>1,350.00</td></tr>
-                <tr><td>سلفة لعم حامد (يوم 7 سبتمبر)</td><td>—</td><td>1,000.00</td><td>350.00</td></tr>
-                <tr><td>فطار العمال (عم حامد - يوم 7 سبتمبر)</td><td>—</td><td>80.00</td><td>270.00</td></tr>
-                <tr><td>فطار (الأربعاء 9 سبتمبر)</td><td>—</td><td>90.00</td><td>180.00</td></tr>
-                <tr><td>حساب جركن جاز قديم (عم سلامة)</td><td>—</td><td>120.00</td><td>60.00</td></tr>
-                <tr><td>مُرحّل من الفاتورة الثانية</td><td>260.00</td><td>—</td><td>320.00</td></tr>
-                <tr><td>مُرحّل من الفاتورة الثالثة</td><td>60.00</td><td>—</td><td>380.00</td></tr>
-                <tr><td>فطار يومي 13 و 14 سبتمبر</td><td>—</td><td>200.00</td><td>180.00</td></tr>
-                <tr><td>متبقي من فلوس (د. أحمد)</td><td>10.00</td><td>—</td><td>190.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>5,600.00</strong></td>
-                    <td><strong>5,410.00</strong></td>
-                    <td><strong>190.00</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>الفاتورة الثانية</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>البيان / بند المصروف</th>
-                    <th>الوارد (ج.م)</th>
-                    <th>المنصرف (ج.م)</th>
-                    <th>الرصيد المتبقي (ج.م)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>المبلغ الأساسي للفاتورة الثانية</td><td>11,480.00</td><td>—</td><td>11,480.00</td></tr>
-                <tr><td>حساب أحمد رجب عن نقلتين</td><td>—</td><td>600.00</td><td>10,880.00</td></tr>
-                <tr><td>راتب عم مصطفى وإبراهيم</td><td>—</td><td>4,000.00</td><td>6,880.00</td></tr>
-                <tr><td>مبلغ لدى د. أحمد (لشحن كهرباء منزله)</td><td>—</td><td>1,000.00</td><td>5,880.00</td></tr>
-                <tr><td>حساب العيش (عم حامد)</td><td>—</td><td>300.00</td><td>5,580.00</td></tr>
-                <tr><td>إكمال راتب عم سلامة (مُضاف إلى 5600 من الفاتورة 4)</td><td>—</td><td>4,400.00</td><td>1,180.00</td></tr>
-                <tr><td>فطار العمال (عم حامد - يوم 12 سبتمبر)</td><td>—</td><td>100.00</td><td>1,080.00</td></tr>
-                <tr><td>إكمال راتب يحيى</td><td>—</td><td>820.00</td><td>260.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>11,480.00</strong></td>
-                    <td><strong>11,220.00</strong></td>
-                    <td><strong>260.00</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>الفاتورة الثالثة</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>البيان / بند المصروف</th>
-                    <th>الوارد (ج.م)</th>
-                    <th>المنصرف (ج.م)</th>
-                    <th>الرصيد المتبقي (ج.م)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>المبلغ الأساسي للفاتورة الثالثة</td><td>8,560.00</td><td>—</td><td>8,560.00</td></tr>
-                <tr><td>رواتب (عم مصطفى، إبراهيم، ويوسف) - 10 سبتمبر</td><td>—</td><td>6,000.00</td><td>2,560.00</td></tr>
-                <tr><td>إكمال راتب يحيى</td><td>—</td><td>2,500.00</td><td>60.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>8,560.00</strong></td>
-                    <td><strong>8,500.00</strong></td>
-                    <td><strong>60.00</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>الفاتورة الرابعة</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>البيان / بند المصروف</th>
-                    <th>الوارد (ج.م)</th>
-                    <th>المنصرف (ج.م)</th>
-                    <th>الرصيد المتبقي (ج.م)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>المبلغ الأساسي للفاتورة الرابعة</td><td>7,710.00</td><td>—</td><td>7,710.00</td></tr>
-                <tr><td>أجرة السيارة</td><td>—</td><td>500.00</td><td>7,210.00</td></tr>
-                <tr><td>كراتين + 3 عواميد لصق</td><td>—</td><td>1,400.00</td><td>5,810.00</td></tr>
-                <tr><td>فطار يومين</td><td>—</td><td>210.00</td><td>5,600.00</td></tr>
-                <tr><td>لإكمال راتب عم سلامة (مُضاف إلى 4400 من الفاتورة 2)</td><td>—</td><td>5,600.00</td><td>0.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>7,710.00</strong></td>
-                    <td><strong>7,710.00</strong></td>
-                    <td><strong>0.00</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>الفاتورة الخامسة</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>البيان / بند المصروف</th>
-                    <th>الوارد (ج.م)</th>
-                    <th>المنصرف (ج.م)</th>
-                    <th>الرصيد المتبقي (ج.م)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>المبلغ الأساسي للفاتورة الخامسة</td><td>10,640.00</td><td>—</td><td>10,640.00</td></tr>
-                <tr><td>حساب السائق</td><td>—</td><td>540.00</td><td>10,100.00</td></tr>
-                <tr><td>راتب محمود أنور</td><td>—</td><td>8,000.00</td><td>2,100.00</td></tr>
-                <tr><td>إكمال راتب يحيى</td><td>—</td><td>2,100.00</td><td>0.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>10,640.00</strong></td>
-                    <td><strong>10,640.00</strong></td>
-                    <td><strong>0.00</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>الفاتورة السادسة</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>البيان / بند المصروف</th>
-                    <th>الوارد (ج.م)</th>
-                    <th>المنصرف (ج.م)</th>
-                    <th>الرصيد المتبقي (ج.م)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>المبلغ الأساسي للفاتورة السادسة</td><td>9,520.00</td><td>—</td><td>9,520.00</td></tr>
-                <tr><td>حساب السائق</td><td>—</td><td>550.00</td><td>8,970.00</td></tr>
-                <tr><td>فطار العمال</td><td>—</td><td>270.00</td><td>8,700.00</td></tr>
-                <tr><td>دُفعت للمبيدات</td><td>—</td><td>8,700.00</td><td>0.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>9,520.00</strong></td>
-                    <td><strong>9,520.00</strong></td>
-                    <td><strong>0.00</strong></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>الفاتورة السابعة</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>البيان / بند المصروف</th>
-                    <th>الوارد (ج.م)</th>
-                    <th>المنصرف (ج.م)</th>
-                    <th>الرصيد المتبقي (ج.م)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td>المبلغ الأساسي للفاتورة السابعة</td><td>20,810.00</td><td>—</td><td>20,810.00</td></tr>
-                <tr><td>مبيدات</td><td>—</td><td>10,000.00</td><td>10,810.00</td></tr>
-                <tr><td>للسائق - محمد عبسي</td><td>—</td><td>600.00</td><td>10,210.00</td></tr>
-                <tr><td>سُلفة لعم مصطفى العامل</td><td>—</td><td>1,000.00</td><td>9,210.00</td></tr>
-                <tr><td>لأحمد رجب (مشاوير قديمة بالتروسيكل)</td><td>—</td><td>400.00</td><td>8,810.00</td></tr>
-                <tr><td>فطار لعم حامد</td><td>—</td><td>300.00</td><td>8,510.00</td></tr>
-                <tr class="total-debt-row">
-                    <td><strong>الإجمالي</strong></td>
-                    <td><strong>20,810.00</strong></td>
-                    <td><strong>12,300.00</strong></td>
-                    <td><strong>8,510.00</strong></td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="invoiceDetailsContainer"></div>
     </div>
 
     <div class="section-block">
@@ -735,13 +282,7 @@
         <h3>أ- تفاصيل الديون المستحقة لد. أحمد</h3>
         <table>
             <thead>
-                <tr>
-                    <th>إجمالي المصروف وتاريخه</th>
-                    <th>الدائن</th>
-                    <th>تفصيل المصروف</th>
-                    <th>المدينون وتفاصيل الديون</th>
-                    <th>إجمالي الدَين</th>
-                </tr>
+                <tr><th>إجمالي المصروف وتاريخه</th><th>الدائن</th><th>تفصيل المصروف</th><th>المدينون وتفاصيل الديون</th><th>إجمالي الدَين</th></tr>
             </thead>
             <tbody id="debtDrAhmedBody"></tbody>
         </table>
@@ -749,13 +290,7 @@
         <h3>ب- تفاصيل الديون المستحقة لمصطفى ياسين</h3>
         <table>
             <thead>
-                <tr>
-                    <th>إجمالي المصروف وتاريخه</th>
-                    <th>الدائن</th>
-                    <th>تفصيل المصروف</th>
-                    <th>المدينون وتفاصيل الديون</th>
-                    <th>إجمالي الدَين</th>
-                </tr>
+                <tr><th>إجمالي المصروف وتاريخه</th><th>الدائن</th><th>تفصيل المصروف</th><th>المدينون وتفاصيل الديون</th><th>إجمالي الدَين</th></tr>
             </thead>
             <tbody id="debtMostafaBody"></tbody>
         </table>
@@ -763,13 +298,7 @@
         <h3>ج- تفاصيل الديون المستحقة ليحيى</h3>
         <table>
             <thead>
-                <tr>
-                    <th>إجمالي المصروف وتاريخه</th>
-                    <th>الدائن</th>
-                    <th>تفصيل المصروف</th>
-                    <th>المدينون وتفاصيل الديون</th>
-                    <th>إجمالي الدَين</th>
-                </tr>
+                <tr><th>إجمالي المصروف وتاريخه</th><th>الدائن</th><th>تفصيل المصروف</th><th>المدينون وتفاصيل الديون</th><th>إجمالي الدَين</th></tr>
             </thead>
             <tbody id="debtYahiaBody"></tbody>
         </table>
@@ -781,12 +310,7 @@
         <div class="settlement-table-wrapper">
             <table>
                 <thead>
-                    <tr>
-                        <th>الشريك</th>
-                        <th>إجمالي المدفوعات (ج.م)</th>
-                        <th>العبء الفعلي (ج.م)</th>
-                        <th>دائنًا بـ / مدينًا بـ (ج.م)</th>
-                    </tr>
+                    <tr><th>الشريك</th><th>إجمالي المدفوعات (ج.م)</th><th>العبء الفعلي (ج.م)</th><th>دائنًا بـ / مدينًا بـ (ج.م)</th></tr>
                 </thead>
                 <tbody id="finalSettlementBody"></tbody>
             </table>
@@ -798,16 +322,12 @@
         <div class="settlement-table-wrapper">
             <table>
                 <thead>
-                    <tr>
-                        <th>المدين النهائي</th>
-                        <th>الدائن النهائي</th>
-                        <th>صافي المبلغ المستحق (ج.م)</th>
-                    </tr>
+                    <tr><th>المدين النهائي</th><th>الدائن النهائي</th><th>صافي المبلغ المستحق (ج.م)</th></tr>
                 </thead>
                 <tbody id="finalDistributionBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص العلاقة النهائية بين كل زوج من الشركاء. تم خصم الديون المتبادلة (أي إذا كان "أ" مديناً لـ "ب" بمبلغ X، و "ب" مديناً لـ "أ" بمبلغ Y، فإن الصافي هو الفرق بينهما).</div>
+        <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص العلاقة النهائية بين كل زوج من الشركاء.</div>
     </div>
 
     <div class="section-block">
@@ -819,9 +339,7 @@
         </ul>
     </div>
 
-    <div class="footer">
-        صفحة التقرير المحدث والنهائي - صادر عن النظام المالي لصوبة أبو الشقاف
-    </div>
+    <div class="footer">صفحة التقرير المحدث والنهائي - صادر عن النظام المالي لصوبة أبو الشقاف</div>
 
     <script>
         const ADMIN_PASSWORD = 'forgetthepassword';
@@ -835,10 +353,8 @@
         };
 
         const creditorColorMap = {
-            dr_ahmed: 'creditor-dr_ahmed',
-            yahia: 'creditor-yahia',
-            mostafa: 'creditor-mostafa',
-            ahmed_yassin: 'creditor-ahmed_yassin'
+            dr_ahmed: 'creditor-dr_ahmed', yahia: 'creditor-yahia',
+            mostafa: 'creditor-mostafa', ahmed_yassin: 'creditor-ahmed_yassin'
         };
 
         const initialExpenses = [
@@ -848,48 +364,116 @@
             { id: 4, dateTitle: '27 يوليو - حراثة الجرار', details: 'حراثة أرض الصوبة بالجرار (دفعها د. أحمد)', amount: 1700.00, payer: 'dr_ahmed' },
             { id: 5, dateTitle: '29 يوليو - شراء سبلة', details: 'سبلة سماد عضوي لتسميد الأرض (دفعها مصطفى ياسين)', amount: 16350.00, payer: 'mostafa' },
             { id: 6, dateTitle: '30 يوليو - عمال فرد السبلة', details: 'أجور عمال فرد وتوزيع السبلة (دفعها د. أحمد)', amount: 1570.00, payer: 'dr_ahmed' },
-            { id: 7, dateTitle: '31 يوليو - حساب العزاقة', details: 'عزاقة لتجهيز التربة بعد الحراثة (دفعها د. أحمد)', amount: 1650.00, payer: 'dr_ahmed' },
-            { id: 8, dateTitle: '31 يوليو - حساب العربة بحصان', details: 'تسطير الأرض وتسويتها بالعربة (دفعها د. أحمد)', amount: 1200.00, payer: 'dr_ahmed' },
-            { id: 9, dateTitle: '31 يوليو - شراء أسمدة', details: '9 شكاير فوسفات ناعم + 5 شكاير كبريت (دفعها د. أحمد)', amount: 4380.00, payer: 'dr_ahmed' },
-            { id: 10, dateTitle: '1 أغسطس - إنشاء مصاطب التربة', details: 'أجر عمال إنشاء مصاطب التربة (دفعها د. أحمد)', amount: 3100.00, payer: 'dr_ahmed' },
-            { id: 11, dateTitle: '2 أغسطس - فرد الشبكة وتنظيف المصرف', details: 'أجر عمال تنظيف المصرف وفرد شبكة الري (دفعها د. أحمد)', amount: 1250.00, payer: 'dr_ahmed' },
-            { id: 12, dateTitle: '2 أغسطس - أدوات شبكة الري', details: 'مفك + مسامير + كولة + تيفلون + سكينة منشار (دفعها د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
-            { id: 13, dateTitle: '3 أغسطس - أعمال تركيب الري', details: '3 عمال + تروسيكل + فطار + أدوات عم جمال (دفعها د. أحمد)', amount: 1360.00, payer: 'dr_ahmed' },
-            { id: 14, dateTitle: '3 أغسطس - شراء سولار وزيت', details: '9 لتر سولار + 4 لتر زيت (دفعها د. أحمد)', amount: 680.00, payer: 'dr_ahmed' },
-            { id: 15, dateTitle: '3 أغسطس - بقية عمال التجهيز', details: 'المتبقي من يومية 20 يوليو (سدده د. أحمد)', amount: 700.00, payer: 'dr_ahmed' },
-            { id: 16, dateTitle: '5 أغسطس - مسامير وخراطيم ري', details: '3 كيلو خراطيم + مسامير لقاعدة ماكينة الري (دفعها د. أحمد)', amount: 95.00, payer: 'dr_ahmed' },
-            { id: 17, dateTitle: '5 أغسطس - حساب الميكانيكي', details: 'أجر الميكانيكي لإصلاح ماكينة الري (دفعها د. أحمد)', amount: 1650.00, payer: 'dr_ahmed' },
-            { id: 18, dateTitle: '5 أغسطس - سولار وزيت', details: 'سولار وزيت لماكينة الري (دفعها د. أحمد)', amount: 500.00, payer: 'dr_ahmed' },
-            { id: 19, dateTitle: '5 أغسطس - غداء سلامة', details: 'وجبة غداء للعامل سلامة (دفعها د. أحمد)', amount: 20.00, payer: 'dr_ahmed' },
-            { id: 20, dateTitle: '6 أغسطس - فطار سلامة', details: 'وجبة فطار للعامل سلامة (دفعها د. أحمد)', amount: 30.00, payer: 'dr_ahmed' },
-            { id: 21, dateTitle: '6 أغسطس - مبيد يونيفورم', details: 'شراء مبيد يونيفورم للرش (دفعها د. أحمد)', amount: 2300.00, payer: 'dr_ahmed' },
-            { id: 22, dateTitle: '6 أغسطس - عربات نقل الشتلة', details: 'أجرة عربات نقل الشتلة (دفعها د. أحمد)', amount: 2400.00, payer: 'dr_ahmed' },
-            { id: 23, dateTitle: '6 أغسطس - أجر عمال زراعة الشتلة', details: 'أجر عمال زراعة الشتلة (دفعها د. أحمد)', amount: 2600.00, payer: 'dr_ahmed' },
-            { id: 24, dateTitle: '8 أغسطس - مستحقات سلامة', details: 'مبلغ مستحق لسلامة سعد الله (دفعه يحيى)', amount: 3000.00, payer: 'yahia' },
-            { id: 25, dateTitle: '18 أغسطس - فطار العمال', details: 'فطار العمال في الأسبوع الماضي (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
-            { id: 26, dateTitle: '23 أغسطس - فطار العمال', details: 'فطار عمال (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
-            { id: 27, dateTitle: '26 أغسطس - فطار العمال', details: 'فطار عمال (دفعه د. أحمد)', amount: 550.00, payer: 'dr_ahmed' },
-            { id: 28, dateTitle: '26 أغسطس - شراء خيط', details: 'خيط لربط النبات (دفعه يحيى)', amount: 1100.00, payer: 'yahia' },
-            { id: 29, dateTitle: '26 أغسطس - أجر عمال تربيط', details: 'أجر عمال تربيط الخيط (دفعه يحيى)', amount: 3900.00, payer: 'yahia' },
-            { id: 30, dateTitle: '26 أغسطس - سلفة محمود أنور', details: 'سلفة لمحمود أنور (دفعه د. أحمد)', amount: 1000.00, payer: 'dr_ahmed' },
-            { id: 31, dateTitle: '27 أغسطس - طلبيات الميكانيكي', details: 'إصلاح ماتور الرش وماكينة الري (دفعه د. أحمد)', amount: 500.00, payer: 'dr_ahmed' },
-            { id: 32, dateTitle: '28 أغسطس - مستحقات عمل', details: 'مستحقات عب ونيس وإيهاب (دفعه د. أحمد)', amount: 4100.00, payer: 'dr_ahmed' },
-            { id: 33, dateTitle: '29 أغسطس - جاز', details: 'وقود جاز (دفعه د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
-            { id: 34, dateTitle: '30 أغسطس - فطار العمال', details: 'فطار عمال (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
-            { id: 35, dateTitle: '30 أغسطس - أجر عمال ربط النبات', details: 'أجر عمال ربط النبات (دفعه د. أحمد)', amount: 2100.00, payer: 'dr_ahmed' },
-            { id: 36, dateTitle: '30 أغسطس - لوازم غرفة العمال', details: 'لوازم تجهيز غرفة العمال (دفعه د. أحمد)', amount: 700.00, payer: 'dr_ahmed' },
-            { id: 37, dateTitle: '31 أغسطس - حساب الميكانيكي', details: 'حساب صابر الميكانيكي (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
-            { id: 38, dateTitle: '1 سبتمبر - كراتين', details: 'كراتين لتعبئة الخيار (دفعه د. أحمد)', amount: 1100.00, payer: 'dr_ahmed' },
-            { id: 39, dateTitle: '3 سبتمبر - حساب التروسيكل', details: 'جلب أسمدة من البرنوجي (دفعه د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
-            { id: 40, dateTitle: '3 سبتمبر - فطار', details: 'فطار عمال (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' }
+            { id: 7, dateTitle: '31 يوليو - حساب العزاقة', details: 'عزاقة لتجهيز التربة (دفعها د. أحمد)', amount: 1650.00, payer: 'dr_ahmed' },
+            { id: 8, dateTitle: '31 يوليو - حساب العربة بحصان', details: 'تسطير الأرض بالعربة (دفعها د. أحمد)', amount: 1200.00, payer: 'dr_ahmed' },
+            { id: 9, dateTitle: '31 يوليو - شراء أسمدة', details: '9 فوسفات + 5 كبريت (دفعها د. أحمد)', amount: 4380.00, payer: 'dr_ahmed' },
+            { id: 10, dateTitle: '1 أغسطس - إنشاء مصاطب', details: 'أجر عمال مصاطب (دفعها د. أحمد)', amount: 3100.00, payer: 'dr_ahmed' },
+            { id: 11, dateTitle: '2 أغسطس - فرد الشبكة وتنظيف المصرف', details: 'أجور عمال (دفعها د. أحمد)', amount: 1250.00, payer: 'dr_ahmed' },
+            { id: 12, dateTitle: '2 أغسطس - أدوات شبكة الري', details: 'أدوات (دفعها د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
+            { id: 13, dateTitle: '3 أغسطس - أعمال تركيب الري', details: 'عمال وتروسيكل (دفعها د. أحمد)', amount: 1360.00, payer: 'dr_ahmed' },
+            { id: 14, dateTitle: '3 أغسطس - شراء سولار وزيت', details: 'سولار وزيت (دفعها د. أحمد)', amount: 680.00, payer: 'dr_ahmed' },
+            { id: 15, dateTitle: '3 أغسطس - بقية عمال التجهيز', details: 'المتبقي (دفعها د. أحمد)', amount: 700.00, payer: 'dr_ahmed' },
+            { id: 16, dateTitle: '5 أغسطس - مسامير وخراطيم', details: 'خراطيم ومسامير (دفعها د. أحمد)', amount: 95.00, payer: 'dr_ahmed' },
+            { id: 17, dateTitle: '5 أغسطس - حساب الميكانيكي', details: 'إصلاح ماكينة الري (دفعها د. أحمد)', amount: 1650.00, payer: 'dr_ahmed' },
+            { id: 18, dateTitle: '5 أغسطس - سولار وزيت', details: 'سولار وزيت (دفعها د. أحمد)', amount: 500.00, payer: 'dr_ahmed' },
+            { id: 19, dateTitle: '5 أغسطس - غداء سلامة', details: 'غداء (دفعها د. أحمد)', amount: 20.00, payer: 'dr_ahmed' },
+            { id: 20, dateTitle: '6 أغسطس - فطار سلامة', details: 'فطار (دفعها د. أحمد)', amount: 30.00, payer: 'dr_ahmed' },
+            { id: 21, dateTitle: '6 أغسطس - مبيد يونيفورم', details: 'مبيد (دفعها د. أحمد)', amount: 2300.00, payer: 'dr_ahmed' },
+            { id: 22, dateTitle: '6 أغسطس - عربات نقل الشتلة', details: 'نقل (دفعها د. أحمد)', amount: 2400.00, payer: 'dr_ahmed' },
+            { id: 23, dateTitle: '6 أغسطس - أجر عمال زراعة الشتلة', details: 'زراعة (دفعها د. أحمد)', amount: 2600.00, payer: 'dr_ahmed' },
+            { id: 24, dateTitle: '8 أغسطس - مستحقات سلامة', details: 'مستحقات (دفعها يحيى)', amount: 3000.00, payer: 'yahia' },
+            { id: 25, dateTitle: '18 أغسطس - فطار العمال', details: 'فطار (دفعها د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 26, dateTitle: '23 أغسطس - فطار العمال', details: 'فطار (دفعها د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 27, dateTitle: '26 أغسطس - فطار العمال', details: 'فطار (دفعها د. أحمد)', amount: 550.00, payer: 'dr_ahmed' },
+            { id: 28, dateTitle: '26 أغسطس - شراء خيط', details: 'خيط (دفعها يحيى)', amount: 1100.00, payer: 'yahia' },
+            { id: 29, dateTitle: '26 أغسطس - أجر عمال تربيط', details: 'تربيط (دفعها يحيى)', amount: 3900.00, payer: 'yahia' },
+            { id: 30, dateTitle: '26 أغسطس - سلفة محمود', details: 'سلفة (دفعها د. أحمد)', amount: 1000.00, payer: 'dr_ahmed' },
+            { id: 31, dateTitle: '27 أغسطس - طلبيات الميكانيكي', details: 'إصلاح (دفعها د. أحمد)', amount: 500.00, payer: 'dr_ahmed' },
+            { id: 32, dateTitle: '28 أغسطس - مستحقات عمل', details: 'مستحقات (دفعها د. أحمد)', amount: 4100.00, payer: 'dr_ahmed' },
+            { id: 33, dateTitle: '29 أغسطس - جاز', details: 'جاز (دفعها د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
+            { id: 34, dateTitle: '30 أغسطس - فطار العمال', details: 'فطار (دفعها د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 35, dateTitle: '30 أغسطس - أجر عمال ربط النبات', details: 'ربط (دفعها د. أحمد)', amount: 2100.00, payer: 'dr_ahmed' },
+            { id: 36, dateTitle: '30 أغسطس - لوازم غرفة العمال', details: 'لوازم (دفعها د. أحمد)', amount: 700.00, payer: 'dr_ahmed' },
+            { id: 37, dateTitle: '31 أغسطس - حساب الميكانيكي', details: 'حساب صابر (دفعها د. أحمد)', amount: 300.00, payer: 'dr_ahmed' },
+            { id: 38, dateTitle: '1 سبتمبر - كراتين', details: 'كراتين (دفعها د. أحمد)', amount: 1100.00, payer: 'dr_ahmed' },
+            { id: 39, dateTitle: '3 سبتمبر - حساب التروسيكل', details: 'جلب أسمدة (دفعها د. أحمد)', amount: 100.00, payer: 'dr_ahmed' },
+            { id: 40, dateTitle: '3 سبتمبر - فطار', details: 'فطار (دفعها د. أحمد)', amount: 300.00, payer: 'dr_ahmed' }
+        ];
+
+        const initialInvoices = [
+            { id: 1, name: 'الفاتورة الأولى', items: [
+                { id: 101, description: 'المبلغ الأساسي للفاتورة', income: 5270, expense: 0 },
+                { id: 102, description: 'أجرة السائق', income: 0, expense: 500 },
+                { id: 103, description: 'تفويل سيارة عم حامد', income: 0, expense: 420 },
+                { id: 104, description: 'جاز وزيت لماكينة الري', income: 0, expense: 500 },
+                { id: 105, description: 'كراتين (3 لفات × 180)', income: 0, expense: 540 },
+                { id: 106, description: 'شريط لصق', income: 0, expense: 270 },
+                { id: 107, description: 'بنزين موتوسيكل لعم مصطفى', income: 0, expense: 250 },
+                { id: 108, description: 'كيلو سكر وربع شاي', income: 0, expense: 85 },
+                { id: 109, description: 'إيجار سكن يحيى', income: 0, expense: 1000 },
+                { id: 110, description: 'إصلاح بوتاجاز', income: 0, expense: 300 },
+                { id: 111, description: 'علبة سجائر للعامل مصطفى (دفعها عم حامد)', income: 0, expense: 55 },
+                { id: 112, description: 'سلفة لعم حامد (يوم 7 سبتمبر)', income: 0, expense: 1000 },
+                { id: 113, description: 'فطار العمال (عم حامد - يوم 7 سبتمبر)', income: 0, expense: 80 },
+                { id: 114, description: 'فطار (الأربعاء 9 سبتمبر)', income: 0, expense: 90 },
+                { id: 115, description: 'حساب جركن جاز قديم (عم سلامة)', income: 0, expense: 120 },
+                { id: 116, description: 'مُرحّل من الفاتورة الثانية', income: 260, expense: 0 },
+                { id: 117, description: 'مُرحّل من الفاتورة الثالثة', income: 60, expense: 0 },
+                { id: 118, description: 'فطار يومي 13 و 14 سبتمبر', income: 0, expense: 200 },
+                { id: 119, description: 'متبقي من فلوس (د. أحمد)', income: 10, expense: 0 }
+            ]},
+            { id: 2, name: 'الفاتورة الثانية', items: [
+                { id: 201, description: 'المبلغ الأساسي للفاتورة الثانية', income: 11480, expense: 0 },
+                { id: 202, description: 'حساب أحمد رجب عن نقلتين', income: 0, expense: 600 },
+                { id: 203, description: 'راتب عم مصطفى وإبراهيم', income: 0, expense: 4000 },
+                { id: 204, description: 'مبلغ لدى د. أحمد (لشحن كهرباء منزله)', income: 0, expense: 1000 },
+                { id: 205, description: 'حساب العيش (عم حامد)', income: 0, expense: 300 },
+                { id: 206, description: 'إكمال راتب عم سلامة', income: 0, expense: 4400 },
+                { id: 207, description: 'فطار العمال (عم حامد - يوم 12 سبتمبر)', income: 0, expense: 100 },
+                { id: 208, description: 'إكمال راتب يحيى', income: 0, expense: 820 }
+            ]},
+            { id: 3, name: 'الفاتورة الثالثة', items: [
+                { id: 301, description: 'المبلغ الأساسي للفاتورة الثالثة', income: 8560, expense: 0 },
+                { id: 302, description: 'رواتب (عم مصطفى، إبراهيم، ويوسف) - 10 سبتمبر', income: 0, expense: 6000 },
+                { id: 303, description: 'إكمال راتب يحيى', income: 0, expense: 2500 }
+            ]},
+            { id: 4, name: 'الفاتورة الرابعة', items: [
+                { id: 401, description: 'المبلغ الأساسي للفاتورة الرابعة', income: 7710, expense: 0 },
+                { id: 402, description: 'أجرة السيارة', income: 0, expense: 500 },
+                { id: 403, description: 'كراتين + 3 عواميد لصق', income: 0, expense: 1400 },
+                { id: 404, description: 'فطار يومين', income: 0, expense: 210 },
+                { id: 405, description: 'لإكمال راتب عم سلامة', income: 0, expense: 5600 }
+            ]},
+            { id: 5, name: 'الفاتورة الخامسة', items: [
+                { id: 501, description: 'المبلغ الأساسي للفاتورة الخامسة', income: 10640, expense: 0 },
+                { id: 502, description: 'حساب السائق', income: 0, expense: 540 },
+                { id: 503, description: 'راتب محمود أنور', income: 0, expense: 8000 },
+                { id: 504, description: 'إكمال راتب يحيى', income: 0, expense: 2100 }
+            ]},
+            { id: 6, name: 'الفاتورة السادسة', items: [
+                { id: 601, description: 'المبلغ الأساسي للفاتورة السادسة', income: 9520, expense: 0 },
+                { id: 602, description: 'حساب السائق', income: 0, expense: 550 },
+                { id: 603, description: 'فطار العمال', income: 0, expense: 270 },
+                { id: 604, description: 'دُفعت للمبيدات', income: 0, expense: 8700 }
+            ]},
+            { id: 7, name: 'الفاتورة السابعة', items: [
+                { id: 701, description: 'المبلغ الأساسي للفاتورة السابعة', income: 20810, expense: 0 },
+                { id: 702, description: 'مبيدات', income: 0, expense: 10000 },
+                { id: 703, description: 'للسائق - محمد عبسي', income: 0, expense: 600 },
+                { id: 704, description: 'سُلفة لعم مصطفى العامل', income: 0, expense: 1000 },
+                { id: 705, description: 'لأحمد رجب (مشاوير قديمة بالتروسيكل)', income: 0, expense: 400 },
+                { id: 706, description: 'فطار لعم حامد', income: 0, expense: 300 }
+            ]}
         ];
 
         let expenses = JSON.parse(localStorage.getItem('soba_expenses_v2')) || initialExpenses;
         let revenues = JSON.parse(localStorage.getItem('soba_revenues_v2')) || [];
+        let invoices = JSON.parse(localStorage.getItem('soba_invoices_v1')) || initialInvoices;
 
         function saveData() {
             localStorage.setItem('soba_expenses_v2', JSON.stringify(expenses));
             localStorage.setItem('soba_revenues_v2', JSON.stringify(revenues));
+            localStorage.setItem('soba_invoices_v1', JSON.stringify(invoices));
             renderAll();
         }
 
@@ -898,6 +482,7 @@
             if (confirm("هل أنت متأكد من استعادة البيانات الأساسية؟ ستفقد أي إضافات جديدة.")) {
                 expenses = JSON.parse(JSON.stringify(initialExpenses));
                 revenues = [];
+                invoices = JSON.parse(JSON.stringify(initialInvoices));
                 saveData();
             }
         }
@@ -951,8 +536,7 @@
             const amount = parseFloat(document.getElementById('expAmount').value);
             const payer = document.getElementById('expPayer').value;
             if (!dateTitle || !details || isNaN(amount) || amount <= 0) {
-                alert('يرجى إدخال جميع بيانات المصروف بشكل صحيح.');
-                return;
+                alert('يرجى إدخال جميع بيانات المصروف بشكل صحيح.'); return;
             }
             expenses.push({ id: Date.now(), dateTitle, details, amount, payer });
             document.getElementById('expDateTitle').value = '';
@@ -976,8 +560,7 @@
             const price = parseFloat(document.getElementById('revPrice').value);
             const receiver = document.getElementById('revReceiver').value;
             if (!date || isNaN(weight) || isNaN(price) || weight <= 0 || price <= 0) {
-                alert('يرجى إدخال بيانات الإيراد بشكل صحيح.');
-                return;
+                alert('يرجى إدخال بيانات الإيراد بشكل صحيح.'); return;
             }
             const total = weight * price;
             revenues.push({ id: revenues.length + 1, date, weight, price, total, receiver });
@@ -995,11 +578,75 @@
             }
         }
 
+        function addInvoiceItem() {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
+            const invId = parseInt(document.getElementById('invSelect').value);
+            const description = document.getElementById('invItemDesc').value.trim();
+            const income = parseFloat(document.getElementById('invItemIncome').value) || 0;
+            const expense = parseFloat(document.getElementById('invItemExpense').value) || 0;
+            if (!description || (income === 0 && expense === 0)) {
+                alert('يرجى إدخال البيان وقيمة الوارد أو المنصرف.'); return;
+            }
+            const inv = invoices.find(i => i.id === invId);
+            if (!inv) { alert('الفاتورة غير موجودة.'); return; }
+            inv.items.push({ id: Date.now(), description, income, expense });
+            document.getElementById('invItemDesc').value = '';
+            document.getElementById('invItemIncome').value = '';
+            document.getElementById('invItemExpense').value = '';
+            saveData();
+        }
+
+        function deleteInvoiceItem(invId, itemId) {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
+            if (confirm('هل تريد حذف هذا البند؟')) {
+                const inv = invoices.find(i => i.id === invId);
+                if (inv) inv.items = inv.items.filter(it => it.id !== itemId);
+                saveData();
+            }
+        }
+
+        function editInvoiceItem(invId, itemId) {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
+            const inv = invoices.find(i => i.id === invId);
+            const item = inv.items.find(it => it.id === itemId);
+            if (!item) return;
+            const newDesc = prompt('البيان:', item.description);
+            if (newDesc === null) return;
+            const newIncome = prompt('الوارد (ج.م):', item.income);
+            if (newIncome === null) return;
+            const newExpense = prompt('المنصرف (ج.م):', item.expense);
+            if (newExpense === null) return;
+            item.description = newDesc.trim() || item.description;
+            item.income = parseFloat(newIncome) || 0;
+            item.expense = parseFloat(newExpense) || 0;
+            saveData();
+        }
+
+        function addNewInvoice() {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
+            const name = prompt('اسم الفاتورة الجديدة:', 'الفاتورة ' + (invoices.length + 1));
+            if (!name) return;
+            invoices.push({ id: Date.now(), name: name.trim(), items: [] });
+            saveData();
+        }
+
+        function deleteCurrentInvoice() {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
+            const invId = parseInt(document.getElementById('invSelect').value);
+            const inv = invoices.find(i => i.id === invId);
+            if (!inv) return;
+            if (confirm('هل أنت متأكد من حذف "' + inv.name + '" بالكامل؟')) {
+                invoices = invoices.filter(i => i.id !== invId);
+                saveData();
+            }
+        }
+
         function renderAll() {
             renderExpensesTable();
             renderBreakdownTable();
             renderDebtsTables();
             renderRevenuesTable();
+            renderInvoicesTables();
             renderFinalSettlement();
             renderFinalDistribution();
             updateAdminUI();
@@ -1013,11 +660,8 @@
 
             expenses.forEach(e => {
                 total += e.amount;
-                if (e.payer === 'all') {
-                    totalsByPayer.all += e.amount;
-                } else {
-                    totalsByPayer[e.payer] += e.amount;
-                }
+                if (e.payer === 'all') totalsByPayer.all += e.amount;
+                else totalsByPayer[e.payer] += e.amount;
                 const colorClass = (e.payer === 'all') ? '' : (creditorColorMap[e.payer] || '');
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>` : '';
                 tbody.innerHTML += `
@@ -1030,14 +674,13 @@
                 `;
             });
 
-            const totalRow = `
+            tbody.innerHTML += `
                 <tr>
                     <td colspan="2"><strong>إجمالي المصروفات المدفوعة الشاملة</strong></td>
                     <td><strong>${total.toLocaleString('en-US', {minimumFractionDigits: 2})} ج.م</strong></td>
                     ${isAdmin ? '<td></td>' : ''}
                 </tr>
             `;
-            tbody.innerHTML += totalRow;
 
             document.getElementById('summaryBoxContainer').innerHTML = `
                 <span class="item"><strong>إجمالي المدفوعات النقدية:</strong></span>
@@ -1072,7 +715,6 @@
                 const colorYahia = (e.payer !== 'yahia' && e.payer !== 'all') ? payerColor : '';
                 const colorMostafa = (e.payer !== 'mostafa' && e.payer !== 'all') ? payerColor : '';
                 const colorAhmedY = (e.payer !== 'ahmed_yassin' && e.payer !== 'all') ? payerColor : '';
-
                 const payerDisplay = e.payer === 'all' ? 'الجميع' : partners[e.payer].name;
 
                 tbody.innerHTML += `
@@ -1089,7 +731,7 @@
 
             tbody.innerHTML += `
                 <tr class="total-row">
-                    <td style="text-align:right; padding-right:8px; font-weight:700;">إجمالي الحصص (مطابق للإجمالي الكلي)</td>
+                    <td style="text-align:right; padding-right:8px; font-weight:700;">إجمالي الحصص</td>
                     <td><strong>${totals.dr_ahmed.toFixed(2)}</strong></td>
                     <td><strong>${totals.yahia.toFixed(2)}</strong></td>
                     <td><strong>${totals.mostafa.toFixed(2)}</strong></td>
@@ -1108,7 +750,6 @@
         function renderCreditorDebtTable(creditorKey, tableBodyId, colorClass, bgColor) {
             const tbody = document.getElementById(tableBodyId);
             tbody.innerHTML = '';
-            
             const creditorExpenses = expenses.filter(e => e.payer === creditorKey);
             let grandDebtTotal = 0;
 
@@ -1138,9 +779,7 @@
             Object.keys(partners).forEach(pKey => {
                 if (pKey !== creditorKey) {
                     let totalDebt = 0;
-                    creditorExpenses.forEach(e => {
-                        totalDebt += (e.amount * partners[pKey].percent) / 100;
-                    });
+                    creditorExpenses.forEach(e => { totalDebt += (e.amount * partners[pKey].percent) / 100; });
                     summaryLines += `• ${partners[pKey].name}: <span class="${colorClass}">${totalDebt.toFixed(2)}</span> ج.م<br>`;
                     grandDebtTotal += totalDebt;
                 }
@@ -1209,11 +848,108 @@
             });
         }
 
+        function renderInvoicesTables() {
+            const select = document.getElementById('invSelect');
+            const currentVal = select.value;
+            select.innerHTML = '';
+            invoices.forEach(inv => {
+                select.innerHTML += `<option value="${inv.id}">${inv.name}</option>`;
+            });
+            if (currentVal && invoices.find(i => i.id === parseInt(currentVal))) {
+                select.value = currentVal;
+            }
+
+            const summaryTbody = document.getElementById('invoiceSummaryBody');
+            summaryTbody.innerHTML = '';
+            let totalIncome = 0, totalExpense = 0, totalBalance = 0;
+
+            invoices.forEach(inv => {
+                const invIncome = inv.items.reduce((s, it) => s + (it.income || 0), 0);
+                const invExpense = inv.items.reduce((s, it) => s + (it.expense || 0), 0);
+                const invBalance = invIncome - invExpense;
+                totalIncome += invIncome;
+                totalExpense += invExpense;
+                totalBalance += invBalance;
+                summaryTbody.innerHTML += `
+                    <tr>
+                        <td>${inv.name}</td>
+                        <td>${invIncome.toFixed(2)}</td>
+                        <td>${invExpense.toFixed(2)}</td>
+                        <td>${invBalance.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+
+            summaryTbody.innerHTML += `
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي العام</strong></td>
+                    <td><strong>${totalIncome.toFixed(2)}</strong></td>
+                    <td><strong>${totalExpense.toFixed(2)}</strong></td>
+                    <td><strong>${totalBalance.toFixed(2)}</strong></td>
+                </tr>
+            `;
+
+            const detailsContainer = document.getElementById('invoiceDetailsContainer');
+            detailsContainer.innerHTML = '';
+
+            invoices.forEach(inv => {
+                let html = `<h3>${inv.name}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>البيان / بند المصروف</th>
+                                <th>الوارد (ج.م)</th>
+                                <th>المنصرف (ج.م)</th>
+                                <th>الرصيد المتبقي (ج.م)</th>
+                                ${isAdmin ? '<th class="no-print">إجراء</th>' : ''}
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                let runningBalance = 0;
+                inv.items.forEach(item => {
+                    runningBalance += (item.income || 0) - (item.expense || 0);
+                    const incomeDisplay = (item.income || 0) > 0 ? item.income.toFixed(2) : '—';
+                    const expenseDisplay = (item.expense || 0) > 0 ? item.expense.toFixed(2) : '—';
+                    const actionBtns = isAdmin ? `<td class="no-print">
+                        <button class="btn-danger btn-edit" onclick="editInvoiceItem(${inv.id}, ${item.id})">تعديل</button>
+                        <button class="btn-danger" onclick="deleteInvoiceItem(${inv.id}, ${item.id})">حذف</button>
+                    </td>` : '';
+
+                    html += `
+                        <tr>
+                            <td style="text-align:right; padding-right:8px;">${item.description}</td>
+                            <td>${incomeDisplay}</td>
+                            <td>${expenseDisplay}</td>
+                            <td>${runningBalance.toFixed(2)}</td>
+                            ${actionBtns}
+                        </tr>
+                    `;
+                });
+
+                const invIncome = inv.items.reduce((s, it) => s + (it.income || 0), 0);
+                const invExpense = inv.items.reduce((s, it) => s + (it.expense || 0), 0);
+                const invBalance = invIncome - invExpense;
+
+                html += `
+                        <tr class="total-debt-row">
+                            <td><strong>الإجمالي</strong></td>
+                            <td><strong>${invIncome.toFixed(2)}</strong></td>
+                            <td><strong>${invExpense.toFixed(2)}</strong></td>
+                            <td><strong>${invBalance.toFixed(2)}</strong></td>
+                            ${isAdmin ? '<td></td>' : ''}
+                        </tr>
+                    </tbody>
+                </table>`;
+
+                detailsContainer.innerHTML += html;
+            });
+        }
+
         function renderFinalSettlement() {
             const tbody = document.getElementById('finalSettlementBody');
             const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
             const paid = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
-            
             expenses.forEach(e => {
                 if (e.payer === 'all') {
                     paid.dr_ahmed += (e.amount * partners.dr_ahmed.percent) / 100;
@@ -1264,9 +1000,7 @@
                 Object.keys(partners).forEach(b => {
                     if (a !== b) {
                         let debt = 0;
-                        expenses.filter(e => e.payer === a).forEach(e => {
-                            debt += (e.amount * partners[b].percent) / 100;
-                        });
+                        expenses.filter(e => e.payer === a).forEach(e => { debt += (e.amount * partners[b].percent) / 100; });
                         if (debt > 0.01) {
                             if (!grossDebt[b]) grossDebt[b] = {};
                             grossDebt[b][a] = debt;
@@ -1280,9 +1014,7 @@
                 Object.keys(partners).forEach(b => {
                     if (a !== b) {
                         let impact = 0;
-                        revenues.filter(r => r.receiver === a).forEach(r => {
-                            impact += (r.total * partners[b].percent) / 100;
-                        });
+                        revenues.filter(r => r.receiver === a).forEach(r => { impact += (r.total * partners[b].percent) / 100; });
                         if (impact > 0.01) {
                             if (!revenueImpact[b]) revenueImpact[b] = {};
                             revenueImpact[b][a] = impact;
@@ -1316,9 +1048,8 @@
                     let debtA_on_B = netDebtRaw[debtorA][creditorB] || 0;
                     let debtB_on_A = (netDebtRaw[creditorB] && netDebtRaw[creditorB][debtorA]) || 0;
 
-                    if (Math.abs(debtA_on_B - debtB_on_A) < 0.01) {
-                        return;
-                    } else if (debtA_on_B > debtB_on_A) {
+                    if (Math.abs(debtA_on_B - debtB_on_A) < 0.01) return;
+                    else if (debtA_on_B > debtB_on_A) {
                         let net = debtA_on_B - debtB_on_A;
                         if (!finalDebt[debtorA]) finalDebt[debtorA] = {};
                         finalDebt[debtorA][creditorB] = net;
@@ -1337,9 +1068,7 @@
             Object.keys(finalDebt).forEach(debtorKey => {
                 let totalDebt = 0;
                 let creditorsDetails = '';
-                let creditorKeys = Object.keys(finalDebt[debtorKey]).sort();
-
-                creditorKeys.forEach(creditorKey => {
+                Object.keys(finalDebt[debtorKey]).sort().forEach(creditorKey => {
                     let amount = finalDebt[debtorKey][creditorKey];
                     if (amount > 0.01) {
                         totalDebt += amount;
@@ -1348,7 +1077,6 @@
                         hasDebt = true;
                     }
                 });
-
                 if (totalDebt > 0.01) {
                     grandTotalAll += totalDebt;
                     html += `
@@ -1377,9 +1105,7 @@
         }
 
         document.getElementById('liveDate').textContent = new Date().toLocaleDateString('ar-EG', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
+            year: 'numeric', month: 'long', day: 'numeric'
         });
 
         renderAll();
