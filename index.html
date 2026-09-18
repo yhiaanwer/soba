@@ -72,6 +72,30 @@
         .revenue-table-wrapper table tr:nth-child(odd), .settlement-table-wrapper table tr:nth-child(odd) { background-color: #ffffff; }
         .settlement-table-wrapper table tr.total-row { background-color: #c8e6c9 !important; font-weight: 700; }
         .settlement-table-wrapper table tr.total-row td { border-top: 2px solid #2e7d32; }
+        /* ===== صور الفواتير ===== */
+        .invoice-images-section { margin-top: 8px; padding: 8px 10px; background: #f9fef9; border: 1px dashed #a5d6a7; border-radius: 6px; }
+        .invoice-images-section h4 { font-size: 12px; color: #2e7d32; margin-bottom: 6px; font-weight: 700; }
+        .invoice-images-gallery { display: flex; flex-wrap: wrap; gap: 8px; }
+        .invoice-image-item { position: relative; width: 110px; height: 110px; border: 2px solid #a5d6a7; border-radius: 6px; overflow: hidden; background: #fff; cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+        .invoice-image-item:hover { transform: scale(1.04); border-color: #2e7d32; }
+        .invoice-image-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .invoice-image-item .img-delete-btn { position: absolute; top: 3px; left: 3px; background: rgba(198,40,40,0.92); color: #fff; border: none; border-radius: 4px; width: 22px; height: 22px; cursor: pointer; font-size: 12px; font-weight: bold; padding: 0; line-height: 1; }
+        .invoice-image-item .img-delete-btn:hover { background: #b71c1c; }
+        .invoice-images-empty { color: #999; font-size: 11px; font-style: italic; }
+        .image-count-badge { display: inline-block; background: #2e7d32; color: #fff; font-size: 10px; padding: 1px 7px; border-radius: 10px; margin-right: 6px; font-weight: 700; }
+        .lightbox-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+        .lightbox-overlay.active { display: flex; }
+        .lightbox-overlay img { max-width: 95%; max-height: 90%; border-radius: 6px; box-shadow: 0 6px 30px rgba(0,0,0,0.6); background: #fff; }
+        .lightbox-close { position: absolute; top: 18px; left: 18px; background: #c62828; color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; font-size: 22px; font-weight: bold; cursor: pointer; z-index: 10000; }
+        .lightbox-close:hover { background: #b71c1c; }
+        .upload-area { border: 2px dashed #a5d6a7; border-radius: 6px; padding: 10px; text-align: center; background: #f9fff9; cursor: pointer; transition: background 0.2s; }
+        .upload-area:hover { background: #e8f5e9; border-color: #2e7d32; }
+        .upload-area input[type="file"] { display: none; }
+        .upload-area label { cursor: pointer; font-weight: bold; color: #2e7d32; font-size: 12px; display: block; }
+        .sync-status { text-align: center; font-size: 11px; padding: 4px 8px; border-radius: 4px; margin-bottom: 8px; font-weight: 600; }
+        .sync-status.loading { background: #fff3e0; color: #e65100; }
+        .sync-status.ok { background: #e8f5e9; color: #2e7d32; }
+        .sync-status.error { background: #ffebee; color: #c62828; }
         @media print {
             .no-print { display: none !important; }
             body { padding: 0 !important; margin: 0 !important; font-size: 10px; line-height: 1.35; max-width: 100% !important; background: #ffffff !important; } 
@@ -85,6 +109,9 @@
             .revenue-table-wrapper, .settlement-table-wrapper { overflow-x: visible !important; border: none !important; }
             .revenue-table-wrapper table, .settlement-table-wrapper table { min-width: auto !important; width: 100% !important; }
             .revenue-table-wrapper table th, .revenue-table-wrapper table td, .settlement-table-wrapper table th, .settlement-table-wrapper table td { white-space: normal !important; }
+            .invoice-images-section { display: none !important; }
+            .lightbox-overlay { display: none !important; }
+            .sync-status { display: none !important; }
         }
     </style>
 </head>
@@ -94,6 +121,7 @@
     <p class="sub-title"><strong>بيان الحسابات، نسب الملكية، والمصروفات الموزعة على الشركاء</strong></p>
     <p class="meta">إعداد ومتابعة: <strong>يحيى أنور</strong> (المسؤول المالي) | تاريخ التحديث: <strong id="liveDate">18 سبتمبر 2026</strong></p>
 
+    <div id="syncStatus" class="sync-status no-print" style="display:none;"></div>
     <div id="adminStatusContainer" class="no-print"></div>
 
     <div id="controlPanel" class="control-panel no-print" style="display:none;">
@@ -174,6 +202,21 @@
         <div class="form-row">
             <button class="btn-add" onclick="addNewInvoice()" style="background:#1565c0; margin-top:0;">➕ فاتورة جديدة</button>
             <button class="btn-danger" onclick="deleteCurrentInvoice()" style="margin-top:0; padding:8px 14px; font-size:12px;">🗑️ حذف الفاتورة الحالية</button>
+        </div>
+
+        <h3 style="margin-top:12px;">🖼️ صور فواتير الخيار</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>اختر الفاتورة:</label>
+                <select id="imgInvSelect"></select>
+            </div>
+            <div class="form-group" style="flex:2; min-width:220px;">
+                <label>رفع صور (يمكن اختيار أكثر من صورة):</label>
+                <div class="upload-area" onclick="document.getElementById('invImagesInput').click()">
+                    <input type="file" id="invImagesInput" accept="image/*" multiple onchange="handleInvoiceImagesUpload()">
+                    <label>📷 اضغط لاختيار الصور</label>
+                </div>
+            </div>
         </div>
 
         <button class="btn-danger" onclick="resetToDefaultData()" style="margin-top:10px;">↩️ استعادة البيانات الأساسية</button>
@@ -341,7 +384,28 @@
 
     <div class="footer">صفحة التقرير المحدث والنهائي - صادر عن النظام المالي لصوبة أبو الشقاف</div>
 
-    <script>
+    <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+        <img id="lightboxImg" src="" alt="صورة الفاتورة">
+    </div>
+
+    <!-- ================= Firebase + منطق التطبيق ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCLzYi6UL7zSzQpS-ESDB6RhFiim4pfmJU",
+            authDomain: "soba-abo-alshokaf.firebaseapp.com",
+            projectId: "soba-abo-alshokaf",
+            storageBucket: "soba-abo-alshokaf.firebasestorage.app",
+            messagingSenderId: "575728580993",
+            appId: "1:575728580993:web:753299b9f3cbd81764d080"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
         const ADMIN_PASSWORD = 'forgetthepassword';
         let isAdmin = localStorage.getItem('soba_admin_session') === 'true';
 
@@ -401,7 +465,7 @@
         ];
 
         const initialInvoices = [
-            { id: 1, name: 'الفاتورة الأولى', items: [
+            { id: 1, name: 'الفاتورة الأولى', images: [], items: [
                 { id: 101, description: 'المبلغ الأساسي للفاتورة', income: 5270, expense: 0 },
                 { id: 102, description: 'أجرة السائق', income: 0, expense: 500 },
                 { id: 103, description: 'تفويل سيارة عم حامد', income: 0, expense: 420 },
@@ -422,7 +486,7 @@
                 { id: 118, description: 'فطار يومي 13 و 14 سبتمبر', income: 0, expense: 200 },
                 { id: 119, description: 'متبقي من فلوس (د. أحمد)', income: 10, expense: 0 }
             ]},
-            { id: 2, name: 'الفاتورة الثانية', items: [
+            { id: 2, name: 'الفاتورة الثانية', images: [], items: [
                 { id: 201, description: 'المبلغ الأساسي للفاتورة الثانية', income: 11480, expense: 0 },
                 { id: 202, description: 'حساب أحمد رجب عن نقلتين', income: 0, expense: 600 },
                 { id: 203, description: 'راتب عم مصطفى وإبراهيم', income: 0, expense: 4000 },
@@ -432,31 +496,31 @@
                 { id: 207, description: 'فطار العمال (عم حامد - يوم 12 سبتمبر)', income: 0, expense: 100 },
                 { id: 208, description: 'إكمال راتب يحيى', income: 0, expense: 820 }
             ]},
-            { id: 3, name: 'الفاتورة الثالثة', items: [
+            { id: 3, name: 'الفاتورة الثالثة', images: [], items: [
                 { id: 301, description: 'المبلغ الأساسي للفاتورة الثالثة', income: 8560, expense: 0 },
                 { id: 302, description: 'رواتب (عم مصطفى، إبراهيم، ويوسف) - 10 سبتمبر', income: 0, expense: 6000 },
                 { id: 303, description: 'إكمال راتب يحيى', income: 0, expense: 2500 }
             ]},
-            { id: 4, name: 'الفاتورة الرابعة', items: [
+            { id: 4, name: 'الفاتورة الرابعة', images: [], items: [
                 { id: 401, description: 'المبلغ الأساسي للفاتورة الرابعة', income: 7710, expense: 0 },
                 { id: 402, description: 'أجرة السيارة', income: 0, expense: 500 },
                 { id: 403, description: 'كراتين + 3 عواميد لصق', income: 0, expense: 1400 },
                 { id: 404, description: 'فطار يومين', income: 0, expense: 210 },
                 { id: 405, description: 'لإكمال راتب عم سلامة', income: 0, expense: 5600 }
             ]},
-            { id: 5, name: 'الفاتورة الخامسة', items: [
+            { id: 5, name: 'الفاتورة الخامسة', images: [], items: [
                 { id: 501, description: 'المبلغ الأساسي للفاتورة الخامسة', income: 10640, expense: 0 },
                 { id: 502, description: 'حساب السائق', income: 0, expense: 540 },
                 { id: 503, description: 'راتب محمود أنور', income: 0, expense: 8000 },
                 { id: 504, description: 'إكمال راتب يحيى', income: 0, expense: 2100 }
             ]},
-            { id: 6, name: 'الفاتورة السادسة', items: [
+            { id: 6, name: 'الفاتورة السادسة', images: [], items: [
                 { id: 601, description: 'المبلغ الأساسي للفاتورة السادسة', income: 9520, expense: 0 },
                 { id: 602, description: 'حساب السائق', income: 0, expense: 550 },
                 { id: 603, description: 'فطار العمال', income: 0, expense: 270 },
                 { id: 604, description: 'دُفعت للمبيدات', income: 0, expense: 8700 }
             ]},
-            { id: 7, name: 'الفاتورة السابعة', items: [
+            { id: 7, name: 'الفاتورة السابعة', images: [], items: [
                 { id: 701, description: 'المبلغ الأساسي للفاتورة السابعة', income: 20810, expense: 0 },
                 { id: 702, description: 'مبيدات', income: 0, expense: 10000 },
                 { id: 703, description: 'للسائق - محمد عبسي', income: 0, expense: 600 },
@@ -466,47 +530,114 @@
             ]}
         ];
 
-        let expenses = JSON.parse(localStorage.getItem('soba_expenses_v2')) || initialExpenses;
-        let revenues = JSON.parse(localStorage.getItem('soba_revenues_v2')) || [];
-        let invoices = JSON.parse(localStorage.getItem('soba_invoices_v1')) || initialInvoices;
+        let expenses = [];
+        let revenues = [];
+        let invoices = [];
+        let dataReady = false;
+
+        function setSyncStatus(type, msg) {
+            const el = document.getElementById('syncStatus');
+            el.className = 'sync-status ' + type;
+            el.textContent = msg;
+            el.style.display = 'block';
+            if (type === 'ok') setTimeout(() => { el.style.display = 'none'; }, 2000);
+        }
+
+        function normalizeInvoices() {
+            invoices.forEach(inv => { if (!Array.isArray(inv.images)) inv.images = []; });
+        }
+
+        async function loadData() {
+            setSyncStatus('loading', '⏳ جارٍ تحميل البيانات من السحابة...');
+            try {
+                const snap = await getDoc(doc(db, 'soba_data', 'main'));
+                if (snap.exists()) {
+                    const data = snap.data();
+                    expenses = data.expenses || initialExpenses;
+                    revenues = data.revenues || [];
+                    invoices = data.invoices || initialInvoices;
+                    normalizeInvoices();
+                    localStorage.setItem('soba_expenses_v2', JSON.stringify(expenses));
+                    localStorage.setItem('soba_revenues_v2', JSON.stringify(revenues));
+                    localStorage.setItem('soba_invoices_v1', JSON.stringify(invoices));
+                    setSyncStatus('ok', '✅ تم تحميل البيانات من السحابة');
+                } else {
+                    expenses = JSON.parse(JSON.stringify(initialExpenses));
+                    revenues = [];
+                    invoices = JSON.parse(JSON.stringify(initialInvoices));
+                    normalizeInvoices();
+                    await syncToFirestore();
+                    setSyncStatus('ok', '✅ تم إنشاء البيانات الأساسية في السحابة');
+                }
+            } catch (err) {
+                console.error('Load failed:', err);
+                expenses = JSON.parse(localStorage.getItem('soba_expenses_v2')) || JSON.parse(JSON.stringify(initialExpenses));
+                revenues = JSON.parse(localStorage.getItem('soba_revenues_v2')) || [];
+                invoices = JSON.parse(localStorage.getItem('soba_invoices_v1')) || JSON.parse(JSON.stringify(initialInvoices));
+                normalizeInvoices();
+                setSyncStatus('error', '⚠️ تعذّر الاتصال — يتم استخدام نسخة محلية');
+            }
+            dataReady = true;
+            renderAll();
+        }
+
+        async function syncToFirestore() {
+            const payload = {
+                expenses, revenues, invoices,
+                updatedAt: new Date().toISOString()
+            };
+            const size = new Blob([JSON.stringify(payload)]).size;
+            if (size > 1000000) {
+                setSyncStatus('error', '⚠️ حجم البيانات تجاوز 1 ميجا — احذف بعض الصور');
+                return;
+            }
+            try {
+                await setDoc(doc(db, 'soba_data', 'main'), payload);
+                setSyncStatus('ok', '✅ تم الحفظ في السحابة');
+            } catch (err) {
+                console.error('Sync failed:', err);
+                setSyncStatus('error', '⚠️ فشل الحفظ في السحابة: ' + err.message);
+            }
+        }
 
         function saveData() {
             localStorage.setItem('soba_expenses_v2', JSON.stringify(expenses));
             localStorage.setItem('soba_revenues_v2', JSON.stringify(revenues));
             localStorage.setItem('soba_invoices_v1', JSON.stringify(invoices));
             renderAll();
+            syncToFirestore();
         }
 
-        function resetToDefaultData() {
-            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن أولاً!'); return; }
-            if (confirm("هل أنت متأكد من استعادة البيانات الأساسية؟ ستفقد أي إضافات جديدة.")) {
-                expenses = JSON.parse(JSON.stringify(initialExpenses));
-                revenues = [];
-                invoices = JSON.parse(JSON.stringify(initialInvoices));
-                saveData();
-            }
-        }
-
-        function login() {
+        /* ========= Auth ========= */
+        window.login = function() {
             const password = prompt('🔐 أدخل كلمة المرور الخاصة بالأدمن:');
             if (password === ADMIN_PASSWORD) {
                 isAdmin = true;
                 localStorage.setItem('soba_admin_session', 'true');
                 renderAll();
-                updateAdminUI();
             } else if (password !== null) {
                 alert('❌ كلمة المرور غير صحيحة. حاول مرة أخرى.');
             }
-        }
+        };
 
-        function logout() {
+        window.logout = function() {
             if (confirm('هل تريد تسجيل الخروج من وضع الأدمن؟')) {
                 isAdmin = false;
                 localStorage.removeItem('soba_admin_session');
                 renderAll();
-                updateAdminUI();
             }
-        }
+        };
+
+        window.resetToDefaultData = function() {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن أولاً!'); return; }
+            if (confirm("هل أنت متأكد من استعادة البيانات الأساسية؟ ستفقد أي إضافات جديدة.")) {
+                expenses = JSON.parse(JSON.stringify(initialExpenses));
+                revenues = [];
+                invoices = JSON.parse(JSON.stringify(initialInvoices));
+                normalizeInvoices();
+                saveData();
+            }
+        };
 
         function updateAdminUI() {
             const panel = document.getElementById('controlPanel');
@@ -529,7 +660,8 @@
             }
         }
 
-        function addExpense() {
+        /* ========= Expenses ========= */
+        window.addExpense = function() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن لإضافة مصروفات.'); return; }
             const dateTitle = document.getElementById('expDateTitle').value.trim();
             const details = document.getElementById('expDetails').value.trim();
@@ -543,17 +675,18 @@
             document.getElementById('expDetails').value = '';
             document.getElementById('expAmount').value = '';
             saveData();
-        }
+        };
 
-        function deleteExpense(id) {
+        window.deleteExpense = function(id) {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن لحذف المصروفات.'); return; }
             if (confirm('هل تريد حذف هذا المصروف نهائياً؟')) {
                 expenses = expenses.filter(e => e.id !== id);
                 saveData();
             }
-        }
+        };
 
-        function addRevenue() {
+        /* ========= Revenues ========= */
+        window.addRevenue = function() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن لإضافة إيرادات.'); return; }
             const date = document.getElementById('revDate').value.trim();
             const weight = parseFloat(document.getElementById('revWeight').value);
@@ -563,22 +696,23 @@
                 alert('يرجى إدخال بيانات الإيراد بشكل صحيح.'); return;
             }
             const total = weight * price;
-            revenues.push({ id: revenues.length + 1, date, weight, price, total, receiver });
+            revenues.push({ id: Date.now(), date, weight, price, total, receiver });
             document.getElementById('revDate').value = '';
             document.getElementById('revWeight').value = '';
             document.getElementById('revPrice').value = '';
             saveData();
-        }
+        };
 
-        function deleteRevenue(id) {
+        window.deleteRevenue = function(id) {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن لحذف الإيرادات.'); return; }
             if (confirm('هل تريد حذف هذا الإيراد نهائياً؟')) {
                 revenues = revenues.filter(r => r.id !== id);
                 saveData();
             }
-        }
+        };
 
-        function addInvoiceItem() {
+        /* ========= Invoice Items ========= */
+        window.addInvoiceItem = function() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
             const invId = parseInt(document.getElementById('invSelect').value);
             const description = document.getElementById('invItemDesc').value.trim();
@@ -594,18 +728,18 @@
             document.getElementById('invItemIncome').value = '';
             document.getElementById('invItemExpense').value = '';
             saveData();
-        }
+        };
 
-        function deleteInvoiceItem(invId, itemId) {
+        window.deleteInvoiceItem = function(invId, itemId) {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
             if (confirm('هل تريد حذف هذا البند؟')) {
                 const inv = invoices.find(i => i.id === invId);
                 if (inv) inv.items = inv.items.filter(it => it.id !== itemId);
                 saveData();
             }
-        }
+        };
 
-        function editInvoiceItem(invId, itemId) {
+        window.editInvoiceItem = function(invId, itemId) {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
             const inv = invoices.find(i => i.id === invId);
             const item = inv.items.find(it => it.id === itemId);
@@ -620,17 +754,17 @@
             item.income = parseFloat(newIncome) || 0;
             item.expense = parseFloat(newExpense) || 0;
             saveData();
-        }
+        };
 
-        function addNewInvoice() {
+        window.addNewInvoice = function() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
             const name = prompt('اسم الفاتورة الجديدة:', 'الفاتورة ' + (invoices.length + 1));
             if (!name) return;
-            invoices.push({ id: Date.now(), name: name.trim(), items: [] });
+            invoices.push({ id: Date.now(), name: name.trim(), items: [], images: [] });
             saveData();
-        }
+        };
 
-        function deleteCurrentInvoice() {
+        window.deleteCurrentInvoice = function() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
             const invId = parseInt(document.getElementById('invSelect').value);
             const inv = invoices.find(i => i.id === invId);
@@ -639,9 +773,93 @@
                 invoices = invoices.filter(i => i.id !== invId);
                 saveData();
             }
+        };
+
+        /* ========= صور الفواتير ========= */
+        function compressImage(file, maxWidth = 900, quality = 0.65) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        let w = img.width, h = img.height;
+                        if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w; canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#fff';
+                        ctx.fillRect(0, 0, w, h);
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = () => reject(new Error('فشل تحميل الصورة'));
+                    img.src = e.target.result;
+                };
+                reader.onerror = () => reject(new Error('فشل قراءة الملف'));
+                reader.readAsDataURL(file);
+            });
         }
 
+        window.handleInvoiceImagesUpload = async function() {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
+            const invId = parseInt(document.getElementById('imgInvSelect').value);
+            const inv = invoices.find(i => i.id === invId);
+            if (!inv) { alert('الفاتورة غير موجودة.'); return; }
+            const input = document.getElementById('invImagesInput');
+            const files = Array.from(input.files || []);
+            if (files.length === 0) return;
+
+            setSyncStatus('loading', '⏳ جارٍ معالجة ورفع الصور...');
+            try {
+                for (const file of files) {
+                    if (!file.type.startsWith('image/')) continue;
+                    const dataUrl = await compressImage(file);
+                    const imgId = 'img_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+                    inv.images.push({
+                        id: imgId,
+                        name: file.name,
+                        data: dataUrl,
+                        uploadedAt: new Date().toISOString()
+                    });
+                }
+                saveData();
+            } catch (err) {
+                alert('حدث خطأ في معالجة الصور: ' + err.message);
+                setSyncStatus('error', '⚠️ فشل رفع الصور');
+            } finally {
+                input.value = '';
+            }
+        };
+
+        window.deleteInvoiceImage = function(invId, imgId) {
+            if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
+            if (!confirm('هل تريد حذف هذه الصورة نهائياً؟')) return;
+            const inv = invoices.find(i => i.id === invId);
+            if (!inv) return;
+            inv.images = inv.images.filter(img => img.id !== imgId);
+            saveData();
+        };
+
+        window.openLightboxById = function(invId, imgId) {
+            const inv = invoices.find(i => i.id === invId);
+            if (!inv) return;
+            const img = inv.images.find(im => im.id === imgId);
+            if (!img) return;
+            document.getElementById('lightboxImg').src = img.data;
+            document.getElementById('lightbox').classList.add('active');
+        };
+
+        window.closeLightbox = function(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('lightbox').classList.remove('active');
+            document.getElementById('lightboxImg').src = '';
+        };
+
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') window.closeLightbox(); });
+
+        /* ========= Render ========= */
         function renderAll() {
+            if (!dataReady) return;
             renderExpensesTable();
             renderBreakdownTable();
             renderDebtsTables();
@@ -811,7 +1029,7 @@
                 const shareMostafa = (r.total * partners.mostafa.percent) / 100;
                 const shareAhmedY = (r.total * partners.ahmed_yassin.percent) / 100;
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteRevenue(${r.id})">حذف</button></td>` : '';
-                const receiverName = r.receiver === 'all' ? 'الجميع (بدون مقاصة)' : partners[r.receiver]?.name || r.receiver;
+                const receiverName = r.receiver === 'all' ? 'الجميع (بدون مقاصة)' : (partners[r.receiver] ? partners[r.receiver].name : r.receiver);
 
                 let drColor = '', yahiaColor = '', mostafaColor = '', ahmedYColor = '';
                 let drSign = '', yahiaSign = '', mostafaSign = '', ahmedYSign = '';
@@ -857,6 +1075,16 @@
             });
             if (currentVal && invoices.find(i => i.id === parseInt(currentVal))) {
                 select.value = currentVal;
+            }
+
+            const imgSelect = document.getElementById('imgInvSelect');
+            const imgCurrentVal = imgSelect.value;
+            imgSelect.innerHTML = '';
+            invoices.forEach(inv => {
+                imgSelect.innerHTML += `<option value="${inv.id}">${inv.name}</option>`;
+            });
+            if (imgCurrentVal && invoices.find(i => i.id === parseInt(imgCurrentVal))) {
+                imgSelect.value = imgCurrentVal;
             }
 
             const summaryTbody = document.getElementById('invoiceSummaryBody');
@@ -941,6 +1169,24 @@
                         </tr>
                     </tbody>
                 </table>`;
+
+                const imgCount = inv.images ? inv.images.length : 0;
+                const imagesHtml = imgCount === 0
+                    ? `<p class="invoice-images-empty">لا توجد صور مرفقة بعد${isAdmin ? ' — ارفعها من لوحة التحكم بالأعلى' : ''}.</p>`
+                    : `<div class="invoice-images-gallery">` +
+                      inv.images.map(img => `
+                          <div class="invoice-image-item" onclick="openLightboxById(${inv.id}, '${img.id}')" title="${img.name}">
+                              <img src="${img.data}" alt="${img.name}">
+                              ${isAdmin ? `<button class="img-delete-btn" onclick="event.stopPropagation(); deleteInvoiceImage(${inv.id}, '${img.id}')" title="حذف الصورة">✕</button>` : ''}
+                          </div>
+                      `).join('') + `</div>`;
+
+                html += `
+                    <div class="invoice-images-section">
+                        <h4>🖼️ صور الفاتورة ${imgCount > 0 ? `<span class="image-count-badge">${imgCount}</span>` : ''}</h4>
+                        ${imagesHtml}
+                    </div>
+                `;
 
                 detailsContainer.innerHTML += html;
             });
@@ -1108,48 +1354,7 @@
             year: 'numeric', month: 'long', day: 'numeric'
         });
 
-        renderAll();
-    </script>
-
-    <!-- ================= Firebase Connection Test ================= -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCLzYi6UL7zSzQpS-ESDB6RhFiim4pfmJU",
-            authDomain: "soba-abo-alshokaf.firebaseapp.com",
-            projectId: "soba-abo-alshokaf",
-            storageBucket: "soba-abo-alshokaf.firebasestorage.app",
-            messagingSenderId: "575728580993",
-            appId: "1:575728580993:web:753299b9f3cbd81764d080"
-        };
-
-        try {
-            const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app);
-
-            (async () => {
-                try {
-                    const testDoc = doc(db, 'soba_test', 'connection');
-                    await setDoc(testDoc, {
-                        connected: true,
-                        timestamp: new Date().toISOString(),
-                        userAgent: navigator.userAgent.substring(0, 80)
-                    });
-                    const snap = await getDoc(testDoc);
-                    const data = snap.data();
-                    console.log('✅ Firebase connected:', data);
-                    alert('✅ تم الاتصال بـ Firebase بنجاح!\n\nالوقت: ' + data.timestamp);
-                } catch (err) {
-                    console.error('❌ Firebase error:', err);
-                    alert('❌ فشل الاتصال بـ Firestore:\n\n' + err.message + '\n\nتأكد أنك تفتح الصفحة عبر GitHub Pages وليس ملف محلي.');
-                }
-            })();
-        } catch (err) {
-            console.error('❌ Firebase init error:', err);
-            alert('❌ فشل تهيئة Firebase:\n\n' + err.message);
-        }
+        loadData();
     </script>
 
 </body>
