@@ -104,7 +104,6 @@
         tr:nth-child(even) { background-color: #f4fcf4; }
         tr:nth-child(odd) { background-color: #ffffff; }
 
-        /* ألوان الدائنين */
         .creditor-dr_ahmed { color: #c62828 !important; font-weight: 700 !important; }
         .creditor-yahia { color: #1565c0 !important; font-weight: 700 !important; }
         .creditor-mostafa { color: #6a1b9a !important; font-weight: 700 !important; }
@@ -172,7 +171,6 @@
         .debt-details-cell { text-align: right; padding: 5px 8px; }
         .debt-details-cell .debt-line { display: block; padding: 1px 0; }
 
-        /* لوحة التحكم */
         .control-panel {
             background: #f1f8e9;
             border: 2px solid #2e7d32;
@@ -270,7 +268,6 @@
 
         .no-print { display: inline-block; }
 
-        /* حاويات التمرير */
         .revenue-table-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -370,12 +367,10 @@
 
     <h1>تقرير حسابات صوبة أبو الشقاف</h1>
     <p class="sub-title"><strong>بيان الحسابات، نسب الملكية، والمصروفات الموزعة على الشركاء</strong></p>
-    <p class="meta">إعداد ومتابعة: <strong>يحيى أنور</strong> (المسؤول المالي) | تاريخ التحديث: <strong id="liveDate">3 سبتمبر 2026</strong></p>
+    <p class="meta">إعداد ومتابعة: <strong>يحيى أنور</strong> (المسؤول المالي) | تاريخ التحديث: <strong id="liveDate">18 سبتمبر 2026</strong></p>
 
-    <!-- حالة الأدمن -->
     <div id="adminStatusContainer" class="no-print"></div>
 
-    <!-- لوحة التحكم -->
     <div id="controlPanel" class="control-panel no-print" style="display:none;">
         <h3>➕ إضافة مصروف جديد</h3>
         <div class="form-row">
@@ -398,7 +393,7 @@
                     <option value="yahia">يحيى أنور</option>
                     <option value="mostafa">مصطفى ياسين</option>
                     <option value="ahmed_yassin">أحمد ياسين</option>
-                    <option value="all">الجميع (بدون ديون)</option> <!-- الخيار الجديد -->
+                    <option value="all">الجميع (بدون ديون)</option>
                 </select>
             </div>
             <button class="btn-add" onclick="addExpense()">حفظ المصروف</button>
@@ -434,9 +429,6 @@
         <button class="btn-logout" onclick="logout()" style="margin-top:10px; margin-right:8px;">🚪 تسجيل الخروج</button>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- أولاً: صوبة أبو الشقاف -->
-    <!-- ============================================================ -->
     <h2>أولاً: صوبة أبو الشقاف (محصول الخيار)</h2>
     <p><strong>المساحة:</strong> فدان ونصف | <strong>المحصول:</strong> خيار | <strong>الحالة:</strong> تم زراعة الشتلة</p>
 
@@ -468,9 +460,6 @@
         <div class="summary-box" id="summaryBoxContainer"></div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ثالثاً: الإيرادات -->
-    <!-- ============================================================ -->
     <div class="section-block">
         <h2>ثالثاً: الإيرادات</h2>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>سجل مبيعات المحصول (خيار) مع توزيع الحصص وإمكانية المقاصة التلقائية.</em></p>
@@ -497,8 +486,229 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- رابعاً: الجدول التفصيلي لأعباء الشركاء -->
+    <!-- ثالثاً-ب: تفاصيل فواتير إيرادات الخيار -->
     <!-- ============================================================ -->
+    <div class="section-block">
+        <h2>ثالثاً-ب: تفاصيل فواتير إيرادات الخيار</h2>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل كل فاتورة من فواتير بيع الخيار، مع بيان الوارد والمنصرف والرصيد المتبقي لكل بند.</em></p>
+
+        <h3>ملخص الفواتير</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>الفاتورة</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>الفاتورة الأولى</td><td>5,600.00</td><td>5,410.00</td><td>190.00</td></tr>
+                <tr><td>الفاتورة الثانية</td><td>11,480.00</td><td>11,220.00</td><td>260.00</td></tr>
+                <tr><td>الفاتورة الثالثة</td><td>8,560.00</td><td>8,500.00</td><td>60.00</td></tr>
+                <tr><td>الفاتورة الرابعة</td><td>7,710.00</td><td>7,710.00</td><td>0.00</td></tr>
+                <tr><td>الفاتورة الخامسة</td><td>10,640.00</td><td>10,640.00</td><td>0.00</td></tr>
+                <tr><td>الفاتورة السادسة</td><td>9,520.00</td><td>9,520.00</td><td>0.00</td></tr>
+                <tr><td>الفاتورة السابعة</td><td>20,810.00</td><td>12,300.00</td><td>8,510.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي العام</strong></td>
+                    <td><strong>74,320.00</strong></td>
+                    <td><strong>65,300.00</strong></td>
+                    <td><strong>9,020.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>الفاتورة الأولى</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>البيان / بند المصروف</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>المبلغ الأساسي للفاتورة</td><td>5,270.00</td><td>—</td><td>5,270.00</td></tr>
+                <tr><td>أجرة السائق</td><td>—</td><td>500.00</td><td>4,770.00</td></tr>
+                <tr><td>تفويل سيارة عم حامد</td><td>—</td><td>420.00</td><td>4,350.00</td></tr>
+                <tr><td>جاز وزيت لماكينة الري</td><td>—</td><td>500.00</td><td>3,850.00</td></tr>
+                <tr><td>كراتين (3 لفات × 180)</td><td>—</td><td>540.00</td><td>3,310.00</td></tr>
+                <tr><td>شريط لصق</td><td>—</td><td>270.00</td><td>3,040.00</td></tr>
+                <tr><td>بنزين موتوسيكل لعم مصطفى</td><td>—</td><td>250.00</td><td>2,790.00</td></tr>
+                <tr><td>كيلو سكر وربع شاي</td><td>—</td><td>85.00</td><td>2,705.00</td></tr>
+                <tr><td>إيجار سكن يحيى</td><td>—</td><td>1,000.00</td><td>1,705.00</td></tr>
+                <tr><td>إصلاح بوتاجاز</td><td>—</td><td>300.00</td><td>1,405.00</td></tr>
+                <tr><td>علبة سجائر للعامل مصطفى (دفعها عم حامد)</td><td>—</td><td>55.00</td><td>1,350.00</td></tr>
+                <tr><td>سلفة لعم حامد (يوم 7 سبتمبر)</td><td>—</td><td>1,000.00</td><td>350.00</td></tr>
+                <tr><td>فطار العمال (عم حامد - يوم 7 سبتمبر)</td><td>—</td><td>80.00</td><td>270.00</td></tr>
+                <tr><td>فطار (الأربعاء 9 سبتمبر)</td><td>—</td><td>90.00</td><td>180.00</td></tr>
+                <tr><td>حساب جركن جاز قديم (عم سلامة)</td><td>—</td><td>120.00</td><td>60.00</td></tr>
+                <tr><td>مُرحّل من الفاتورة الثانية</td><td>260.00</td><td>—</td><td>320.00</td></tr>
+                <tr><td>مُرحّل من الفاتورة الثالثة</td><td>60.00</td><td>—</td><td>380.00</td></tr>
+                <tr><td>فطار يومي 13 و 14 سبتمبر</td><td>—</td><td>200.00</td><td>180.00</td></tr>
+                <tr><td>متبقي من فلوس (د. أحمد)</td><td>10.00</td><td>—</td><td>190.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>5,600.00</strong></td>
+                    <td><strong>5,410.00</strong></td>
+                    <td><strong>190.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>الفاتورة الثانية</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>البيان / بند المصروف</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>المبلغ الأساسي للفاتورة الثانية</td><td>11,480.00</td><td>—</td><td>11,480.00</td></tr>
+                <tr><td>حساب أحمد رجب عن نقلتين</td><td>—</td><td>600.00</td><td>10,880.00</td></tr>
+                <tr><td>راتب عم مصطفى وإبراهيم</td><td>—</td><td>4,000.00</td><td>6,880.00</td></tr>
+                <tr><td>مبلغ لدى د. أحمد (لشحن كهرباء منزله)</td><td>—</td><td>1,000.00</td><td>5,880.00</td></tr>
+                <tr><td>حساب العيش (عم حامد)</td><td>—</td><td>300.00</td><td>5,580.00</td></tr>
+                <tr><td>إكمال راتب عم سلامة (مُضاف إلى 5600 من الفاتورة 4)</td><td>—</td><td>4,400.00</td><td>1,180.00</td></tr>
+                <tr><td>فطار العمال (عم حامد - يوم 12 سبتمبر)</td><td>—</td><td>100.00</td><td>1,080.00</td></tr>
+                <tr><td>إكمال راتب يحيى</td><td>—</td><td>820.00</td><td>260.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>11,480.00</strong></td>
+                    <td><strong>11,220.00</strong></td>
+                    <td><strong>260.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>الفاتورة الثالثة</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>البيان / بند المصروف</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>المبلغ الأساسي للفاتورة الثالثة</td><td>8,560.00</td><td>—</td><td>8,560.00</td></tr>
+                <tr><td>رواتب (عم مصطفى، إبراهيم، ويوسف) - 10 سبتمبر</td><td>—</td><td>6,000.00</td><td>2,560.00</td></tr>
+                <tr><td>إكمال راتب يحيى</td><td>—</td><td>2,500.00</td><td>60.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>8,560.00</strong></td>
+                    <td><strong>8,500.00</strong></td>
+                    <td><strong>60.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>الفاتورة الرابعة</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>البيان / بند المصروف</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>المبلغ الأساسي للفاتورة الرابعة</td><td>7,710.00</td><td>—</td><td>7,710.00</td></tr>
+                <tr><td>أجرة السيارة</td><td>—</td><td>500.00</td><td>7,210.00</td></tr>
+                <tr><td>كراتين + 3 عواميد لصق</td><td>—</td><td>1,400.00</td><td>5,810.00</td></tr>
+                <tr><td>فطار يومين</td><td>—</td><td>210.00</td><td>5,600.00</td></tr>
+                <tr><td>لإكمال راتب عم سلامة (مُضاف إلى 4400 من الفاتورة 2)</td><td>—</td><td>5,600.00</td><td>0.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>7,710.00</strong></td>
+                    <td><strong>7,710.00</strong></td>
+                    <td><strong>0.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>الفاتورة الخامسة</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>البيان / بند المصروف</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>المبلغ الأساسي للفاتورة الخامسة</td><td>10,640.00</td><td>—</td><td>10,640.00</td></tr>
+                <tr><td>حساب السائق</td><td>—</td><td>540.00</td><td>10,100.00</td></tr>
+                <tr><td>راتب محمود أنور</td><td>—</td><td>8,000.00</td><td>2,100.00</td></tr>
+                <tr><td>إكمال راتب يحيى</td><td>—</td><td>2,100.00</td><td>0.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>10,640.00</strong></td>
+                    <td><strong>10,640.00</strong></td>
+                    <td><strong>0.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>الفاتورة السادسة</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>البيان / بند المصروف</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>المبلغ الأساسي للفاتورة السادسة</td><td>9,520.00</td><td>—</td><td>9,520.00</td></tr>
+                <tr><td>حساب السائق</td><td>—</td><td>550.00</td><td>8,970.00</td></tr>
+                <tr><td>فطار العمال</td><td>—</td><td>270.00</td><td>8,700.00</td></tr>
+                <tr><td>دُفعت للمبيدات</td><td>—</td><td>8,700.00</td><td>0.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>9,520.00</strong></td>
+                    <td><strong>9,520.00</strong></td>
+                    <td><strong>0.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>الفاتورة السابعة</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>البيان / بند المصروف</th>
+                    <th>الوارد (ج.م)</th>
+                    <th>المنصرف (ج.م)</th>
+                    <th>الرصيد المتبقي (ج.م)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>المبلغ الأساسي للفاتورة السابعة</td><td>20,810.00</td><td>—</td><td>20,810.00</td></tr>
+                <tr><td>مبيدات</td><td>—</td><td>10,000.00</td><td>10,810.00</td></tr>
+                <tr><td>للسائق - محمد عبسي</td><td>—</td><td>600.00</td><td>10,210.00</td></tr>
+                <tr><td>سُلفة لعم مصطفى العامل</td><td>—</td><td>1,000.00</td><td>9,210.00</td></tr>
+                <tr><td>لأحمد رجب (مشاوير قديمة بالتروسيكل)</td><td>—</td><td>400.00</td><td>8,810.00</td></tr>
+                <tr><td>فطار لعم حامد</td><td>—</td><td>300.00</td><td>8,510.00</td></tr>
+                <tr class="total-debt-row">
+                    <td><strong>الإجمالي</strong></td>
+                    <td><strong>20,810.00</strong></td>
+                    <td><strong>12,300.00</strong></td>
+                    <td><strong>8,510.00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div class="section-block">
         <h2>رابعاً: الجدول التفصيلي لأعباء الشركاء</h2>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل الالتزامات المالية لكل شريك بناءً على إجمالي المصروفات الفعلية.</em></p>
@@ -518,9 +728,6 @@
         <div class="note"><strong>ملحوظة:</strong> يتم توزيع أعباء المصروفات تلقائياً وحساب الحصص بدقة فور تسجيل أي بند.</div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- خامساً: تفاصيل الديون (بدون مقاصة) -->
-    <!-- ============================================================ -->
     <div class="section-block">
         <h2>خامساً: تفاصيل الديون (بدون مقاصة)</h2>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تم تقسيم الديون إلى ثلاثة جداول مستقلة حسب كل دائن.</em></p>
@@ -568,9 +775,6 @@
         </table>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- سادساً: المقاصة النهائية -->
-    <!-- ============================================================ -->
     <div class="section-block">
         <h2>سادساً: المقاصة النهائية</h2>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>صافي المركز المالي لكل شريك (للمعلومية).</em></p>
@@ -589,7 +793,6 @@
         </div>
         <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong>، والقيمة السالبة تعني أنه <strong>مدين</strong> (صافي المركز المالي).</div>
 
-        <!-- الجدول الجديد: تفاصيل الديون النهائية (بعد المقاصة الثنائية) -->
         <h3>تفاصيل الديون النهائية (بعد المقاصة الثنائية)</h3>
         <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول صافي الديون بين كل زوج من الشركاء بعد خصم الديون المتبادلة (المقاصة).</em></p>
         <div class="settlement-table-wrapper">
@@ -607,9 +810,6 @@
         <div class="note"><strong>تنبيه:</strong> هذا الجدول يلخص العلاقة النهائية بين كل زوج من الشركاء. تم خصم الديون المتبادلة (أي إذا كان "أ" مديناً لـ "ب" بمبلغ X، و "ب" مديناً لـ "أ" بمبلغ Y، فإن الصافي هو الفرق بينهما).</div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- سابعاً: تعليمات عامة -->
-    <!-- ============================================================ -->
     <div class="section-block">
         <h2>سابعاً: تعليمات عامة</h2>
         <ul>
@@ -624,15 +824,9 @@
     </div>
 
     <script>
-        // ============================================================
-        // إعدادات الأمان (كلمة المرور الافتراضية)
-        // ============================================================
         const ADMIN_PASSWORD = 'forgetthepassword';
         let isAdmin = localStorage.getItem('soba_admin_session') === 'true';
 
-        // ============================================================
-        // البيانات الأساسية (نسب الشركاء والمصروفات الافتراضية)
-        // ============================================================
         const partners = {
             dr_ahmed: { name: 'د. أحمد', percent: 45.25, creditorClass: 'creditor-dr_ahmed' },
             yahia: { name: 'يحيى أنور', percent: 23.08, creditorClass: 'creditor-yahia' },
@@ -690,9 +884,6 @@
             { id: 40, dateTitle: '3 سبتمبر - فطار', details: 'فطار عمال (دفعه د. أحمد)', amount: 300.00, payer: 'dr_ahmed' }
         ];
 
-        // ============================================================
-        // إدارة البيانات
-        // ============================================================
         let expenses = JSON.parse(localStorage.getItem('soba_expenses_v2')) || initialExpenses;
         let revenues = JSON.parse(localStorage.getItem('soba_revenues_v2')) || [];
 
@@ -711,9 +902,6 @@
             }
         }
 
-        // ============================================================
-        // دوال تسجيل الدخول والخروج
-        // ============================================================
         function login() {
             const password = prompt('🔐 أدخل كلمة المرور الخاصة بالأدمن:');
             if (password === ADMIN_PASSWORD) {
@@ -756,9 +944,6 @@
             }
         }
 
-        // ============================================================
-        // إضافة وحذف المصروفات والإيرادات
-        // ============================================================
         function addExpense() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن لإضافة مصروفات.'); return; }
             const dateTitle = document.getElementById('expDateTitle').value.trim();
@@ -810,9 +995,6 @@
             }
         }
 
-        // ============================================================
-        // دوال العرض (Rendering)
-        // ============================================================
         function renderAll() {
             renderExpensesTable();
             renderBreakdownTable();
@@ -823,9 +1005,6 @@
             updateAdminUI();
         }
 
-        // ============================================================
-        // 1. جدول المصروفات
-        // ============================================================
         function renderExpensesTable() {
             const tbody = document.getElementById('expensesTableBody');
             tbody.innerHTML = '';
@@ -841,7 +1020,6 @@
                 }
                 const colorClass = (e.payer === 'all') ? '' : (creditorColorMap[e.payer] || '');
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>` : '';
-                const payerName = e.payer === 'all' ? 'الجميع' : partners[e.payer].name;
                 tbody.innerHTML += `
                     <tr>
                         <td><strong>${e.dateTitle}</strong></td>
@@ -871,9 +1049,6 @@
             `;
         }
 
-        // ============================================================
-        // 2. جدول أعباء الشركاء
-        // ============================================================
         function renderBreakdownTable() {
             const tbody = document.getElementById('breakdownTableBody');
             tbody.innerHTML = '';
@@ -892,9 +1067,7 @@
                 totals.mostafa += shareMostafa;
                 totals.ahmed_yassin += shareAhmedY;
 
-                // إذا كان الدافع هو "الجميع"، فلا نطبق أي لون (أسود عادي)
                 const payerColor = (e.payer === 'all') ? '' : (creditorColorMap[e.payer] || '');
-                // نطبق اللون على جميع الخلايا ما عدا خلية الدافع نفسه (أو نتركها كلها بدون لون إذا كان الدافع "الجميع")
                 const colorDr = (e.payer !== 'dr_ahmed' && e.payer !== 'all') ? payerColor : '';
                 const colorYahia = (e.payer !== 'yahia' && e.payer !== 'all') ? payerColor : '';
                 const colorMostafa = (e.payer !== 'mostafa' && e.payer !== 'all') ? payerColor : '';
@@ -926,9 +1099,6 @@
             `;
         }
 
-        // ============================================================
-        // 3. جداول المديونيات (نتخطى المصروفات التي دافعها "الجميع")
-        // ============================================================
         function renderDebtsTables() {
             renderCreditorDebtTable('dr_ahmed', 'debtDrAhmedBody', 'creditor-dr_ahmed', '#ffebee');
             renderCreditorDebtTable('mostafa', 'debtMostafaBody', 'creditor-mostafa', '#f3e5f5');
@@ -939,7 +1109,6 @@
             const tbody = document.getElementById(tableBodyId);
             tbody.innerHTML = '';
             
-            // تصفية المصروفات التي دفعها هذا الدائن فقط (تجاهل "الجميع")
             const creditorExpenses = expenses.filter(e => e.payer === creditorKey);
             let grandDebtTotal = 0;
 
@@ -990,9 +1159,6 @@
             `;
         }
 
-        // ============================================================
-        // 4. جدول الإيرادات
-        // ============================================================
         function renderRevenuesTable() {
             const tbody = document.getElementById('revenueTableBody');
             tbody.innerHTML = '';
@@ -1008,38 +1174,21 @@
                 const deleteBtn = isAdmin ? `<td class="no-print"><button class="btn-danger" onclick="deleteRevenue(${r.id})">حذف</button></td>` : '';
                 const receiverName = r.receiver === 'all' ? 'الجميع (بدون مقاصة)' : partners[r.receiver]?.name || r.receiver;
 
-                let drColor = '';
-                let yahiaColor = '';
-                let mostafaColor = '';
-                let ahmedYColor = '';
-                let drSign = '';
-                let yahiaSign = '';
-                let mostafaSign = '';
-                let ahmedYSign = '';
+                let drColor = '', yahiaColor = '', mostafaColor = '', ahmedYColor = '';
+                let drSign = '', yahiaSign = '', mostafaSign = '', ahmedYSign = '';
 
                 if (r.receiver === 'dr_ahmed') {
-                    yahiaColor = 'creditor-dr_ahmed';
-                    yahiaSign = '-';
-                    mostafaColor = 'creditor-dr_ahmed';
-                    mostafaSign = '-';
-                    ahmedYColor = 'creditor-dr_ahmed';
-                    ahmedYSign = '-';
+                    yahiaColor = 'creditor-dr_ahmed'; yahiaSign = '-';
+                    mostafaColor = 'creditor-dr_ahmed'; mostafaSign = '-';
+                    ahmedYColor = 'creditor-dr_ahmed'; ahmedYSign = '-';
                 } else if (r.receiver === 'yahia') {
-                    drColor = 'creditor-yahia';
-                    drSign = '-';
-                    mostafaColor = 'creditor-yahia';
-                    mostafaSign = '-';
-                    ahmedYColor = 'creditor-yahia';
-                    ahmedYSign = '-';
+                    drColor = 'creditor-yahia'; drSign = '-';
+                    mostafaColor = 'creditor-yahia'; mostafaSign = '-';
+                    ahmedYColor = 'creditor-yahia'; ahmedYSign = '-';
                 } else if (r.receiver === 'mostafa') {
-                    drColor = 'creditor-mostafa';
-                    drSign = '-';
-                    yahiaColor = 'creditor-mostafa';
-                    yahiaSign = '-';
-                    ahmedYColor = 'creditor-mostafa';
-                    ahmedYSign = '-';
-                } else {
-                    // المستلم = 'all' → لا توجد علامات سالب ولا ألوان خاصة
+                    drColor = 'creditor-mostafa'; drSign = '-';
+                    yahiaColor = 'creditor-mostafa'; yahiaSign = '-';
+                    ahmedYColor = 'creditor-mostafa'; ahmedYSign = '-';
                 }
 
                 tbody.innerHTML += `
@@ -1060,19 +1209,13 @@
             });
         }
 
-        // ============================================================
-        // 5. صافي المركز المالي (يتم احتساب "الجميع" كمدفوعات من جميع الشركاء)
-        // ============================================================
         function renderFinalSettlement() {
             const tbody = document.getElementById('finalSettlementBody');
-            
             const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
-            
-            // حساب المدفوعات الفعلية مع توزيع مصروفات "الجميع" على الشركاء حسب نسبهم
             const paid = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
+            
             expenses.forEach(e => {
                 if (e.payer === 'all') {
-                    // توزيع مبلغ المصروف على جميع الشركاء حسب نسبهم
                     paid.dr_ahmed += (e.amount * partners.dr_ahmed.percent) / 100;
                     paid.yahia += (e.amount * partners.yahia.percent) / 100;
                     paid.mostafa += (e.amount * partners.mostafa.percent) / 100;
@@ -1083,20 +1226,15 @@
             });
 
             let html = '';
-            let grandTotalPaid = 0;
-            let grandTotalShareExp = 0;
-            let grandTotalNetExp = 0;
+            let grandTotalPaid = 0, grandTotalShareExp = 0, grandTotalNetExp = 0;
 
             Object.keys(partners).forEach(key => {
                 const shareExp = (totalExpenses * partners[key].percent) / 100;
                 const netExp = paid[key] - shareExp;
-
                 grandTotalPaid += paid[key];
                 grandTotalShareExp += shareExp;
                 grandTotalNetExp += netExp;
-
                 const netExpColor = netExp >= 0 ? creditorColorMap[key] : '';
-
                 html += `
                     <tr>
                         <td><strong>${partners[key].name}</strong></td>
@@ -1115,17 +1253,12 @@
                     <td><strong>${grandTotalNetExp.toFixed(2)}</strong></td>
                 </tr>
             `;
-
             tbody.innerHTML = html;
         }
 
-        // ============================================================
-        // 6. توزيع الديون النهائية (مع المقاصة الثنائية) - نتخطى "الجميع"
-        // ============================================================
         function renderFinalDistribution() {
             const tbody = document.getElementById('finalDistributionBody');
             
-            // 1. حساب إجمالي الديون الخام من المصروفات بين كل زوج (نتجاهل "الجميع")
             let grossDebt = {};
             Object.keys(partners).forEach(a => {
                 Object.keys(partners).forEach(b => {
@@ -1142,7 +1275,6 @@
                 });
             });
 
-            // 2. حساب تأثير الإيرادات (تُخصم من ديون المدينين للدائن المستلم)
             let revenueImpact = {};
             Object.keys(partners).forEach(a => {
                 Object.keys(partners).forEach(b => {
@@ -1159,7 +1291,6 @@
                 });
             });
 
-            // 3. دمج GrossDebt و RevenueImpact للحصول على صافي الدين الخام
             let netDebtRaw = {};
             Object.keys(grossDebt).forEach(debtor => {
                 Object.keys(grossDebt[debtor]).forEach(creditor => {
@@ -1173,7 +1304,6 @@
                 });
             });
 
-            // 4. المقاصة الثنائية: خصم الديون المتبادلة بين كل زوج
             let finalDebt = {};
             let processedPairs = new Set();
 
@@ -1200,7 +1330,6 @@
                 });
             });
 
-            // 5. بناء جدول النتائج
             let html = '';
             let grandTotalAll = 0;
             let hasDebt = false;
@@ -1244,13 +1373,9 @@
                     <td><strong>${grandTotalAll.toFixed(2)}</strong></td>
                 </tr>
             `;
-
             tbody.innerHTML = html;
         }
 
-        // ============================================================
-        // التشغيل الأولي
-        // ============================================================
         document.getElementById('liveDate').textContent = new Date().toLocaleDateString('ar-EG', {
             year: 'numeric',
             month: 'long',
