@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-body{font-family:'Cairo','Tahoma','Arial',sans-serif;background:#fff;color:#1a1a1a;padding:8px 12px;line-height:1.4;font-size:13px;max-width:1100px;margin:0 auto}
+body{font-family:'Cairo','Tahoma',sans-serif;background:#fff;color:#1a1a1a;padding:8px 12px;line-height:1.4;font-size:13px;max-width:1100px;margin:0 auto}
 h1{font-size:22px;color:#fff;background:#1b5e20;text-align:center;padding:10px;margin-bottom:8px;border-radius:8px}
 h2{font-size:16px;padding:5px 10px;border-right:5px solid #1b5e20;margin-top:16px;margin-bottom:6px;border-radius:4px 0 0 4px;color:#1b5e20}
 h3{font-size:13.5px;border-bottom:2px solid #4caf50;padding-bottom:3px;margin-top:12px;margin-bottom:6px;color:#2e7d32}
@@ -17,7 +17,7 @@ p{margin-bottom:4px}
 .sub-title{text-align:center;font-size:13.5px;margin-bottom:3px;color:#2c3e50;font-weight:600}
 .meta{text-align:center;font-size:11.5px;color:#5d6d7e;margin-bottom:12px;font-weight:500}
 .meta strong{color:#1b5e20}
-table{width:100%;border-collapse:collapse;margin:6px 0 10px 0;font-size:12px;background:#fff}
+table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:12px;background:#fff}
 th,td{border:1px solid #a5d6a7;padding:6px;text-align:center;vertical-align:middle}
 th{background-color:#2e7d32;color:#fff;font-weight:700;border-color:#1b5e20;font-size:12px}
 tr:nth-child(even){background-color:#f4fcf4}
@@ -42,8 +42,8 @@ table.distribution-table tr.total-row{background-color:#c8e6c9!important;font-we
 .section-block{break-inside:avoid;page-break-inside:avoid}
 .debt-details-cell{text-align:right;padding:5px 8px}
 .debt-details-cell .debt-line{display:block;padding:1px 0}
-.revenue-table-wrapper,.settlement-table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0 10px 0;border-radius:6px;border:1px solid #a5d6a7}
-.revenue-table-wrapper table,.settlement-table-wrapper table{width:100%;min-width:900px;border-collapse:collapse;font-size:12px;background:#fff;margin:0}
+.revenue-table-wrapper,.settlement-table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:6px 0 10px;border-radius:6px;border:1px solid #a5d6a7}
+.revenue-table-wrapper table,.settlement-table-wrapper table{width:100%;min-width:1000px;border-collapse:collapse;font-size:12px;background:#fff;margin:0}
 .revenue-table-wrapper table th,.revenue-table-wrapper table td,.settlement-table-wrapper table th,.settlement-table-wrapper table td{border:1px solid #a5d6a7;padding:6px 4px;text-align:center;vertical-align:middle;white-space:nowrap}
 .revenue-table-wrapper table th,.settlement-table-wrapper table th{background-color:#2e7d32;color:#fff;font-weight:700;border-color:#1b5e20;font-size:12px}
 .revenue-table-wrapper table tr:nth-child(even),.settlement-table-wrapper table tr:nth-child(even){background-color:#f4fcf4}
@@ -68,6 +68,7 @@ table.distribution-table tr.total-row{background-color:#c8e6c9!important;font-we
 .info-badge{display:inline-block;background:#fff3e0;color:#e65100;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;margin-right:6px}
 .transfer-badge{display:inline-block;background:#e3f2fd;color:#1565c0;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;margin-right:4px}
 .transfer-out-badge{display:inline-block;background:#fff3e0;color:#e65100;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;margin-right:4px}
+.virtual-badge{display:inline-block;background:#e8eaf6;color:#3949ab;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;margin-right:4px}
 .control-panel{background:#f1f8e9;border:2px solid #2e7d32;border-radius:8px;padding:12px;margin-bottom:15px}
 .control-panel h3{margin-top:0;margin-bottom:8px;color:#1b5e20;border-bottom:1px solid #a5d6a7;padding-bottom:4px}
 .form-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
@@ -79,41 +80,24 @@ table.distribution-table tr.total-row{background-color:#c8e6c9!important;font-we
 .btn-danger{background:#c62828;color:#fff;border:none;padding:4px 8px;border-radius:3px;cursor:pointer;font-size:10px;font-family:'Cairo';margin:1px}
 .btn-danger:hover{background:#b71c1c}
 .btn-edit{background:#1565c0!important}
-.btn-edit:hover{background:#0d47a1!important}
 .btn-login{background:#1565c0;color:#fff;border:none;padding:6px 18px;border-radius:4px;font-weight:bold;cursor:pointer;font-family:'Cairo'}
-.btn-login:hover{background:#0d47a1}
 .btn-logout{background:#e65100;color:#fff;border:none;padding:6px 14px;border-radius:4px;font-weight:bold;cursor:pointer;font-family:'Cairo'}
-.btn-logout:hover{background:#bf360c}
 .admin-status{font-weight:bold;padding:6px 12px;border-radius:6px;margin-bottom:10px;text-align:center}
 .admin-status.viewer{background:#fff3e0;color:#e65100;border:1px solid #ffcc80}
 .admin-status.editor{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
-.upload-area{border:2px dashed #a5d6a7;border-radius:6px;padding:10px;text-align:center;background:#f9fff9;cursor:pointer;transition:background .2s}
+.upload-area{border:2px dashed #a5d6a7;border-radius:6px;padding:10px;text-align:center;background:#f9fff9;cursor:pointer}
 .upload-area:hover{background:#e8f5e9;border-color:#2e7d32}
 .upload-area input[type="file"]{display:none}
 .upload-area label{cursor:pointer;font-weight:bold;color:#2e7d32;font-size:12px;display:block}
 .no-print{display:inline-block}
-@media print{
-.no-print{display:none!important}
-body{padding:0!important;margin:0!important;font-size:10px;line-height:1.35;max-width:100%!important;background:#fff!important}
-h1{font-size:16px;padding:6px;margin-bottom:6px;background:#1b5e20!important;color:#fff!important}
-h2{font-size:13px;padding:4px 6px;border-right:4px solid #1b5e20!important;margin-top:10px!important;margin-bottom:4px!important}
-h3{font-size:11.5px;border-bottom:1.5px solid #1b5e20!important;margin-top:8px!important;margin-bottom:3px!important}
-table{font-size:9.5px;margin:4px 0 8px 0!important}
-th,td{padding:4px!important;border:1px solid #81c784!important}
-th{background-color:#2e7d32!important;color:#fff!important}
-.debt-details-cell{font-size:8.5px!important;padding:3px 5px!important}
-.revenue-table-wrapper,.settlement-table-wrapper{overflow-x:visible!important;border:none!important}
-.revenue-table-wrapper table,.settlement-table-wrapper table{min-width:auto!important;width:100%!important}
-.revenue-table-wrapper table th,.revenue-table-wrapper table td,.settlement-table-wrapper table th,.settlement-table-wrapper table td{white-space:normal!important}
-.invoice-images-section,.lightbox-overlay,.sync-status{display:none!important}
-}
+@media print{.no-print{display:none!important}.control-panel{display:none!important}body{padding:0!important;font-size:10px;max-width:100%!important}h1{font-size:16px;background:#1b5e20!important}table{font-size:9.5px}th{background-color:#2e7d32!important}.revenue-table-wrapper,.settlement-table-wrapper{overflow-x:visible!important;border:none!important}.revenue-table-wrapper table,.settlement-table-wrapper table{min-width:auto!important}.invoice-images-section,.lightbox-overlay,.sync-status{display:none!important}}
 </style>
 </head>
 <body>
 
 <h1>تقرير حسابات صوبة أبو الشقاف</h1>
 <p class="sub-title"><strong>بيان الحسابات، نسب الملكية، والمصروفات الموزعة على الشركاء</strong></p>
-<p class="meta">إعداد ومتابعة: <strong>يحيى أنور</strong> | تاريخ التحديث: <strong id="liveDate">18 سبتمبر 2026</strong></p>
+<p class="meta">إعداد ومتابعة: <strong>يحيى أنور</strong> | تاريخ التحديث: <strong id="liveDate"></strong></p>
 
 <div id="syncStatus" class="sync-status no-print" style="display:none;"></div>
 <div id="adminStatusContainer" class="no-print"></div>
@@ -144,7 +128,7 @@ th{background-color:#2e7d32!important;color:#fff!important}
 <div class="form-group"><label>مُرحّل من (اختياري):</label><select id="invItemFrom"></select></div>
 <button class="btn-add" onclick="addInvoiceItem()">إضافة بند</button>
 </div>
-<div class="note" style="margin-top:4px;font-size:11px;"><strong>معلومة:</strong> البند "الوارد" المُرحّل من فاتورة أخرى سيُخصم تلقائياً من تلك الفاتورة.</div>
+<div class="note" style="margin-top:4px;font-size:11px;"><strong>معلومة:</strong> "مُرحّل من فاتورة" يُخصم من تلك الفاتورة. "مُرحّل من شريك" يُسجَّل تلقائياً كمصروف على ذلك الشريك ويُضاف للديون المستحقة له.</div>
 
 <div class="form-row" style="margin-top:8px;">
 <button class="btn-add" onclick="addNewInvoice()" style="background:#1565c0;margin-top:0;">➕ فاتورة جديدة</button>
@@ -154,7 +138,7 @@ th{background-color:#2e7d32!important;color:#fff!important}
 <h3 style="margin-top:12px;">🖼️ صور فواتير الخيار</h3>
 <div class="form-row">
 <div class="form-group"><label>اختر الفاتورة:</label><select id="imgInvSelect"></select></div>
-<div class="form-group" style="flex:2;min-width:220px;"><label>رفع صور (يمكن اختيار أكثر من صورة):</label><div class="upload-area" onclick="document.getElementById('invImagesInput').click()"><input type="file" id="invImagesInput" accept="image/*" multiple onchange="handleInvoiceImagesUpload()"><label>📷 اضغط لاختيار الصور</label></div></div>
+<div class="form-group" style="flex:2;min-width:220px;"><label>رفع صور:</label><div class="upload-area" onclick="document.getElementById('invImagesInput').click()"><input type="file" id="invImagesInput" accept="image/*" multiple onchange="handleInvoiceImagesUpload()"><label>📷 اضغط لاختيار الصور</label></div></div>
 </div>
 
 <button class="btn-danger" onclick="resetToDefaultData()" style="margin-top:10px;">↩️ استعادة البيانات الأساسية</button>
@@ -187,14 +171,16 @@ th{background-color:#2e7d32!important;color:#fff!important}
 
 <div class="section-block">
 <h2>ثالثاً: الإيرادات (ملخص الفواتير)</h2>
-<p style="font-size:12px;color:#2c3e50;margin-bottom:6px;"><em>ملخص كل فاتورة: الوارد، المنصرف، المُرحّل منها، والمتبقي الفعلي؛ وتوزيعه على الشركاء.</em></p>
+<p style="font-size:12px;color:#2c3e50;margin-bottom:6px;"><em>ملخص كل فاتورة: إجمالي الفاتورة (الوارد الأصلي)، المُرحّل إليها من فواتير أخرى، المُرحّل من شريك، المنصرف، المُرحّل منها، والمتبقي الفعلي.</em></p>
 <div class="revenue-table-wrapper">
 <table>
-<thead><tr><th>رقم الفاتورة</th><th>تاريخ الفاتورة</th><th>إجمالي الوارد</th><th>المنصرف</th><th>مُرحّل منها</th><th>المتبقي الفعلي</th><th>المتسلم</th><th>د. أحمد (45.25%)</th><th>يحيى (23.08%)</th><th>مصطفى (21.42%)</th><th>أحمد ياسين (10.25%)</th></tr></thead>
+<thead><tr>
+<th>رقم الفاتورة</th><th>تاريخ الفاتورة</th><th>إجمالي الفاتورة</th><th>من فاتورة</th><th>من شريك</th><th>المنصرف</th><th>مُرحّل منها</th><th>المتبقي الفعلي</th><th>المتسلم</th><th>د. أحمد (45.25%)</th><th>يحيى (23.08%)</th><th>مصطفى (21.42%)</th><th>أحمد ياسين (10.25%)</th>
+</tr></thead>
 <tbody id="revenueTableBody"></tbody>
 </table>
 </div>
-<div class="note"><strong>ملحوظة:</strong> "المتبقي الفعلي" = الوارد − المنصرف − المُرحّل منها. الحصص تُحسب من المتبقي الفعلي.</div>
+<div class="note"><strong>المعادلة:</strong> المتبقي الفعلي = إجمالي الفاتورة + من فاتورة + من شريك − المنصرف − مُرحّل منها. الحصص تُحسب من المتبقي الفعلي.</div>
 </div>
 
 <div class="section-block">
@@ -275,46 +261,46 @@ ahmed_yassin:{name:'أحمد ياسين',percent:10.25}
 const creditorColorMap={dr_ahmed:'creditor-dr_ahmed',yahia:'creditor-yahia',mostafa:'creditor-mostafa',ahmed_yassin:'creditor-ahmed_yassin'};
 
 const initialExpenses=[
-{id:1,dateTitle:'16 يوليو - عربون شتلة الخيار',details:'دفعة عربون مقدمة للشتلة (دفعها د. أحمد)',amount:20000.00,payer:'dr_ahmed'},
-{id:2,dateTitle:'20 يوليو - عمال تجهيز الصوبة',details:'أجور العمال والتجهيز (دفعها مصطفى ياسين)',amount:1580.00,payer:'mostafa'},
-{id:3,dateTitle:'21 يوليو - استكمال تجهيزات',details:'3 عمال وتروسيكل وفطار (دفعها مصطفى ياسين)',amount:1100.00,payer:'mostafa'},
-{id:4,dateTitle:'27 يوليو - حراثة الجرار',details:'حراثة أرض الصوبة بالجرار (دفعها د. أحمد)',amount:1700.00,payer:'dr_ahmed'},
-{id:5,dateTitle:'29 يوليو - شراء سبلة',details:'سبلة سماد عضوي لتسميد الأرض (دفعها مصطفى ياسين)',amount:16350.00,payer:'mostafa'},
-{id:6,dateTitle:'30 يوليو - عمال فرد السبلة',details:'أجور عمال فرد وتوزيع السبلة (دفعها د. أحمد)',amount:1570.00,payer:'dr_ahmed'},
-{id:7,dateTitle:'31 يوليو - حساب العزاقة',details:'عزاقة لتجهيز التربة (دفعها د. أحمد)',amount:1650.00,payer:'dr_ahmed'},
-{id:8,dateTitle:'31 يوليو - حساب العربة بحصان',details:'تسطير الأرض بالعربة (دفعها د. أحمد)',amount:1200.00,payer:'dr_ahmed'},
-{id:9,dateTitle:'31 يوليو - شراء أسمدة',details:'9 فوسفات + 5 كبريت (دفعها د. أحمد)',amount:4380.00,payer:'dr_ahmed'},
-{id:10,dateTitle:'1 أغسطس - إنشاء مصاطب',details:'أجر عمال مصاطب (دفعها د. أحمد)',amount:3100.00,payer:'dr_ahmed'},
-{id:11,dateTitle:'2 أغسطس - فرد الشبكة وتنظيف المصرف',details:'أجور عمال (دفعها د. أحمد)',amount:1250.00,payer:'dr_ahmed'},
-{id:12,dateTitle:'2 أغسطس - أدوات شبكة الري',details:'أدوات (دفعها د. أحمد)',amount:100.00,payer:'dr_ahmed'},
-{id:13,dateTitle:'3 أغسطس - أعمال تركيب الري',details:'عمال وتروسيكل (دفعها د. أحمد)',amount:1360.00,payer:'dr_ahmed'},
-{id:14,dateTitle:'3 أغسطس - شراء سولار وزيت',details:'سولار وزيت (دفعها د. أحمد)',amount:680.00,payer:'dr_ahmed'},
-{id:15,dateTitle:'3 أغسطس - بقية عمال التجهيز',details:'المتبقي (دفعها د. أحمد)',amount:700.00,payer:'dr_ahmed'},
-{id:16,dateTitle:'5 أغسطس - مسامير وخراطيم',details:'خراطيم ومسامير (دفعها د. أحمد)',amount:95.00,payer:'dr_ahmed'},
-{id:17,dateTitle:'5 أغسطس - حساب الميكانيكي',details:'إصلاح ماكينة الري (دفعها د. أحمد)',amount:1650.00,payer:'dr_ahmed'},
-{id:18,dateTitle:'5 أغسطس - سولار وزيت',details:'سولار وزيت (دفعها د. أحمد)',amount:500.00,payer:'dr_ahmed'},
-{id:19,dateTitle:'5 أغسطس - غداء سلامة',details:'غداء (دفعها د. أحمد)',amount:20.00,payer:'dr_ahmed'},
-{id:20,dateTitle:'6 أغسطس - فطار سلامة',details:'فطار (دفعها د. أحمد)',amount:30.00,payer:'dr_ahmed'},
-{id:21,dateTitle:'6 أغسطس - مبيد يونيفورم',details:'مبيد (دفعها د. أحمد)',amount:2300.00,payer:'dr_ahmed'},
-{id:22,dateTitle:'6 أغسطس - عربات نقل الشتلة',details:'نقل (دفعها د. أحمد)',amount:2400.00,payer:'dr_ahmed'},
-{id:23,dateTitle:'6 أغسطس - أجر عمال زراعة الشتلة',details:'زراعة (دفعها د. أحمد)',amount:2600.00,payer:'dr_ahmed'},
-{id:24,dateTitle:'8 أغسطس - مستحقات سلامة',details:'مستحقات (دفعها يحيى)',amount:3000.00,payer:'yahia'},
-{id:25,dateTitle:'18 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:300.00,payer:'dr_ahmed'},
-{id:26,dateTitle:'23 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:300.00,payer:'dr_ahmed'},
-{id:27,dateTitle:'26 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:550.00,payer:'dr_ahmed'},
-{id:28,dateTitle:'26 أغسطس - شراء خيط',details:'خيط (دفعها يحيى)',amount:1100.00,payer:'yahia'},
-{id:29,dateTitle:'26 أغسطس - أجر عمال تربيط',details:'تربيط (دفعها يحيى)',amount:3900.00,payer:'yahia'},
-{id:30,dateTitle:'26 أغسطس - سلفة محمود',details:'سلفة (دفعها د. أحمد)',amount:1000.00,payer:'dr_ahmed'},
-{id:31,dateTitle:'27 أغسطس - طلبيات الميكانيكي',details:'إصلاح (دفعها د. أحمد)',amount:500.00,payer:'dr_ahmed'},
-{id:32,dateTitle:'28 أغسطس - مستحقات عمل',details:'مستحقات (دفعها د. أحمد)',amount:4100.00,payer:'dr_ahmed'},
-{id:33,dateTitle:'29 أغسطس - جاز',details:'جاز (دفعها د. أحمد)',amount:100.00,payer:'dr_ahmed'},
-{id:34,dateTitle:'30 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:300.00,payer:'dr_ahmed'},
-{id:35,dateTitle:'30 أغسطس - أجر عمال ربط النبات',details:'ربط (دفعها د. أحمد)',amount:2100.00,payer:'dr_ahmed'},
-{id:36,dateTitle:'30 أغسطس - لوازم غرفة العمال',details:'لوازم (دفعها د. أحمد)',amount:700.00,payer:'dr_ahmed'},
-{id:37,dateTitle:'31 أغسطس - حساب الميكانيكي',details:'حساب صابر (دفعها د. أحمد)',amount:300.00,payer:'dr_ahmed'},
-{id:38,dateTitle:'1 سبتمبر - كراتين',details:'كراتين (دفعها د. أحمد)',amount:1100.00,payer:'dr_ahmed'},
-{id:39,dateTitle:'3 سبتمبر - حساب التروسيكل',details:'جلب أسمدة (دفعها د. أحمد)',amount:100.00,payer:'dr_ahmed'},
-{id:40,dateTitle:'3 سبتمبر - فطار',details:'فطار (دفعها د. أحمد)',amount:300.00,payer:'dr_ahmed'}
+{id:1,dateTitle:'16 يوليو - عربون شتلة الخيار',details:'دفعة عربون مقدمة للشتلة (دفعها د. أحمد)',amount:20000,payer:'dr_ahmed'},
+{id:2,dateTitle:'20 يوليو - عمال تجهيز الصوبة',details:'أجور العمال والتجهيز (دفعها مصطفى ياسين)',amount:1580,payer:'mostafa'},
+{id:3,dateTitle:'21 يوليو - استكمال تجهيزات',details:'3 عمال وتروسيكل وفطار (دفعها مصطفى ياسين)',amount:1100,payer:'mostafa'},
+{id:4,dateTitle:'27 يوليو - حراثة الجرار',details:'حراثة أرض الصوبة بالجرار (دفعها د. أحمد)',amount:1700,payer:'dr_ahmed'},
+{id:5,dateTitle:'29 يوليو - شراء سبلة',details:'سبلة سماد عضوي لتسميد الأرض (دفعها مصطفى ياسين)',amount:16350,payer:'mostafa'},
+{id:6,dateTitle:'30 يوليو - عمال فرد السبلة',details:'أجور عمال فرد وتوزيع السبلة (دفعها د. أحمد)',amount:1570,payer:'dr_ahmed'},
+{id:7,dateTitle:'31 يوليو - حساب العزاقة',details:'عزاقة لتجهيز التربة (دفعها د. أحمد)',amount:1650,payer:'dr_ahmed'},
+{id:8,dateTitle:'31 يوليو - حساب العربة بحصان',details:'تسطير الأرض بالعربة (دفعها د. أحمد)',amount:1200,payer:'dr_ahmed'},
+{id:9,dateTitle:'31 يوليو - شراء أسمدة',details:'9 فوسفات + 5 كبريت (دفعها د. أحمد)',amount:4380,payer:'dr_ahmed'},
+{id:10,dateTitle:'1 أغسطس - إنشاء مصاطب',details:'أجر عمال مصاطب (دفعها د. أحمد)',amount:3100,payer:'dr_ahmed'},
+{id:11,dateTitle:'2 أغسطس - فرد الشبكة وتنظيف المصرف',details:'أجور عمال (دفعها د. أحمد)',amount:1250,payer:'dr_ahmed'},
+{id:12,dateTitle:'2 أغسطس - أدوات شبكة الري',details:'أدوات (دفعها د. أحمد)',amount:100,payer:'dr_ahmed'},
+{id:13,dateTitle:'3 أغسطس - أعمال تركيب الري',details:'عمال وتروسيكل (دفعها د. أحمد)',amount:1360,payer:'dr_ahmed'},
+{id:14,dateTitle:'3 أغسطس - شراء سولار وزيت',details:'سولار وزيت (دفعها د. أحمد)',amount:680,payer:'dr_ahmed'},
+{id:15,dateTitle:'3 أغسطس - بقية عمال التجهيز',details:'المتبقي (دفعها د. أحمد)',amount:700,payer:'dr_ahmed'},
+{id:16,dateTitle:'5 أغسطس - مسامير وخراطيم',details:'خراطيم ومسامير (دفعها د. أحمد)',amount:95,payer:'dr_ahmed'},
+{id:17,dateTitle:'5 أغسطس - حساب الميكانيكي',details:'إصلاح ماكينة الري (دفعها د. أحمد)',amount:1650,payer:'dr_ahmed'},
+{id:18,dateTitle:'5 أغسطس - سولار وزيت',details:'سولار وزيت (دفعها د. أحمد)',amount:500,payer:'dr_ahmed'},
+{id:19,dateTitle:'5 أغسطس - غداء سلامة',details:'غداء (دفعها د. أحمد)',amount:20,payer:'dr_ahmed'},
+{id:20,dateTitle:'6 أغسطس - فطار سلامة',details:'فطار (دفعها د. أحمد)',amount:30,payer:'dr_ahmed'},
+{id:21,dateTitle:'6 أغسطس - مبيد يونيفورم',details:'مبيد (دفعها د. أحمد)',amount:2300,payer:'dr_ahmed'},
+{id:22,dateTitle:'6 أغسطس - عربات نقل الشتلة',details:'نقل (دفعها د. أحمد)',amount:2400,payer:'dr_ahmed'},
+{id:23,dateTitle:'6 أغسطس - أجر عمال زراعة الشتلة',details:'زراعة (دفعها د. أحمد)',amount:2600,payer:'dr_ahmed'},
+{id:24,dateTitle:'8 أغسطس - مستحقات سلامة',details:'مستحقات (دفعها يحيى)',amount:3000,payer:'yahia'},
+{id:25,dateTitle:'18 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'},
+{id:26,dateTitle:'23 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'},
+{id:27,dateTitle:'26 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:550,payer:'dr_ahmed'},
+{id:28,dateTitle:'26 أغسطس - شراء خيط',details:'خيط (دفعها يحيى)',amount:1100,payer:'yahia'},
+{id:29,dateTitle:'26 أغسطس - أجر عمال تربيط',details:'تربيط (دفعها يحيى)',amount:3900,payer:'yahia'},
+{id:30,dateTitle:'26 أغسطس - سلفة محمود',details:'سلفة (دفعها د. أحمد)',amount:1000,payer:'dr_ahmed'},
+{id:31,dateTitle:'27 أغسطس - طلبيات الميكانيكي',details:'إصلاح (دفعها د. أحمد)',amount:500,payer:'dr_ahmed'},
+{id:32,dateTitle:'28 أغسطس - مستحقات عمل',details:'مستحقات (دفعها د. أحمد)',amount:4100,payer:'dr_ahmed'},
+{id:33,dateTitle:'29 أغسطس - جاز',details:'جاز (دفعها د. أحمد)',amount:100,payer:'dr_ahmed'},
+{id:34,dateTitle:'30 أغسطس - فطار العمال',details:'فطار (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'},
+{id:35,dateTitle:'30 أغسطس - أجر عمال ربط النبات',details:'ربط (دفعها د. أحمد)',amount:2100,payer:'dr_ahmed'},
+{id:36,dateTitle:'30 أغسطس - لوازم غرفة العمال',details:'لوازم (دفعها د. أحمد)',amount:700,payer:'dr_ahmed'},
+{id:37,dateTitle:'31 أغسطس - حساب الميكانيكي',details:'حساب صابر (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'},
+{id:38,dateTitle:'1 سبتمبر - كراتين',details:'كراتين (دفعها د. أحمد)',amount:1100,payer:'dr_ahmed'},
+{id:39,dateTitle:'3 سبتمبر - حساب التروسيكل',details:'جلب أسمدة (دفعها د. أحمد)',amount:100,payer:'dr_ahmed'},
+{id:40,dateTitle:'3 سبتمبر - فطار',details:'فطار (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'}
 ];
 
 const initialInvoices=[
@@ -392,7 +378,7 @@ const el=document.getElementById('syncStatus');
 el.className='sync-status '+type;
 el.textContent=msg;
 el.style.display='block';
-if(type==='ok')setTimeout(()=>{el.style.display='none';},2000);
+if(type==='ok')setTimeout(()=>{el.style.display='none';},2500);
 }
 
 function normalizeInvoices(){
@@ -416,68 +402,61 @@ if(it.transferredFrom)return;
 if(!it.description||!it.description.includes('مُرحّل'))return;
 for(const srcInv of invoices){
 if(srcInv.id===inv.id)continue;
-if(it.description.includes(srcInv.name)){
-it.transferredFrom={type:'invoice',id:srcInv.id};
-changed=true;
-return;
-}
+if(it.description.includes(srcInv.name)){it.transferredFrom={type:'invoice',id:srcInv.id};changed=true;return;}
 }
 for(const pKey of Object.keys(partners)){
-if(it.description.includes(partners[pKey].name)){
-it.transferredFrom={type:'partner',id:pKey};
-changed=true;
-return;
-}
+if(it.description.includes(partners[pKey].name)){it.transferredFrom={type:'partner',id:pKey};changed=true;return;}
 }
 });
 });
 if(changed)setTimeout(()=>syncToFirestore(),100);
 }
 
-function transferToValue(tf){
-if(!tf)return'';
-if(tf.type==='invoice')return'inv:'+tf.id;
-if(tf.type==='partner')return'prt:'+tf.id;
-return'';
+function transferToValue(tf){if(!tf)return'';if(tf.type==='invoice')return'inv:'+tf.id;if(tf.type==='partner')return'prt:'+tf.id;return'';}
+function parseTransferValue(val){if(!val)return null;const p=val.split(':');if(p.length!==2)return null;if(p[0]==='inv')return{type:'invoice',id:parseInt(p[1])};if(p[0]==='prt')return{type:'partner',id:p[1]};return null;}
+function isTransferFromInvoice(tf,invoiceId){if(!tf||tf.type!=='invoice')return false;return tf.id===invoiceId;}
+function getTransferLabel(tf){if(!tf)return'';if(tf.type==='invoice'){const s=invoices.find(i=>i.id===tf.id);return s?s.name:('#'+tf.id);}if(tf.type==='partner')return partners[tf.id]?partners[tf.id].name:tf.id;return'';}
+
+// ✅ المصروفات الافتراضية من "مُرحّل من شريك"
+function getPartnerTransferExpenses(){
+const result=[];
+invoices.forEach(inv=>{
+inv.items.forEach(it=>{
+if(it.transferredFrom&&it.transferredFrom.type==='partner'&&(it.income||0)>0){
+const pk=it.transferredFrom.id;
+if(partners[pk]){
+result.push({
+id:'vx_'+inv.id+'_'+it.id,
+dateTitle:'مُرحّل من '+partners[pk].name+' إلى '+inv.name,
+details:it.description||('مبلغ مُرحّل من '+partners[pk].name),
+amount:it.income,
+payer:pk,
+isVirtual:true
+});
+}
+}
+});
+});
+return result;
 }
 
-function parseTransferValue(val){
-if(!val)return null;
-const p=val.split(':');
-if(p.length!==2)return null;
-if(p[0]==='inv')return{type:'invoice',id:parseInt(p[1])};
-if(p[0]==='prt')return{type:'partner',id:p[1]};
-return null;
-}
-
-function isTransferFromInvoice(tf,invoiceId){
-if(!tf||tf.type!=='invoice')return false;
-return tf.id===invoiceId;
-}
-
-function getTransferLabel(tf){
-if(!tf)return'';
-if(tf.type==='invoice'){
-const src=invoices.find(i=>i.id===tf.id);
-return src?src.name:('#'+tf.id);
-}
-if(tf.type==='partner')return partners[tf.id]?partners[tf.id].name:tf.id;
-return'';
-}
+// ✅ قائمة المصروفات الكاملة (الحقيقية + الافتراضية)
+function getAllExpenses(){return expenses.concat(getPartnerTransferExpenses());}
 
 function calcInvoiceTotals(inv,allInvoices){
-const income=inv.items.reduce((s,it)=>s+(it.income||0),0);
+const originalIncome=inv.items.reduce((s,it)=>s+((!it.transferredFrom&&(it.income||0))?it.income:0),0);
+const transferInFromInvoices=inv.items.reduce((s,it)=>s+((it.transferredFrom&&it.transferredFrom.type==='invoice'&&(it.income||0))?it.income:0),0);
+const transferInFromPartners=inv.items.reduce((s,it)=>s+((it.transferredFrom&&it.transferredFrom.type==='partner'&&(it.income||0))?it.income:0),0);
+const totalIncome=originalIncome+transferInFromInvoices+transferInFromPartners;
 const expense=inv.items.reduce((s,it)=>s+(it.expense||0),0);
 let transferredOut=0;
-(allInvoices||invoices).forEach(otherInv=>{
-if(otherInv.id===inv.id)return;
-otherInv.items.forEach(it=>{
-if(isTransferFromInvoice(it.transferredFrom,inv.id)&&(it.income||0)>0){
-transferredOut+=it.income;
-}
+(allInvoices||invoices).forEach(o=>{
+if(o.id===inv.id)return;
+o.items.forEach(it=>{
+if(isTransferFromInvoice(it.transferredFrom,inv.id)&&(it.income||0)>0)transferredOut+=it.income;
 });
 });
-return{income,expense,transferredOut,balance:income-expense-transferredOut};
+return{originalIncome,transferInFromInvoices,transferInFromPartners,totalIncome,expense,transferredOut,balance:totalIncome-expense-transferredOut};
 }
 
 async function loadData(){
@@ -491,16 +470,16 @@ invoices=data.invoices||initialInvoices;
 normalizeInvoices();
 localStorage.setItem('soba_expenses_v2',JSON.stringify(expenses));
 localStorage.setItem('soba_invoices_v1',JSON.stringify(invoices));
-setSyncStatus('ok','✅ تم تحميل البيانات من السحابة');
+setSyncStatus('ok','✅ تم تحميل البيانات');
 }else{
 expenses=JSON.parse(JSON.stringify(initialExpenses));
 invoices=JSON.parse(JSON.stringify(initialInvoices));
 normalizeInvoices();
 await syncToFirestore();
-setSyncStatus('ok','✅ تم إنشاء البيانات الأساسية');
+setSyncStatus('ok','✅ تم إنشاء البيانات');
 }
 }catch(err){
-console.error('Load failed:',err);
+console.error(err);
 expenses=JSON.parse(localStorage.getItem('soba_expenses_v2'))||JSON.parse(JSON.stringify(initialExpenses));
 invoices=JSON.parse(localStorage.getItem('soba_invoices_v1'))||JSON.parse(JSON.stringify(initialInvoices));
 normalizeInvoices();
@@ -513,16 +492,9 @@ renderAll();
 async function syncToFirestore(){
 const payload={expenses,invoices,updatedAt:new Date().toISOString()};
 const size=new Blob([JSON.stringify(payload)]).size;
-if(size>1000000){
-setSyncStatus('error','⚠️ حجم البيانات تجاوز 1 ميجا — احذف بعض الصور');
-return;
-}
-try{
-await setDoc(doc(db,'soba_data','main'),payload);
-setSyncStatus('ok','✅ تم الحفظ في السحابة');
-}catch(err){
-setSyncStatus('error','⚠️ فشل الحفظ: '+err.message);
-}
+if(size>1000000){setSyncStatus('error','⚠️ حجم البيانات تجاوز 1 ميجا');return;}
+try{await setDoc(doc(db,'soba_data','main'),payload);setSyncStatus('ok','✅ تم الحفظ');}
+catch(err){setSyncStatus('error','⚠️ فشل الحفظ: '+err.message);}
 }
 
 function saveData(){
@@ -533,47 +505,26 @@ syncToFirestore();
 }
 
 window.login=function(){
-const password=prompt('🔐 أدخل كلمة المرور:');
-if(password===ADMIN_PASSWORD){
-isAdmin=true;
-localStorage.setItem('soba_admin_session','true');
-renderAll();
-}else if(password!==null){
-alert('❌ كلمة المرور غير صحيحة.');
-}
+const p=prompt('🔐 أدخل كلمة المرور:');
+if(p===ADMIN_PASSWORD){isAdmin=true;localStorage.setItem('soba_admin_session','true');renderAll();}
+else if(p!==null)alert('❌ كلمة المرور غير صحيحة.');
 };
-
-window.logout=function(){
-if(confirm('هل تريد تسجيل الخروج؟')){
-isAdmin=false;
-localStorage.removeItem('soba_admin_session');
-renderAll();
-}
-};
-
+window.logout=function(){if(confirm('تسجيل الخروج؟')){isAdmin=false;localStorage.removeItem('soba_admin_session');renderAll();}};
 window.resetToDefaultData=function(){
 if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
-if(confirm("استعادة البيانات الأساسية؟ ستفقد أي إضافات.")){
+if(confirm("استعادة البيانات الأساسية؟")){
 expenses=JSON.parse(JSON.stringify(initialExpenses));
 invoices=JSON.parse(JSON.stringify(initialInvoices));
-normalizeInvoices();
-saveData();
+normalizeInvoices();saveData();
 }
 };
 
 function updateAdminUI(){
 const panel=document.getElementById('controlPanel');
-const statusContainer=document.getElementById('adminStatusContainer');
-const actionHeaders=document.querySelectorAll('#expenseActionHeader, #revenueActionHeader');
-if(isAdmin){
-panel.style.display='block';
-statusContainer.innerHTML=`<div class="admin-status editor">✅ أنت الآن في وضع التحرير الكامل (أدمن).</div>`;
-actionHeaders.forEach(h=>h.style.display='');
-}else{
-panel.style.display='none';
-statusContainer.innerHTML=`<div class="admin-status viewer">🔒 أنت في وضع المشاهدة فقط. <button class="btn-login" onclick="login()">🔑 تسجيل الدخول كأدمن</button></div>`;
-actionHeaders.forEach(h=>h.style.display='none');
-}
+const sc=document.getElementById('adminStatusContainer');
+const ah=document.querySelectorAll('#expenseActionHeader, #revenueActionHeader');
+if(isAdmin){panel.style.display='block';sc.innerHTML='<div class="admin-status editor">✅ أنت الآن في وضع التحرير الكامل (أدمن).</div>';ah.forEach(h=>h.style.display='');}
+else{panel.style.display='none';sc.innerHTML='<div class="admin-status viewer">🔒 وضع المشاهدة فقط. <button class="btn-login" onclick="login()">🔑 تسجيل الدخول كأدمن</button></div>';ah.forEach(h=>h.style.display='none');}
 }
 
 window.addExpense=function(){
@@ -582,21 +533,17 @@ const dateTitle=document.getElementById('expDateTitle').value.trim();
 const details=document.getElementById('expDetails').value.trim();
 const amount=parseFloat(document.getElementById('expAmount').value);
 const payer=document.getElementById('expPayer').value;
-if(!dateTitle||!details||isNaN(amount)||amount<=0){alert('يرجى إدخال جميع بيانات المصروف.');return;}
+if(!dateTitle||!details||isNaN(amount)||amount<=0){alert('يرجى إدخال البيانات.');return;}
 expenses.push({id:Date.now(),dateTitle,details,amount,payer});
 document.getElementById('expDateTitle').value='';
 document.getElementById('expDetails').value='';
 document.getElementById('expAmount').value='';
 saveData();
-setSyncStatus('ok','✅ تم إضافة المصروف');
 };
 
 window.deleteExpense=function(id){
 if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
-if(confirm('حذف هذا المصروف نهائياً؟')){
-expenses=expenses.filter(e=>e.id!==id);
-saveData();
-}
+if(confirm('حذف هذا المصروف؟')){expenses=expenses.filter(e=>e.id!==id);saveData();}
 };
 
 window.onInvoiceSelectChange=function(){
@@ -612,13 +559,11 @@ function populateTransferSelect(excludeId){
 const sel=document.getElementById('invItemFrom');
 if(!sel)return;
 const prev=sel.value;
-let invoiceOpts='';
-invoices.forEach(inv=>{
-if(inv.id!==excludeId)invoiceOpts+=`<option value="inv:${inv.id}">${inv.name}</option>`;
-});
-let partnerOpts='';
-Object.keys(partners).forEach(p=>{partnerOpts+=`<option value="prt:${p}">${partners[p].name}</option>`;});
-sel.innerHTML=`<option value="">— لا يوجد ترحيل —</option>${invoiceOpts?`<optgroup label="من فواتير">${invoiceOpts}</optgroup>`:''}<optgroup label="من شركاء">${partnerOpts}</optgroup>`;
+let io='';
+invoices.forEach(inv=>{if(inv.id!==excludeId)io+=`<option value="inv:${inv.id}">${inv.name}</option>`;});
+let po='';
+Object.keys(partners).forEach(p=>{po+=`<option value="prt:${p}">${partners[p].name}</option>`;});
+sel.innerHTML=`<option value="">— لا يوجد ترحيل —</option>${io?`<optgroup label="من فواتير">${io}</optgroup>`:''}<optgroup label="من شركاء">${po}</optgroup>`;
 if(prev)sel.value=prev;
 }
 
@@ -626,11 +571,10 @@ window.saveInvoiceMeta=function(){
 if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
 const invId=parseInt(document.getElementById('invSelect').value);
 const inv=invoices.find(i=>i.id===invId);
-if(!inv){alert('الفاتورة غير موجودة.');return;}
+if(!inv){alert('غير موجودة.');return;}
 inv.date=document.getElementById('invDate').value.trim();
 inv.receiver=document.getElementById('invReceiver').value;
 saveData();
-setSyncStatus('ok','✅ تم حفظ بيانات الفاتورة');
 };
 
 window.addInvoiceItem=function(){
@@ -641,16 +585,15 @@ const income=parseFloat(document.getElementById('invItemIncome').value)||0;
 const expense=parseFloat(document.getElementById('invItemExpense').value)||0;
 const transferredFrom=parseTransferValue(document.getElementById('invItemFrom').value);
 if(!description||(income===0&&expense===0)){alert('يرجى إدخال البيان والقيمة.');return;}
-if(transferredFrom&&income<=0){alert('الترحيل على بند "وارد" فقط.');return;}
+if(transferredFrom&&income<=0){alert('الترحيل على بند وارد فقط.');return;}
 const inv=invoices.find(i=>i.id===invId);
-if(!inv){alert('الفاتورة غير موجودة.');return;}
+if(!inv){alert('غير موجودة.');return;}
 inv.items.push({id:Date.now(),description,income,expense,transferredFrom});
 document.getElementById('invItemDesc').value='';
 document.getElementById('invItemIncome').value='';
 document.getElementById('invItemExpense').value='';
 document.getElementById('invItemFrom').value='';
 saveData();
-setSyncStatus('ok','✅ تم إضافة البند');
 };
 
 window.deleteInvoiceItem=function(invId,itemId){
@@ -667,29 +610,26 @@ if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
 const inv=invoices.find(i=>i.id===invId);
 const item=inv.items.find(it=>it.id===itemId);
 if(!item)return;
-const newDesc=prompt('البيان:',item.description);
-if(newDesc===null)return;
-const newIncome=prompt('الوارد (ج.م):',item.income);
-if(newIncome===null)return;
-const newExpense=prompt('المنصرف (ج.م):',item.expense);
-if(newExpense===null)return;
+const nD=prompt('البيان:',item.description);if(nD===null)return;
+const nI=prompt('الوارد:',item.income);if(nI===null)return;
+const nE=prompt('المنصرف:',item.expense);if(nE===null)return;
 let opts='— لا يوجد ترحيل —\n';
 invoices.forEach(i=>{if(i.id!==invId)opts+=`inv:${i.id} = ${i.name}\n`;});
 Object.keys(partners).forEach(p=>{opts+=`prt:${p} = ${partners[p].name}\n`;});
-const fromPrompt=prompt('مصدر الترحيل (اكتب الكود أو اتركه فارغاً):\n'+opts,transferToValue(item.transferredFrom));
-if(fromPrompt===null)return;
-item.description=newDesc.trim()||item.description;
-item.income=parseFloat(newIncome)||0;
-item.expense=parseFloat(newExpense)||0;
-item.transferredFrom=parseTransferValue(fromPrompt.trim());
+const fP=prompt('مصدر الترحيل:\n'+opts,transferToValue(item.transferredFrom));
+if(fP===null)return;
+item.description=nD.trim()||item.description;
+item.income=parseFloat(nI)||0;
+item.expense=parseFloat(nE)||0;
+item.transferredFrom=parseTransferValue(fP.trim());
 saveData();
 };
 
 window.addNewInvoice=function(){
 if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
-const name=prompt('اسم الفاتورة الجديدة:','الفاتورة '+(invoices.length+1));
+const name=prompt('اسم الفاتورة:','الفاتورة '+(invoices.length+1));
 if(!name)return;
-const date=prompt('تاريخ الفاتورة (اختياري):','')||'';
+const date=prompt('تاريخ الفاتورة:','')||'';
 invoices.push({id:Date.now(),name:name.trim(),date:date.trim(),receiver:'all',items:[],images:[]});
 saveData();
 };
@@ -699,14 +639,12 @@ if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
 const invId=parseInt(document.getElementById('invSelect').value);
 const inv=invoices.find(i=>i.id===invId);
 if(!inv)return;
-let usedAsSource=false;
-invoices.forEach(other=>{
-if(other.id!==invId)other.items.forEach(it=>{if(isTransferFromInvoice(it.transferredFrom,invId))usedAsSource=true;});
-});
-let msg='حذف "'+inv.name+'" بالكامل؟';
-if(usedAsSource)msg+='\n\n⚠️ توجد بنود مُرَحّلة من هذه الفاتورة، سيتم إلغاء الترحيل.';
+let used=false;
+invoices.forEach(o=>{if(o.id!==invId)o.items.forEach(it=>{if(isTransferFromInvoice(it.transferredFrom,invId))used=true;});});
+let msg='حذف "'+inv.name+'"؟';
+if(used)msg+='\n\n⚠️ توجد بنود مُرَحّلة، سيتم إلغاء الترحيل.';
 if(confirm(msg)){
-invoices.forEach(other=>other.items.forEach(it=>{if(isTransferFromInvoice(it.transferredFrom,invId))it.transferredFrom=null;}));
+invoices.forEach(o=>o.items.forEach(it=>{if(isTransferFromInvoice(it.transferredFrom,invId))it.transferredFrom=null;}));
 invoices=invoices.filter(i=>i.id!==invId);
 saveData();
 }
@@ -714,24 +652,22 @@ saveData();
 
 function compressImage(file,maxWidth=900,quality=0.65){
 return new Promise((resolve,reject)=>{
-const reader=new FileReader();
-reader.onload=(e)=>{
+const r=new FileReader();
+r.onload=(e)=>{
 const img=new Image();
 img.onload=()=>{
 let w=img.width,h=img.height;
 if(w>maxWidth){h=Math.round(h*maxWidth/w);w=maxWidth;}
-const canvas=document.createElement('canvas');
-canvas.width=w;canvas.height=h;
-const ctx=canvas.getContext('2d');
-ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+const c=document.createElement('canvas');c.width=w;c.height=h;
+const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
 ctx.drawImage(img,0,0,w,h);
-resolve(canvas.toDataURL('image/jpeg',quality));
+resolve(c.toDataURL('image/jpeg',quality));
 };
 img.onerror=()=>reject(new Error('فشل تحميل الصورة'));
 img.src=e.target.result;
 };
-reader.onerror=()=>reject(new Error('فشل قراءة الملف'));
-reader.readAsDataURL(file);
+r.onerror=()=>reject(new Error('فشل قراءة الملف'));
+r.readAsDataURL(file);
 });
 }
 
@@ -739,28 +675,25 @@ window.handleInvoiceImagesUpload=async function(){
 if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
 const invId=parseInt(document.getElementById('imgInvSelect').value);
 const inv=invoices.find(i=>i.id===invId);
-if(!inv){alert('الفاتورة غير موجودة.');return;}
+if(!inv){alert('غير موجودة.');return;}
 const input=document.getElementById('invImagesInput');
 const files=Array.from(input.files||[]);
 if(files.length===0)return;
 setSyncStatus('loading','⏳ معالجة الصور...');
 try{
-for(const file of files){
-if(!file.type.startsWith('image/'))continue;
-const dataUrl=await compressImage(file);
-inv.images.push({id:'img_'+Date.now()+'_'+Math.floor(Math.random()*100000),name:file.name,data:dataUrl,uploadedAt:new Date().toISOString()});
+for(const f of files){
+if(!f.type.startsWith('image/'))continue;
+const d=await compressImage(f);
+inv.images.push({id:'img_'+Date.now()+'_'+Math.floor(Math.random()*100000),name:f.name,data:d,uploadedAt:new Date().toISOString()});
 }
 saveData();
-}catch(err){
-alert('خطأ في الصور: '+err.message);
-}finally{
-input.value='';
-}
+}catch(err){alert('خطأ: '+err.message);}
+finally{input.value='';}
 };
 
 window.deleteInvoiceImage=function(invId,imgId){
 if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
-if(!confirm('حذف هذه الصورة نهائياً؟'))return;
+if(!confirm('حذف الصورة؟'))return;
 const inv=invoices.find(i=>i.id===invId);
 if(!inv)return;
 inv.images=inv.images.filter(img=>img.id!==imgId);
@@ -776,13 +709,8 @@ document.getElementById('lightboxImg').src=img.data;
 document.getElementById('lightbox').classList.add('active');
 };
 
-window.closeLightbox=function(e){
-if(e)e.stopPropagation();
-document.getElementById('lightbox').classList.remove('active');
-document.getElementById('lightboxImg').src='';
-};
-
-document.addEventListener('keydown',(e)=>{if(e.key==='Escape')window.closeLightbox();});
+window.closeLightbox=function(e){if(e)e.stopPropagation();document.getElementById('lightbox').classList.remove('active');document.getElementById('lightboxImg').src='';};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
 
 function renderAll(){
 if(!dataReady)return;
@@ -799,31 +727,35 @@ updateAdminUI();
 function renderExpensesTable(){
 const tbody=document.getElementById('expensesTableBody');
 tbody.innerHTML='';
+const allExp=getAllExpenses();
 let total=0;
-const totalsByPayer={dr_ahmed:0,mostafa:0,yahia:0,ahmed_yassin:0,all:0};
-expenses.forEach(e=>{
+const tbp={dr_ahmed:0,mostafa:0,yahia:0,ahmed_yassin:0,all:0};
+allExp.forEach(e=>{
 total+=e.amount;
-if(e.payer==='all')totalsByPayer.all+=e.amount;else totalsByPayer[e.payer]+=e.amount;
-const colorClass=(e.payer==='all')?'':(creditorColorMap[e.payer]||'');
-const deleteBtn=isAdmin?`<td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>`:'';
-tbody.innerHTML+=`<tr><td><strong>${e.dateTitle}</strong></td><td>${e.details}</td><td><strong class="${colorClass}">${e.amount.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td>${deleteBtn}</tr>`;
+if(e.payer==='all')tbp.all+=e.amount;else tbp[e.payer]+=e.amount;
+const cC=(e.payer==='all')?'':(creditorColorMap[e.payer]||'');
+const badge=e.isVirtual?'<span class="virtual-badge">تلقائي</span> ':'';
+const dB=e.isVirtual?'':(isAdmin?`<td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>`:'');
+const rowStyle=e.isVirtual?'style="background:#e8eaf6 !important;"':'';
+tbody.innerHTML+=`<tr ${rowStyle}><td>${badge}<strong>${e.dateTitle}</strong></td><td>${e.details}</td><td><strong class="${cC}">${e.amount.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td>${dB||(isAdmin?'<td class="no-print"></td>':'')}</tr>`;
 });
 tbody.innerHTML+=`<tr><td colspan="2"><strong>إجمالي المصروفات</strong></td><td><strong>${total.toLocaleString('en-US',{minimumFractionDigits:2})} ج.م</strong></td>${isAdmin?'<td></td>':''}</tr>`;
 document.getElementById('summaryBoxContainer').innerHTML=`
 <span class="item"><strong>إجمالي المدفوعات:</strong></span>
-<span class="item creditor-dr_ahmed"><strong>د. أحمد:</strong> ${totalsByPayer.dr_ahmed.toLocaleString('en-US')} ج.م</span>
-<span class="item creditor-yahia"><strong>يحيى:</strong> ${totalsByPayer.yahia.toLocaleString('en-US')} ج.م</span>
-<span class="item creditor-mostafa"><strong>مصطفى:</strong> ${totalsByPayer.mostafa.toLocaleString('en-US')} ج.م</span>
-<span class="item creditor-ahmed_yassin"><strong>أ. ياسين:</strong> ${totalsByPayer.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
-<span class="item"><strong>الجميع:</strong> ${totalsByPayer.all.toLocaleString('en-US')} ج.م</span>`;
+<span class="item creditor-dr_ahmed"><strong>د. أحمد:</strong> ${tbp.dr_ahmed.toLocaleString('en-US')} ج.م</span>
+<span class="item creditor-yahia"><strong>يحيى:</strong> ${tbp.yahia.toLocaleString('en-US')} ج.م</span>
+<span class="item creditor-mostafa"><strong>مصطفى:</strong> ${tbp.mostafa.toLocaleString('en-US')} ج.م</span>
+<span class="item creditor-ahmed_yassin"><strong>أ. ياسين:</strong> ${tbp.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
+<span class="item"><strong>الجميع:</strong> ${tbp.all.toLocaleString('en-US')} ج.م</span>`;
 }
 
 function renderBreakdownTable(){
 const tbody=document.getElementById('breakdownTableBody');
 tbody.innerHTML='';
+const allExp=getAllExpenses();
 let totalExp=0;
 const totals={dr_ahmed:0,yahia:0,mostafa:0,ahmed_yassin:0};
-expenses.forEach(e=>{
+allExp.forEach(e=>{
 totalExp+=e.amount;
 const sDr=(e.amount*partners.dr_ahmed.percent)/100;
 const sY=(e.amount*partners.yahia.percent)/100;
@@ -836,7 +768,9 @@ const cY=(e.payer!=='yahia'&&e.payer!=='all')?pc:'';
 const cM=(e.payer!=='mostafa'&&e.payer!=='all')?pc:'';
 const cAY=(e.payer!=='ahmed_yassin'&&e.payer!=='all')?pc:'';
 const pd=e.payer==='all'?'الجميع':partners[e.payer].name;
-tbody.innerHTML+=`<tr><td style="text-align:right;padding-right:8px;font-weight:600;">${e.dateTitle} [دفعها ${pd}]</td><td class="${cD}">${sDr.toFixed(2)}</td><td class="${cY}">${sY.toFixed(2)}</td><td class="${cM}">${sM.toFixed(2)}</td><td class="${cAY}">${sAY.toFixed(2)}</td><td><strong>${e.amount.toFixed(2)}</strong></td></tr>`;
+const badge=e.isVirtual?'<span class="virtual-badge">تلقائي</span> ':'';
+const rowStyle=e.isVirtual?'style="background:#e8eaf6 !important;"':'';
+tbody.innerHTML+=`<tr ${rowStyle}><td style="text-align:right;padding-right:8px;font-weight:600;">${badge}${e.dateTitle} [دفعها ${pd}]</td><td class="${cD}">${sDr.toFixed(2)}</td><td class="${cY}">${sY.toFixed(2)}</td><td class="${cM}">${sM.toFixed(2)}</td><td class="${cAY}">${sAY.toFixed(2)}</td><td><strong>${e.amount.toFixed(2)}</strong></td></tr>`;
 });
 tbody.innerHTML+=`<tr class="total-row"><td style="text-align:right;padding-right:8px;font-weight:700;">إجمالي الحصص</td><td><strong>${totals.dr_ahmed.toFixed(2)}</strong></td><td><strong>${totals.yahia.toFixed(2)}</strong></td><td><strong>${totals.mostafa.toFixed(2)}</strong></td><td><strong>${totals.ahmed_yassin.toFixed(2)}</strong></td><td><strong>${totalExp.toFixed(2)}</strong></td></tr>`;
 }
@@ -850,11 +784,11 @@ renderCreditorDebtTable('yahia','debtYahiaBody','creditor-yahia','#e3f2fd');
 function renderCreditorDebtTable(creditorKey,tableBodyId,colorClass,bgColor){
 const tbody=document.getElementById(tableBodyId);
 tbody.innerHTML='';
-const cExp=expenses.filter(e=>e.payer===creditorKey);
-let grandDebtTotal=0;
+const allExp=getAllExpenses();
+const cExp=allExp.filter(e=>e.payer===creditorKey);
+let gdt=0;
 cExp.forEach(e=>{
-let dd='';
-let itemTotal=0;
+let dd='';let itemTotal=0;
 Object.keys(partners).forEach(pKey=>{
 if(pKey!==creditorKey){
 const d=(e.amount*partners[pKey].percent)/100;
@@ -863,73 +797,71 @@ itemTotal+=d;
 }
 });
 const dp=e.dateTitle.split('-')[0].trim();
-tbody.innerHTML+=`<tr><td><strong>${e.amount.toLocaleString('en-US')} ج.م</strong><br>${dp}</td><td style="background-color:${bgColor};">${partners[creditorKey].name}</td><td>${e.details}</td><td class="debt-details-cell">${dd}</td><td class="${colorClass}" style="font-weight:700;">${itemTotal.toFixed(2)}</td></tr>`;
+const badge=e.isVirtual?'<span class="virtual-badge">تلقائي</span> ':'';
+tbody.innerHTML+=`<tr><td>${badge}<strong>${e.amount.toLocaleString('en-US')} ج.م</strong><br>${dp}</td><td style="background-color:${bgColor};">${partners[creditorKey].name}</td><td>${e.details}</td><td class="debt-details-cell">${dd}</td><td class="${colorClass}" style="font-weight:700;">${itemTotal.toFixed(2)}</td></tr>`;
 });
 let sl='';
 Object.keys(partners).forEach(pKey=>{
 if(pKey!==creditorKey){
-let td=0;
-cExp.forEach(e=>{td+=(e.amount*partners[pKey].percent)/100;});
+let td=0;cExp.forEach(e=>{td+=(e.amount*partners[pKey].percent)/100;});
 sl+=`• ${partners[pKey].name}: <span class="${colorClass}">${td.toFixed(2)}</span> ج.م<br>`;
-grandDebtTotal+=td;
+gdt+=td;
 }
 });
-tbody.innerHTML+=`<tr class="total-debt-row"><td colspan="4" style="text-align:left;padding-right:10px;"><strong>🔹 إجمالي الديون لـ ${partners[creditorKey].name}</strong></td><td class="${colorClass}" style="font-weight:700;font-size:11.5px;text-align:right;line-height:1.6;padding:6px;">${sl}<div style="border-top:1px dashed;margin-top:3px;padding-top:2px;"><strong>الإجمالي: ${grandDebtTotal.toFixed(2)} ج.م</strong></div></td></tr>`;
+tbody.innerHTML+=`<tr class="total-debt-row"><td colspan="4" style="text-align:left;padding-right:10px;"><strong>🔹 إجمالي الديون لـ ${partners[creditorKey].name}</strong></td><td class="${colorClass}" style="font-weight:700;font-size:11.5px;text-align:right;line-height:1.6;padding:6px;">${sl}<div style="border-top:1px dashed;margin-top:3px;padding-top:2px;"><strong>الإجمالي: ${gdt.toFixed(2)} ج.م</strong></div></td></tr>`;
 }
 
 function renderRevenuesTable(){
 const tbody=document.getElementById('revenueTableBody');
 tbody.innerHTML='';
-if(invoices.length===0){
-tbody.innerHTML=`<tr><td colspan="11" style="text-align:center;color:#888;padding:12px;">لا توجد فواتير</td></tr>`;
-return;
-}
-let gI=0,gE=0,gTO=0,gB=0;
+if(invoices.length===0){tbody.innerHTML=`<tr><td colspan="13" style="text-align:center;color:#888;padding:12px;">لا توجد فواتير</td></tr>`;return;}
+let gO=0,gFI=0,gFP=0,gE=0,gTO=0,gB=0;
 const gS={dr_ahmed:0,yahia:0,mostafa:0,ahmed_yassin:0};
 invoices.forEach(inv=>{
-const{income,expense,transferredOut,balance}=calcInvoiceTotals(inv,invoices);
-gI+=income;gE+=expense;gTO+=transferredOut;gB+=balance;
+const t=calcInvoiceTotals(inv,invoices);
+gO+=t.originalIncome;gFI+=t.transferInFromInvoices;gFP+=t.transferInFromPartners;gE+=t.expense;gTO+=t.transferredOut;gB+=t.balance;
 const rn=(inv.receiver==='all'||!inv.receiver)?'—':(partners[inv.receiver]?partners[inv.receiver].name:inv.receiver);
-const sDr=(balance*partners.dr_ahmed.percent)/100;
-const sY=(balance*partners.yahia.percent)/100;
-const sM=(balance*partners.mostafa.percent)/100;
-const sAY=(balance*partners.ahmed_yassin.percent)/100;
+const sDr=(t.balance*partners.dr_ahmed.percent)/100;
+const sY=(t.balance*partners.yahia.percent)/100;
+const sM=(t.balance*partners.mostafa.percent)/100;
+const sAY=(t.balance*partners.ahmed_yassin.percent)/100;
 gS.dr_ahmed+=sDr;gS.yahia+=sY;gS.mostafa+=sM;gS.ahmed_yassin+=sAY;
 let dC='',yC='',mC='',aC='',dS='',yS='',mS='',aS='';
 if(inv.receiver==='dr_ahmed'){yC='creditor-dr_ahmed';yS='-';mC='creditor-dr_ahmed';mS='-';aC='creditor-dr_ahmed';aS='-';}
 else if(inv.receiver==='yahia'){dC='creditor-yahia';dS='-';mC='creditor-yahia';mS='-';aC='creditor-yahia';aS='-';}
 else if(inv.receiver==='mostafa'){dC='creditor-mostafa';dS='-';yC='creditor-mostafa';yS='-';aC='creditor-mostafa';aS='-';}
 else if(inv.receiver==='ahmed_yassin'){dC='creditor-ahmed_yassin';dS='-';yC='creditor-ahmed_yassin';yS='-';mC='creditor-ahmed_yassin';mS='-';}
-const tOD=transferredOut>0?`<span class="transfer-out-badge">${transferredOut.toFixed(2)}</span>`:'—';
-tbody.innerHTML+=`<tr><td>${inv.name}</td><td>${inv.date||'—'}</td><td><strong>${income.toFixed(2)}</strong></td><td>${expense.toFixed(2)}</td><td>${tOD}</td><td><strong style="color:#1b5e20;">${balance.toFixed(2)}</strong></td><td>${rn}</td><td class="${dC}">${dS}${sDr.toFixed(2)}</td><td class="${yC}">${yS}${sY.toFixed(2)}</td><td class="${mC}">${mS}${sM.toFixed(2)}</td><td class="${aC}">${aS}${sAY.toFixed(2)}</td></tr>`;
+const fI=t.transferInFromInvoices>0?`<span class="transfer-badge">${t.transferInFromInvoices.toFixed(2)}</span>`:'—';
+const fP=t.transferInFromPartners>0?`<span class="virtual-badge">${t.transferInFromPartners.toFixed(2)}</span>`:'—';
+const tOD=t.transferredOut>0?`<span class="transfer-out-badge">${t.transferredOut.toFixed(2)}</span>`:'—';
+tbody.innerHTML+=`<tr><td>${inv.name}</td><td>${inv.date||'—'}</td><td><strong>${t.originalIncome.toFixed(2)}</strong></td><td>${fI}</td><td>${fP}</td><td>${t.expense.toFixed(2)}</td><td>${tOD}</td><td><strong style="color:#1b5e20;">${t.balance.toFixed(2)}</strong></td><td>${rn}</td><td class="${dC}">${dS}${sDr.toFixed(2)}</td><td class="${yC}">${yS}${sY.toFixed(2)}</td><td class="${mC}">${mS}${sM.toFixed(2)}</td><td class="${aC}">${aS}${sAY.toFixed(2)}</td></tr>`;
 });
-tbody.innerHTML+=`<tr class="total-debt-row"><td><strong>الإجمالي</strong></td><td></td><td><strong>${gI.toFixed(2)}</strong></td><td><strong>${gE.toFixed(2)}</strong></td><td><strong>${gTO.toFixed(2)}</strong></td><td><strong>${gB.toFixed(2)}</strong></td><td></td><td><strong>${gS.dr_ahmed.toFixed(2)}</strong></td><td><strong>${gS.yahia.toFixed(2)}</strong></td><td><strong>${gS.mostafa.toFixed(2)}</strong></td><td><strong>${gS.ahmed_yassin.toFixed(2)}</strong></td></tr>`;
+tbody.innerHTML+=`<tr class="total-debt-row"><td><strong>الإجمالي</strong></td><td></td><td><strong>${gO.toFixed(2)}</strong></td><td><strong>${gFI.toFixed(2)}</strong></td><td><strong>${gFP.toFixed(2)}</strong></td><td><strong>${gE.toFixed(2)}</strong></td><td><strong>${gTO.toFixed(2)}</strong></td><td><strong>${gB.toFixed(2)}</strong></td><td></td><td><strong>${gS.dr_ahmed.toFixed(2)}</strong></td><td><strong>${gS.yahia.toFixed(2)}</strong></td><td><strong>${gS.mostafa.toFixed(2)}</strong></td><td><strong>${gS.ahmed_yassin.toFixed(2)}</strong></td></tr>`;
 }
 
 function renderInvoicesTables(){
 const select=document.getElementById('invSelect');
-const currentVal=select.value;
-select.innerHTML='';
+const cv=select.value;select.innerHTML='';
 invoices.forEach(inv=>{select.innerHTML+=`<option value="${inv.id}">${inv.name}</option>`;});
-if(currentVal&&invoices.find(i=>i.id===parseInt(currentVal)))select.value=currentVal;
+if(cv&&invoices.find(i=>i.id===parseInt(cv)))select.value=cv;
 onInvoiceSelectChange();
 
-const imgSelect=document.getElementById('imgInvSelect');
-const imgCurrentVal=imgSelect.value;
-imgSelect.innerHTML='';
-invoices.forEach(inv=>{imgSelect.innerHTML+=`<option value="${inv.id}">${inv.name}</option>`;});
-if(imgCurrentVal&&invoices.find(i=>i.id===parseInt(imgCurrentVal)))imgSelect.value=imgCurrentVal;
+const iS=document.getElementById('imgInvSelect');
+const icv=iS.value;iS.innerHTML='';
+invoices.forEach(inv=>{iS.innerHTML+=`<option value="${inv.id}">${inv.name}</option>`;});
+if(icv&&invoices.find(i=>i.id===parseInt(icv)))iS.value=icv;
 
 const dc=document.getElementById('invoiceDetailsContainer');
 dc.innerHTML='';
 invoices.forEach(inv=>{
 const rn=(inv.receiver==='all'||!inv.receiver)?'الجميع (بدون مقاصة)':(partners[inv.receiver]?partners[inv.receiver].name:inv.receiver);
-const{income:invIncome,expense:invExpense,transferredOut,balance:invBalance}=calcInvoiceTotals(inv,invoices);
-let tI=transferredOut>0?`<span class="transfer-out-badge">⬆️ مُرحّل منها: ${transferredOut.toFixed(2)} ج.م</span>`:'';
-let html=`<h3>${inv.name} <span class="info-badge">📅 ${inv.date||'بدون تاريخ'}</span> <span class="info-badge">👤 المتسلم: ${rn}</span> ${tI}</h3>
-<table>
-<thead><tr><th>البيان</th><th>الوارد</th><th>المنصرف</th><th>الرصيد المتبقي</th>${isAdmin?'<th class="no-print">إجراء</th>':''}</tr></thead>
-<tbody>`;
+const t=calcInvoiceTotals(inv,invoices);
+let ti='';
+if(t.transferInFromInvoices>0)ti+=`<span class="transfer-badge">⬇️ من فواتير: ${t.transferInFromInvoices.toFixed(2)}</span> `;
+if(t.transferInFromPartners>0)ti+=`<span class="virtual-badge">⬇️ من شركاء: ${t.transferInFromPartners.toFixed(2)}</span> `;
+if(t.transferredOut>0)ti+=`<span class="transfer-out-badge">⬆️ مُرحّل منها: ${t.transferredOut.toFixed(2)}</span>`;
+let html=`<h3>${inv.name} <span class="info-badge">📅 ${inv.date||'بدون تاريخ'}</span> <span class="info-badge">👤 المتسلم: ${rn}</span> ${ti}</h3>
+<table><thead><tr><th>البيان</th><th>الوارد</th><th>المنصرف</th><th>الرصيد المتبقي</th>${isAdmin?'<th class="no-print">إجراء</th>':''}</tr></thead><tbody>`;
 let rb=0;
 inv.items.forEach(item=>{
 rb+=(item.income||0)-(item.expense||0);
@@ -940,133 +872,6 @@ if(item.transferredFrom)dB+=` <span class="transfer-badge">⬇️ من: ${getTra
 const aB=isAdmin?`<td class="no-print"><button class="btn-danger btn-edit" onclick="editInvoiceItem(${inv.id},${item.id})">تعديل</button><button class="btn-danger" onclick="deleteInvoiceItem(${inv.id},${item.id})">حذف</button></td>`:'';
 html+=`<tr><td style="text-align:right;padding-right:8px;">${dB}</td><td>${iD}</td><td>${eD}</td><td>${rb.toFixed(2)}</td>${aB}</tr>`;
 });
-html+=`<tr class="total-debt-row"><td><strong>الإجمالي</strong></td><td><strong>${invIncome.toFixed(2)}</strong></td><td><strong>${invExpense.toFixed(2)}</strong></td><td><strong>${invBalance.toFixed(2)}</strong></td>${isAdmin?'<td></td>':''}</tr></tbody></table>`;
-const imgCount=inv.images?inv.images.length:0;
-const iH=imgCount===0?`<p class="invoice-images-empty">لا توجد صور مرفقة${isAdmin?' — ارفعها من لوحة التحكم':''}.</p>`:`<div class="invoice-images-gallery">`+inv.images.map(img=>`<div class="invoice-image-item" onclick="openLightboxById(${inv.id},'${img.id}')" title="${img.name}"><img src="${img.data}" alt="${img.name}">${isAdmin?`<button class="img-delete-btn" onclick="event.stopPropagation();deleteInvoiceImage(${inv.id},'${img.id}')">✕</button>`:''}</div>`).join('')+`</div>`;
-html+=`<div class="invoice-images-section"><h4>🖼️ صور الفاتورة ${imgCount>0?`<span class="image-count-badge">${imgCount}</span>`:''}</h4>${iH}</div>`;
-dc.innerHTML+=html;
-});
-}
-
-function renderFinalSettlement(){
-const tbody=document.getElementById('finalSettlementBody');
-const tE=expenses.reduce((s,e)=>s+e.amount,0);
-const paid={dr_ahmed:0,yahia:0,mostafa:0,ahmed_yassin:0};
-expenses.forEach(e=>{
-if(e.payer==='all'){
-paid.dr_ahmed+=(e.amount*partners.dr_ahmed.percent)/100;
-paid.yahia+=(e.amount*partners.yahia.percent)/100;
-paid.mostafa+=(e.amount*partners.mostafa.percent)/100;
-paid.ahmed_yassin+=(e.amount*partners.ahmed_yassin.percent)/100;
-}else paid[e.payer]+=e.amount;
-});
-let html='';
-let gP=0,gS=0,gN=0;
-Object.keys(partners).forEach(key=>{
-const sE=(tE*partners[key].percent)/100;
-const nE=paid[key]-sE;
-gP+=paid[key];gS+=sE;gN+=nE;
-const nC=nE>=0?creditorColorMap[key]:'';
-html+=`<tr><td><strong>${partners[key].name}</strong></td><td>${paid[key].toFixed(2)}</td><td>${sE.toFixed(2)}</td><td class="${nC}"><strong>${nE.toFixed(2)}</strong></td></tr>`;
-});
-html+=`<tr class="total-debt-row"><td><strong>الإجمالي</strong></td><td><strong>${gP.toFixed(2)}</strong></td><td><strong>${gS.toFixed(2)}</strong></td><td><strong>${gN.toFixed(2)}</strong></td></tr>`;
-tbody.innerHTML=html;
-}
-
-function renderFinalDistribution(){
-const tbody=document.getElementById('finalDistributionBody');
-let grossDebt={};
-Object.keys(partners).forEach(a=>{
-Object.keys(partners).forEach(b=>{
-if(a!==b){
-let debt=0;
-expenses.filter(e=>e.payer===a).forEach(e=>{debt+=(e.amount*partners[b].percent)/100;});
-if(debt>0.01){
-if(!grossDebt[b])grossDebt[b]={};
-grossDebt[b][a]=debt;
-}
-}
-});
-});
-let revenueImpact={};
-invoices.forEach(inv=>{
-if(inv.receiver==='all'||!inv.receiver)return;
-const{balance}=calcInvoiceTotals(inv,invoices);
-if(balance<=0)return;
-Object.keys(partners).forEach(p=>{
-if(p!==inv.receiver){
-const debt=(balance*partners[p].percent)/100;
-if(debt>0.01){
-if(!revenueImpact[p])revenueImpact[p]={};
-revenueImpact[p][inv.receiver]=(revenueImpact[p][inv.receiver]||0)+debt;
-}
-}
-});
-});
-let netDebtRaw={};
-Object.keys(grossDebt).forEach(debtor=>{
-Object.keys(grossDebt[debtor]).forEach(creditor=>{
-let amount=grossDebt[debtor][creditor];
-let revImpact=(revenueImpact[debtor]&&revenueImpact[debtor][creditor])||0;
-let net=amount-revImpact;
-if(net>0.01){
-if(!netDebtRaw[debtor])netDebtRaw[debtor]={};
-netDebtRaw[debtor][creditor]=net;
-}
-});
-});
-let finalDebt={};
-let processedPairs=new Set();
-Object.keys(netDebtRaw).forEach(dA=>{
-Object.keys(netDebtRaw[dA]).forEach(cB=>{
-let pk=[dA,cB].sort().join('|');
-if(processedPairs.has(pk))return;
-processedPairs.add(pk);
-let aOB=netDebtRaw[dA][cB]||0;
-let bOA=(netDebtRaw[cB]&&netDebtRaw[cB][dA])||0;
-if(Math.abs(aOB-bOA)<0.01)return;
-else if(aOB>bOA){
-let net=aOB-bOA;
-if(!finalDebt[dA])finalDebt[dA]={};
-finalDebt[dA][cB]=net;
-}else{
-let net=bOA-aOB;
-if(!finalDebt[cB])finalDebt[cB]={};
-finalDebt[cB][dA]=net;
-}
-});
-});
-let html='';
-let gT=0;
-let hasDebt=false;
-Object.keys(finalDebt).forEach(dK=>{
-let tD=0;
-let cD='';
-Object.keys(finalDebt[dK]).sort().forEach(cK=>{
-let amount=finalDebt[dK][cK];
-if(amount>0.01){
-tD+=amount;
-const cC=creditorColorMap[cK]||'';
-cD+=`<span class="${cC}">${partners[cK].name} : ${amount.toFixed(2)} ج.م</span><br>`;
-hasDebt=true;
-}
-});
-if(tD>0.01){
-gT+=tD;
-html+=`<tr><td><strong>${partners[dK].name}</strong></td><td style="text-align:right;padding-left:10px;">${cD}</td><td><strong>${tD.toFixed(2)}</strong></td></tr>`;
-}
-});
-if(!hasDebt){
-tbody.innerHTML=`<tr><td colspan="3" style="text-align:center;color:#888;padding:12px;">لا توجد ديون متبادلة، جميع الحسابات متساوية.</td></tr>`;
-return;
-}
-html+=`<tr class="total-debt-row"><td><strong>الإجمالي الكلي</strong></td><td></td><td><strong>${gT.toFixed(2)}</strong></td></tr>`;
-tbody.innerHTML=html;
-}
-
-document.getElementById('liveDate').textContent=new Date().toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
-
-loadData();
-</script>
-</body>
-</html>
+html+=`<tr class="total-debt-row"><td><strong>الإجمالي</strong></td><td><strong>${t.totalIncome.toFixed(2)}</strong></td><td><strong>${t.expense.toFixed(2)}</strong></td><td><strong>${t.balance.toFixed(2)}</strong></td>${isAdmin?'<td></td>':''}</tr></tbody></table>`;
+const ic=inv.images?inv.images.length:0;
+const iH=ic===0?`<p class="invoice-images-empty">لا توجد صور مرفقة${isAdmin?' — ارفعها من لوحة التحكم':''}.</p>`:`<div class="invoice-images-gallery">`+inv.images.map(img=>`<div class="invoice-image-item" onclick="openLightboxById(${inv.id},'${img.id}')" title="${img.name}"><img src="${img.data}" alt="${img.name}">${isAdmin?`<button class="img-delete-btn" onclick="event.stopPropagation();deleteInvoiceImage(${inv.id},'${img.id}')">✕</button>`:''}</div>`).
