@@ -168,6 +168,7 @@ table.distribution-table tr.total-row{background:#c8e6c9!important;font-weight:7
 <thead><tr>
 <th>رقم الفاتورة</th><th>تاريخ الفاتورة</th><th>إجمالي الفاتورة</th><th>المتبقي الفعلي</th><th>المتسلم</th>
 <th>د. أحمد (45.25%)</th><th>يحيى (23.08%)</th><th>مصطفى (21.42%)</th><th>أحمد ياسين (10.25%)</th>
+<th class="no-print" id="revenueActionHeader">إجراء</th>
 </tr></thead>
 <tbody id="revenueTableBody"></tbody>
 </table>
@@ -224,7 +225,9 @@ table.distribution-table tr.total-row{background:#c8e6c9!important;font-weight:7
 <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
 <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
 <img id="lightboxImg" src="" alt="صورة الفاتورة">
-</div><script type="module">
+</div>
+
+  <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -291,7 +294,8 @@ const initialExpenses=[
 {id:37,dateTitle:'31 أغسطس - حساب الميكانيكي',details:'حساب صابر (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'},
 {id:38,dateTitle:'1 سبتمبر - كراتين',details:'كراتين (دفعها د. أحمد)',amount:1100,payer:'dr_ahmed'},
 {id:39,dateTitle:'3 سبتمبر - حساب التروسيكل',details:'جلب أسمدة (دفعها د. أحمد)',amount:100,payer:'dr_ahmed'},
-{id:40,dateTitle:'3 سبتمبر - فطار',details:'فطار (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'}
+{id:40,dateTitle:'3 سبتمبر - فطار',details:'فطار (دفعها د. أحمد)',amount:300,payer:'dr_ahmed'},
+{id:41,dateTitle:'مصروف قديم مفقود (دفعه د. أحمد)',details:'مصروفات قديمة لم تُسجَّل عند تسجيل الفواتير',amount:65,payer:'dr_ahmed'}
 ];
 
 const initialInvoices=[
@@ -313,8 +317,7 @@ const initialInvoices=[
 {id:115,description:'حساب جركن جاز قديم (عم سلامة)',income:0,expense:120},
 {id:116,description:'مُرحّل من الفاتورة الثانية',income:255,expense:0,transferredFrom:{type:'invoice',id:2}},
 {id:117,description:'مُرحّل من الفاتورة الثالثة',income:60,expense:0,transferredFrom:{type:'invoice',id:3}},
-{id:118,description:'فطار يومي 13 و 14 سبتمبر',income:0,expense:200},
-{id:119,description:'مُرحّل من د. أحمد',income:15,expense:0,transferredFrom:{type:'partner',id:'dr_ahmed'}}
+{id:118,description:'فطار يومي 13 و 14 سبتمبر',income:0,expense:200}
 ]},
 {id:2,name:'الفاتورة الثانية',date:'',receiver:'all',images:[],items:[
 {id:201,description:'المبلغ الأساسي للفاتورة الثانية',income:11480,expense:0,transferredFrom:null},
@@ -408,7 +411,6 @@ function parseTransferValue(val){if(!val)return null;const p=val.split(':');if(p
 function isTransferFromInvoice(tf,invoiceId){if(!tf||tf.type!=='invoice')return false;return tf.id===invoiceId;}
 function getTransferLabel(tf){if(!tf)return'';if(tf.type==='invoice'){const s=invoices.find(i=>i.id===tf.id);return s?s.name:('#'+tf.id);}if(tf.type==='partner')return partners[tf.id]?partners[tf.id].name:tf.id;return'';}
 
-// ✅ توليد مصروفات افتراضية من "مُرحّل من شريك"
 function getPartnerTransferExpenses(){
 const result=[];
 invoices.forEach(inv=>{
@@ -431,10 +433,8 @@ isVirtual:true
 return result;
 }
 
-// ✅ قائمة المصروفات الكاملة (الحقيقية + الافتراضية)
 function getAllExpenses(){return expenses.concat(getPartnerTransferExpenses());}
 
-// ✅ حساب إجماليات الفاتورة
 function calcInvoiceTotals(inv,allInvoices){
 const originalIncome=inv.items.reduce((s,it)=>s+((!it.transferredFrom&&(it.income||0))?it.income:0),0);
 const transferInFromInvoices=inv.items.reduce((s,it)=>s+((it.transferredFrom&&it.transferredFrom.type==='invoice'&&(it.income||0))?it.income:0),0);
@@ -448,7 +448,8 @@ o.items.forEach(it=>{
 if(isTransferFromInvoice(it.transferredFrom,inv.id)&&(it.income||0)>0)transferredOut+=it.income;
 });
 });
-return{originalIncome,transferInFromInvoices,transferInFromPartners,totalIncome,expense,transferredOut,balance:totalIncome-expense-transferredOut};
+const balance=originalIncome+transferInFromInvoices-expense-transferredOut;
+return{originalIncome,transferInFromInvoices,transferInFromPartners,totalIncome,expense,transferredOut,balance};
 }
 
 async function loadData(){
@@ -646,6 +647,40 @@ saveData();
 }
 };
 
+window.editInvoiceMeta=function(invId){
+if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
+const inv=invoices.find(i=>i.id===invId);
+if(!inv)return;
+const newName=prompt('اسم الفاتورة:',inv.name);
+if(newName===null)return;
+const newDate=prompt('تاريخ الفاتورة:',inv.date||'');
+if(newDate===null)return;
+const currentRec=inv.receiver||'all';
+const recOptions='all=الجميع (بدون مقاصة)\n'+Object.keys(partners).map(p=>p+'='+partners[p].name).join('\n');
+const newRec=prompt('المتسلم (اكتب الكود):\n'+recOptions,currentRec);
+if(newRec===null)return;
+inv.name=newName.trim()||inv.name;
+inv.date=newDate.trim();
+if(newRec.trim()==='all'||partners[newRec.trim()])inv.receiver=newRec.trim();
+saveData();
+setSyncStatus('ok','✅ تم تحديث الفاتورة');
+};
+
+window.deleteInvoiceFromSummary=function(invId){
+if(!isAdmin){alert('يجب تسجيل الدخول كأدمن.');return;}
+const inv=invoices.find(i=>i.id===invId);
+if(!inv)return;
+let used=false;
+invoices.forEach(o=>{if(o.id!==invId)o.items.forEach(it=>{if(isTransferFromInvoice(it.transferredFrom,invId))used=true;});});
+let msg='حذف "'+inv.name+'" بالكامل؟';
+if(used)msg+='\n\n⚠️ توجد بنود مُرَحّلة من هذه الفاتورة، سيتم إلغاء الترحيل.';
+if(confirm(msg)){
+invoices.forEach(o=>o.items.forEach(it=>{if(isTransferFromInvoice(it.transferredFrom,invId))it.transferredFrom=null;}));
+invoices=invoices.filter(i=>i.id!==invId);
+saveData();
+}
+};
+
 function compressImage(file,maxWidth=900,quality=0.65){
 return new Promise((resolve,reject)=>{
 const r=new FileReader();
@@ -706,7 +741,9 @@ document.getElementById('lightbox').classList.add('active');
 };
 
 window.closeLightbox=function(e){if(e)e.stopPropagation();document.getElementById('lightbox').classList.remove('active');document.getElementById('lightboxImg').src='';};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')window.closeLightbox();});function renderAll(){
+document.addEventListener('keydown',e=>{if(e.key==='Escape')window.closeLightbox();});
+
+    function renderAll(){
 if(!dataReady)return;
 renderExpensesTable();
 renderBreakdownTable();
@@ -731,7 +768,7 @@ const cC=(e.payer==='all')?'':(creditorColorMap[e.payer]||'');
 const badge=e.isVirtual?'<span class="virtual-badge">تلقائي</span> ':'';
 let actCell='';
 if(isAdmin){
-if(e.isVirtual){actCell='<td class="no-print" style="font-size:10px; color:#888;">يُدار من الفاتورة</td>';}
+if(e.isVirtual){actCell='<td class="no-print" style="font-size:10px;color:#888;">يُدار من الفاتورة</td>';}
 else{actCell=`<td class="no-print"><button class="btn-danger" onclick="deleteExpense(${e.id})">حذف</button></td>`;}
 }
 const rowStyle=e.isVirtual?'style="background:#e8eaf6 !important;"':'';
@@ -743,8 +780,7 @@ document.getElementById('summaryBoxContainer').innerHTML=`
 <span class="item creditor-dr_ahmed"><strong>د. أحمد:</strong> ${tbp.dr_ahmed.toLocaleString('en-US')} ج.م</span>
 <span class="item creditor-yahia"><strong>يحيى:</strong> ${tbp.yahia.toLocaleString('en-US')} ج.م</span>
 <span class="item creditor-mostafa"><strong>مصطفى:</strong> ${tbp.mostafa.toLocaleString('en-US')} ج.م</span>
-<span class="item creditor-ahmed_yassin"><strong>أ. ياسين:</strong> ${tbp.ahmed_yassin.toLocaleString('en-US')} ج.م</span>
-<span class="item"><strong>الجميع:</strong> ${tbp.all.toLocaleString('en-US')} ج.م</span>`;
+<span class="item creditor-ahmed_yassin"><strong>أحمد ياسين:</strong> ${tbp.ahmed_yassin.toLocaleString('en-US')} ج.م</span>`;
 }
 
 function renderBreakdownTable(){
@@ -812,7 +848,7 @@ tbody.innerHTML+=`<tr class="total-debt-row"><td colspan="4" style="text-align:l
 function renderRevenuesTable(){
 const tbody=document.getElementById('revenueTableBody');
 tbody.innerHTML='';
-if(invoices.length===0){tbody.innerHTML=`<tr><td colspan="9" style="text-align:center;color:#888;padding:12px;">لا توجد فواتير مسجلة</td></tr>`;return;}
+if(invoices.length===0){tbody.innerHTML=`<tr><td colspan="10" style="text-align:center;color:#888;padding:12px;">لا توجد فواتير مسجلة</td></tr>`;return;}
 let gO=0,gB=0;
 const gS={dr_ahmed:0,yahia:0,mostafa:0,ahmed_yassin:0};
 invoices.forEach(inv=>{
@@ -829,9 +865,10 @@ if(inv.receiver==='dr_ahmed'){yC='creditor-dr_ahmed';yS='-';mC='creditor-dr_ahme
 else if(inv.receiver==='yahia'){dC='creditor-yahia';dS='-';mC='creditor-yahia';mS='-';aC='creditor-yahia';aS='-';}
 else if(inv.receiver==='mostafa'){dC='creditor-mostafa';dS='-';yC='creditor-mostafa';yS='-';aC='creditor-mostafa';aS='-';}
 else if(inv.receiver==='ahmed_yassin'){dC='creditor-ahmed_yassin';dS='-';yC='creditor-ahmed_yassin';yS='-';mC='creditor-ahmed_yassin';mS='-';}
-tbody.innerHTML+=`<tr><td>${inv.name}</td><td>${inv.date||'—'}</td><td><strong>${t.originalIncome.toFixed(2)}</strong></td><td><strong style="color:#1b5e20;">${t.balance.toFixed(2)}</strong></td><td>${rn}</td><td class="${dC}">${dS}${sDr.toFixed(2)}</td><td class="${yC}">${yS}${sY.toFixed(2)}</td><td class="${mC}">${mS}${sM.toFixed(2)}</td><td class="${aC}">${aS}${sAY.toFixed(2)}</td></tr>`;
+const actBtn=isAdmin?`<td class="no-print"><button class="btn-danger btn-edit" onclick="editInvoiceMeta(${inv.id})">تعديل</button><button class="btn-danger" onclick="deleteInvoiceFromSummary(${inv.id})">حذف</button></td>`:'';
+tbody.innerHTML+=`<tr><td>${inv.name}</td><td>${inv.date||'—'}</td><td><strong>${t.originalIncome.toFixed(2)}</strong></td><td><strong style="color:#1b5e20;">${t.balance.toFixed(2)}</strong></td><td>${rn}</td><td class="${dC}">${dS}${sDr.toFixed(2)}</td><td class="${yC}">${yS}${sY.toFixed(2)}</td><td class="${mC}">${mS}${sM.toFixed(2)}</td><td class="${aC}">${aS}${sAY.toFixed(2)}</td>${actBtn}</tr>`;
 });
-tbody.innerHTML+=`<tr class="total-debt-row"><td><strong>الإجمالي</strong></td><td></td><td><strong>${gO.toFixed(2)}</strong></td><td><strong>${gB.toFixed(2)}</strong></td><td></td><td><strong>${gS.dr_ahmed.toFixed(2)}</strong></td><td><strong>${gS.yahia.toFixed(2)}</strong></td><td><strong>${gS.mostafa.toFixed(2)}</strong></td><td><strong>${gS.ahmed_yassin.toFixed(2)}</strong></td></tr>`;
+tbody.innerHTML+=`<tr class="total-debt-row"><td><strong>الإجمالي</strong></td><td></td><td><strong>${gO.toFixed(2)}</strong></td><td><strong>${gB.toFixed(2)}</strong></td><td></td><td><strong>${gS.dr_ahmed.toFixed(2)}</strong></td><td><strong>${gS.yahia.toFixed(2)}</strong></td><td><strong>${gS.mostafa.toFixed(2)}</strong></td><td><strong>${gS.ahmed_yassin.toFixed(2)}</strong></td>${isAdmin?'<td></td>':''}</tr>`;
 }
 
 function renderInvoicesTables(){
