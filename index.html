@@ -65,7 +65,7 @@
         .admin-status.editor { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
         .no-print { display: inline-block; }
         .revenue-table-wrapper, .settlement-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 6px 0 10px 0; border-radius: 6px; border: 1px solid #a5d6a7; }
-        .revenue-table-wrapper table, .settlement-table-wrapper table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: 12px; background: #ffffff; margin: 0; }
+        .revenue-table-wrapper table, .settlement-table-wrapper table { width: 100%; min-width: 800px; border-collapse: collapse; font-size: 12px; background: #ffffff; margin: 0; }
         .revenue-table-wrapper table th, .revenue-table-wrapper table td, .settlement-table-wrapper table th, .settlement-table-wrapper table td { border: 1px solid #a5d6a7; padding: 6px 4px; text-align: center; vertical-align: middle; white-space: nowrap; }
         .revenue-table-wrapper table th, .settlement-table-wrapper table th { background-color: #2e7d32; color: #ffffff; font-weight: 700; border-color: #1b5e20; font-size: 12px; }
         .revenue-table-wrapper table tr:nth-child(even), .settlement-table-wrapper table tr:nth-child(even) { background-color: #f4fcf4; }
@@ -96,6 +96,8 @@
         .sync-status.ok { background: #e8f5e9; color: #2e7d32; }
         .sync-status.error { background: #ffebee; color: #c62828; }
         .info-badge { display: inline-block; background: #fff3e0; color: #e65100; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 6px; }
+        .transfer-badge { display: inline-block; background: #e3f2fd; color: #1565c0; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 4px; }
+        .transfer-out-badge { display: inline-block; background: #fff3e0; color: #e65100; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 700; margin-right: 4px; }
         @media print {
             .no-print { display: none !important; }
             body { padding: 0 !important; margin: 0 !important; font-size: 10px; line-height: 1.35; max-width: 100% !important; background: #ffffff !important; } 
@@ -174,6 +176,8 @@
             </div>
             <button class="btn-add" onclick="saveInvoiceMeta()">حفظ بيانات الفاتورة</button>
         </div>
+
+        <h4 style="font-size:12px; color:#2e7d32; margin-top:8px; margin-bottom:4px;">🔹 إضافة بند جديد للفاتورة</h4>
         <div class="form-row">
             <div class="form-group">
                 <label>البيان:</label>
@@ -187,9 +191,19 @@
                 <label>المنصرف (ج.م):</label>
                 <input type="number" id="invItemExpense" step="0.01" placeholder="0.00">
             </div>
+            <div class="form-group">
+                <label>مُرحّل من فاتورة (اختياري):</label>
+                <select id="invItemFrom">
+                    <option value="">— ليس مُرحّلاً —</option>
+                </select>
+            </div>
             <button class="btn-add" onclick="addInvoiceItem()">إضافة بند</button>
         </div>
-        <div class="form-row">
+        <div class="note" style="margin-top:4px; font-size:11px;">
+            <strong>معلومة:</strong> لو البند "وارد" ومُرحّل من فاتورة أخرى، النظام سيخصم المبلغ تلقائياً من الفاتورة المصدر.
+        </div>
+
+        <div class="form-row" style="margin-top:8px;">
             <button class="btn-add" onclick="addNewInvoice()" style="background:#1565c0; margin-top:0;">➕ فاتورة جديدة</button>
             <button class="btn-danger" onclick="deleteCurrentInvoice()" style="margin-top:0; padding:8px 14px; font-size:12px;">🗑️ حذف الفاتورة الحالية</button>
         </div>
@@ -246,7 +260,7 @@
 
     <div class="section-block">
         <h2>ثالثاً: الإيرادات (ملخص الفواتير)</h2>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>ملخص كل فاتورة: إجمالي الوارد، إجمالي المنصرف، والمتبقي الذي استلمه الدائن فعليًا؛ ثم توزيعه على الشركاء.</em></p>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>ملخص كل فاتورة: إجمالي الوارد، إجمالي المنصرف، المُرحّل منها إلى فواتير أخرى، والمتبقي الفعلي الذي استلمه الدائن؛ ثم توزيعه على الشركاء.</em></p>
         <div class="revenue-table-wrapper">
             <table>
                 <thead>
@@ -255,7 +269,8 @@
                         <th>تاريخ الفاتورة</th>
                         <th>إجمالي الفاتورة</th>
                         <th>المنصرف منها</th>
-                        <th>المتبقي منها</th>
+                        <th>مُرحّل منها</th>
+                        <th>المتبقي الفعلي</th>
                         <th>المتسلم</th>
                         <th>د. أحمد (45.25%)</th>
                         <th>يحيى (23.08%)</th>
@@ -266,12 +281,12 @@
                 <tbody id="revenueTableBody"></tbody>
             </table>
         </div>
-        <div class="note"><strong>ملحوظة:</strong> الحصص تُحسب من <strong>المتبقي</strong> (ما استلمه المتسلم فعليًا)؛ لأن هذا هو المبلغ الذي يجب أن يوزَّع على الشركاء.</div>
+        <div class="note"><strong>ملحوظة:</strong> الحصص تُحسب من <strong>المتبقي الفعلي</strong> بعد خصم المنصرف والمُرحّل منها إلى فواتير أخرى.</div>
     </div>
 
     <div class="section-block">
         <h2>ثالثاً-ب: تفاصيل فواتير إيرادات الخيار</h2>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل كل فاتورة من فواتير بيع الخيار، مع بيان الوارد والمنصرف والرصيد المتبقي لكل بند.</em></p>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>تفصيل كل فاتورة من فواتير بيع الخيار، مع بيان الوارد والمنصرف والرصيد المتبقي لكل بند، وبيان الترحيلات بين الفواتير.</em></p>
         <div id="invoiceDetailsContainer"></div>
     </div>
 
@@ -337,7 +352,7 @@
         <div class="note"><strong>ملحوظة:</strong> القيمة الموجبة تعني أن الشريك <strong>دائن</strong>، والقيمة السالبة تعني أنه <strong>مدين</strong> (صافي المركز المالي).</div>
 
         <h3>تفاصيل الديون النهائية (بعد المقاصة الثنائية)</h3>
-        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول صافي الديون بين كل زوج من الشركاء بعد خصم الديون المتبادلة (المقاصة) وخصم حصص الشركاء من المتبقي بالإيرادات.</em></p>
+        <p style="font-size:12px; color:#2c3e50; margin-bottom:6px;"><em>يوضح هذا الجدول صافي الديون بين كل زوج من الشركاء بعد خصم الديون المتبادلة (المقاصة) وخصم حصص الشركاء من المتبقي الفعلي بالإيرادات.</em></p>
         <div class="settlement-table-wrapper">
             <table>
                 <thead>
@@ -440,9 +455,10 @@
             { id: 40, dateTitle: '3 سبتمبر - فطار', details: 'فطار (دفعها د. أحمد)', amount: 300.00, payer: 'dr_ahmed' }
         ];
 
+        // ملاحظة: البنود التي تحمل transferredFrom تشير إلى الفاتورة المصدر
         const initialInvoices = [
             { id: 1, name: 'الفاتورة الأولى', date: '', receiver: 'all', images: [], items: [
-                { id: 101, description: 'المبلغ الأساسي للفاتورة', income: 5270, expense: 0 },
+                { id: 101, description: 'المبلغ الأساسي للفاتورة', income: 5270, expense: 0, transferredFrom: null },
                 { id: 102, description: 'أجرة السائق', income: 0, expense: 500 },
                 { id: 103, description: 'تفويل سيارة عم حامد', income: 0, expense: 420 },
                 { id: 104, description: 'جاز وزيت لماكينة الري', income: 0, expense: 500 },
@@ -457,13 +473,13 @@
                 { id: 113, description: 'فطار العمال (عم حامد - يوم 7 سبتمبر)', income: 0, expense: 80 },
                 { id: 114, description: 'فطار (الأربعاء 9 سبتمبر)', income: 0, expense: 90 },
                 { id: 115, description: 'حساب جركن جاز قديم (عم سلامة)', income: 0, expense: 120 },
-                { id: 116, description: 'مُرحّل من الفاتورة الثانية', income: 260, expense: 0 },
-                { id: 117, description: 'مُرحّل من الفاتورة الثالثة', income: 60, expense: 0 },
+                { id: 116, description: 'مُرحّل من الفاتورة الثانية', income: 260, expense: 0, transferredFrom: 2 },
+                { id: 117, description: 'مُرحّل من الفاتورة الثالثة', income: 60, expense: 0, transferredFrom: 3 },
                 { id: 118, description: 'فطار يومي 13 و 14 سبتمبر', income: 0, expense: 200 },
-                { id: 119, description: 'متبقي من فلوس (د. أحمد)', income: 10, expense: 0 }
+                { id: 119, description: 'متبقي من فلوس (د. أحمد)', income: 10, expense: 0, transferredFrom: null }
             ]},
             { id: 2, name: 'الفاتورة الثانية', date: '', receiver: 'all', images: [], items: [
-                { id: 201, description: 'المبلغ الأساسي للفاتورة الثانية', income: 11480, expense: 0 },
+                { id: 201, description: 'المبلغ الأساسي للفاتورة الثانية', income: 11480, expense: 0, transferredFrom: null },
                 { id: 202, description: 'حساب أحمد رجب عن نقلتين', income: 0, expense: 600 },
                 { id: 203, description: 'راتب عم مصطفى وإبراهيم', income: 0, expense: 4000 },
                 { id: 204, description: 'مبلغ لدى د. أحمد (لشحن كهرباء منزله)', income: 0, expense: 1000 },
@@ -473,31 +489,31 @@
                 { id: 208, description: 'إكمال راتب يحيى', income: 0, expense: 820 }
             ]},
             { id: 3, name: 'الفاتورة الثالثة', date: '', receiver: 'all', images: [], items: [
-                { id: 301, description: 'المبلغ الأساسي للفاتورة الثالثة', income: 8560, expense: 0 },
+                { id: 301, description: 'المبلغ الأساسي للفاتورة الثالثة', income: 8560, expense: 0, transferredFrom: null },
                 { id: 302, description: 'رواتب (عم مصطفى، إبراهيم، ويوسف) - 10 سبتمبر', income: 0, expense: 6000 },
                 { id: 303, description: 'إكمال راتب يحيى', income: 0, expense: 2500 }
             ]},
             { id: 4, name: 'الفاتورة الرابعة', date: '', receiver: 'all', images: [], items: [
-                { id: 401, description: 'المبلغ الأساسي للفاتورة الرابعة', income: 7710, expense: 0 },
+                { id: 401, description: 'المبلغ الأساسي للفاتورة الرابعة', income: 7710, expense: 0, transferredFrom: null },
                 { id: 402, description: 'أجرة السيارة', income: 0, expense: 500 },
                 { id: 403, description: 'كراتين + 3 عواميد لصق', income: 0, expense: 1400 },
                 { id: 404, description: 'فطار يومين', income: 0, expense: 210 },
                 { id: 405, description: 'لإكمال راتب عم سلامة', income: 0, expense: 5600 }
             ]},
             { id: 5, name: 'الفاتورة الخامسة', date: '', receiver: 'all', images: [], items: [
-                { id: 501, description: 'المبلغ الأساسي للفاتورة الخامسة', income: 10640, expense: 0 },
+                { id: 501, description: 'المبلغ الأساسي للفاتورة الخامسة', income: 10640, expense: 0, transferredFrom: null },
                 { id: 502, description: 'حساب السائق', income: 0, expense: 540 },
                 { id: 503, description: 'راتب محمود أنور', income: 0, expense: 8000 },
                 { id: 504, description: 'إكمال راتب يحيى', income: 0, expense: 2100 }
             ]},
             { id: 6, name: 'الفاتورة السادسة', date: '', receiver: 'all', images: [], items: [
-                { id: 601, description: 'المبلغ الأساسي للفاتورة السادسة', income: 9520, expense: 0 },
+                { id: 601, description: 'المبلغ الأساسي للفاتورة السادسة', income: 9520, expense: 0, transferredFrom: null },
                 { id: 602, description: 'حساب السائق', income: 0, expense: 550 },
                 { id: 603, description: 'فطار العمال', income: 0, expense: 270 },
                 { id: 604, description: 'دُفعت للمبيدات', income: 0, expense: 8700 }
             ]},
             { id: 7, name: 'الفاتورة السابعة', date: '', receiver: 'all', images: [], items: [
-                { id: 701, description: 'المبلغ الأساسي للفاتورة السابعة', income: 20810, expense: 0 },
+                { id: 701, description: 'المبلغ الأساسي للفاتورة السابعة', income: 20810, expense: 0, transferredFrom: null },
                 { id: 702, description: 'مبيدات', income: 0, expense: 10000 },
                 { id: 703, description: 'للسائق - محمد عبسي', income: 0, expense: 600 },
                 { id: 704, description: 'سُلفة لعم مصطفى العامل', income: 0, expense: 1000 },
@@ -523,13 +539,36 @@
                 if (!Array.isArray(inv.images)) inv.images = [];
                 if (typeof inv.date !== 'string') inv.date = '';
                 if (typeof inv.receiver !== 'string') inv.receiver = 'all';
+                inv.items.forEach(it => {
+                    if (it.transferredFrom === undefined) it.transferredFrom = null;
+                });
             });
         }
 
-        function calcInvoiceTotals(inv) {
+        // الحسابات: income - expense - (المُرحّل منها إلى فواتير أخرى)
+        function calcInvoiceTotals(inv, allInvoices) {
             const income = inv.items.reduce((s, it) => s + (it.income || 0), 0);
             const expense = inv.items.reduce((s, it) => s + (it.expense || 0), 0);
-            return { income, expense, balance: income - expense };
+            
+            // المُرحّل منها: مجموع البنود في الفواتير الأخرى التي transferredFrom === هذه الفاتورة
+            let transferredOut = 0;
+            const transfersList = [];
+            (allInvoices || invoices).forEach(otherInv => {
+                otherInv.items.forEach(it => {
+                    if (it.transferredFrom === inv.id && (it.income || 0) > 0) {
+                        transferredOut += it.income;
+                        transfersList.push({ toInvoice: otherInv, amount: it.income });
+                    }
+                });
+            });
+            
+            return { 
+                income, 
+                expense, 
+                transferredOut,
+                balance: income - expense - transferredOut,
+                transfersList
+            };
         }
 
         async function loadData() {
@@ -667,7 +706,21 @@
             if (!inv) return;
             document.getElementById('invDate').value = inv.date || '';
             document.getElementById('invReceiver').value = inv.receiver || 'all';
+            populateTransferSelect(invId);
         };
+
+        function populateTransferSelect(excludeId) {
+            const sel = document.getElementById('invItemFrom');
+            if (!sel) return;
+            const prev = sel.value;
+            sel.innerHTML = '<option value="">— ليس مُرحّلاً —</option>';
+            invoices.forEach(inv => {
+                if (inv.id !== excludeId) {
+                    sel.innerHTML += `<option value="${inv.id}">${inv.name}</option>`;
+                }
+            });
+            if (prev) sel.value = prev;
+        }
 
         window.saveInvoiceMeta = function() {
             if (!isAdmin) { alert('يجب تسجيل الدخول كأدمن.'); return; }
@@ -686,15 +739,23 @@
             const description = document.getElementById('invItemDesc').value.trim();
             const income = parseFloat(document.getElementById('invItemIncome').value) || 0;
             const expense = parseFloat(document.getElementById('invItemExpense').value) || 0;
+            const fromVal = document.getElementById('invItemFrom').value;
+            const transferredFrom = fromVal ? parseInt(fromVal) : null;
+            
             if (!description || (income === 0 && expense === 0)) {
                 alert('يرجى إدخال البيان وقيمة الوارد أو المنصرف.'); return;
             }
+            if (transferredFrom && income <= 0) {
+                alert('الترحيل يكون من فاتورة إلى بند "وارد" فقط. يرجى إدخال قيمة في الوارد أو إلغاء الترحيل.');
+                return;
+            }
             const inv = invoices.find(i => i.id === invId);
             if (!inv) { alert('الفاتورة غير موجودة.'); return; }
-            inv.items.push({ id: Date.now(), description, income, expense });
+            inv.items.push({ id: Date.now(), description, income, expense, transferredFrom });
             document.getElementById('invItemDesc').value = '';
             document.getElementById('invItemIncome').value = '';
             document.getElementById('invItemExpense').value = '';
+            document.getElementById('invItemFrom').value = '';
             saveData();
         };
 
@@ -712,15 +773,24 @@
             const inv = invoices.find(i => i.id === invId);
             const item = inv.items.find(it => it.id === itemId);
             if (!item) return;
+            
             const newDesc = prompt('البيان:', item.description);
             if (newDesc === null) return;
             const newIncome = prompt('الوارد (ج.م):', item.income);
             if (newIncome === null) return;
             const newExpense = prompt('المنصرف (ج.م):', item.expense);
             if (newExpense === null) return;
+            
+            // عرض قائمة الترحيل
+            const invOptions = invoices.filter(i => i.id !== invId).map(i => i.id + '=' + i.name).join('\n');
+            const currentFrom = item.transferredFrom || '';
+            const fromPrompt = prompt('مُرحّل من فاتورة (رقم) — أو اتركه فارغاً:\n' + invOptions, currentFrom);
+            if (fromPrompt === null) return;
+            
             item.description = newDesc.trim() || item.description;
             item.income = parseFloat(newIncome) || 0;
             item.expense = parseFloat(newExpense) || 0;
+            item.transferredFrom = fromPrompt ? parseInt(fromPrompt) : null;
             saveData();
         };
 
@@ -738,7 +808,26 @@
             const invId = parseInt(document.getElementById('invSelect').value);
             const inv = invoices.find(i => i.id === invId);
             if (!inv) return;
-            if (confirm('هل أنت متأكد من حذف "' + inv.name + '" بالكامل؟')) {
+            
+            // فحص: هل هذه الفاتورة مصدر ترحيل لبند آخر؟
+            let usedAsSource = false;
+            invoices.forEach(other => {
+                if (other.id !== invId) {
+                    other.items.forEach(it => {
+                        if (it.transferredFrom === invId) usedAsSource = true;
+                    });
+                }
+            });
+            let msg = 'هل أنت متأكد من حذف "' + inv.name + '" بالكامل؟';
+            if (usedAsSource) msg += '\n\n⚠️ تنبيه: هناك بنود في فواتير أخرى مُرَحّلة من هذه الفاتورة. سيتم إلغاء الترحيل تلقائياً.';
+            
+            if (confirm(msg)) {
+                // حذف أي إشارات ترحيل من هذه الفاتورة
+                invoices.forEach(other => {
+                    other.items.forEach(it => {
+                        if (it.transferredFrom === invId) it.transferredFrom = null;
+                    });
+                });
                 invoices = invoices.filter(i => i.id !== invId);
                 saveData();
             }
@@ -989,17 +1078,18 @@
             const tbody = document.getElementById('revenueTableBody');
             tbody.innerHTML = '';
             if (invoices.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:#888; padding:12px;">لا توجد فواتير مسجلة حتى الآن</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color:#888; padding:12px;">لا توجد فواتير مسجلة حتى الآن</td></tr>`;
                 return;
             }
 
-            let grandIncome = 0, grandExpense = 0, grandBalance = 0;
+            let grandIncome = 0, grandExpense = 0, grandTransferOut = 0, grandBalance = 0;
             const grandShares = { dr_ahmed: 0, yahia: 0, mostafa: 0, ahmed_yassin: 0 };
 
-            invoices.forEach((inv, idx) => {
-                const { income, expense, balance } = calcInvoiceTotals(inv);
+            invoices.forEach(inv => {
+                const { income, expense, transferredOut, balance } = calcInvoiceTotals(inv, invoices);
                 grandIncome += income;
                 grandExpense += expense;
+                grandTransferOut += transferredOut;
                 grandBalance += balance;
 
                 const receiverName = (inv.receiver === 'all' || !inv.receiver) ? '—' : (partners[inv.receiver] ? partners[inv.receiver].name : inv.receiver);
@@ -1035,12 +1125,15 @@
                     mostafaColor = 'creditor-ahmed_yassin'; mostafaSign = '-';
                 }
 
+                const transferOutDisplay = transferredOut > 0 ? `<span class="transfer-out-badge">${transferredOut.toFixed(2)}</span>` : '—';
+
                 tbody.innerHTML += `
                     <tr>
                         <td>${inv.name}</td>
                         <td>${inv.date || '—'}</td>
                         <td><strong>${income.toFixed(2)}</strong></td>
                         <td>${expense.toFixed(2)}</td>
+                        <td>${transferOutDisplay}</td>
                         <td><strong style="color:#1b5e20;">${balance.toFixed(2)}</strong></td>
                         <td>${receiverName}</td>
                         <td class="${drColor}">${drSign}${shareDr.toFixed(2)}</td>
@@ -1057,6 +1150,7 @@
                     <td></td>
                     <td><strong>${grandIncome.toFixed(2)}</strong></td>
                     <td><strong>${grandExpense.toFixed(2)}</strong></td>
+                    <td><strong>${grandTransferOut.toFixed(2)}</strong></td>
                     <td><strong>${grandBalance.toFixed(2)}</strong></td>
                     <td></td>
                     <td><strong>${grandShares.dr_ahmed.toFixed(2)}</strong></td>
@@ -1094,9 +1188,14 @@
 
             invoices.forEach(inv => {
                 const receiverName = (inv.receiver === 'all' || !inv.receiver) ? 'الجميع (بدون مقاصة)' : (partners[inv.receiver] ? partners[inv.receiver].name : inv.receiver);
-                const { income: invIncome, expense: invExpense, balance: invBalance } = calcInvoiceTotals(inv);
+                const { income: invIncome, expense: invExpense, transferredOut, balance: invBalance, transfersList } = calcInvoiceTotals(inv, invoices);
 
-                let html = `<h3>${inv.name} <span class="info-badge">📅 ${inv.date || 'بدون تاريخ'}</span> <span class="info-badge">👤 المتسلم: ${receiverName}</span></h3>
+                let transferInfo = '';
+                if (transferredOut > 0) {
+                    transferInfo = `<span class="transfer-out-badge">⬆️ مُرحّل منها: ${transferredOut.toFixed(2)} ج.م</span>`;
+                }
+
+                let html = `<h3>${inv.name} <span class="info-badge">📅 ${inv.date || 'بدون تاريخ'}</span> <span class="info-badge">👤 المتسلم: ${receiverName}</span> ${transferInfo}</h3>
                     <table>
                         <thead>
                             <tr>
@@ -1114,6 +1213,14 @@
                     runningBalance += (item.income || 0) - (item.expense || 0);
                     const incomeDisplay = (item.income || 0) > 0 ? item.income.toFixed(2) : '—';
                     const expenseDisplay = (item.expense || 0) > 0 ? item.expense.toFixed(2) : '—';
+                    
+                    let descWithBadge = item.description;
+                    if (item.transferredFrom) {
+                        const srcInv = invoices.find(i => i.id === item.transferredFrom);
+                        const srcName = srcInv ? srcInv.name : ('#' + item.transferredFrom);
+                        descWithBadge += ` <span class="transfer-badge">⬇️ من: ${srcName}</span>`;
+                    }
+                    
                     const actionBtns = isAdmin ? `<td class="no-print">
                         <button class="btn-danger btn-edit" onclick="editInvoiceItem(${inv.id}, ${item.id})">تعديل</button>
                         <button class="btn-danger" onclick="deleteInvoiceItem(${inv.id}, ${item.id})">حذف</button>
@@ -1121,7 +1228,7 @@
 
                     html += `
                         <tr>
-                            <td style="text-align:right; padding-right:8px;">${item.description}</td>
+                            <td style="text-align:right; padding-right:8px;">${descWithBadge}</td>
                             <td>${incomeDisplay}</td>
                             <td>${expenseDisplay}</td>
                             <td>${runningBalance.toFixed(2)}</td>
@@ -1227,11 +1334,11 @@
                 });
             });
 
-            // 2. تأثير الإيرادات (المتبقي لكل فاتورة) - يُخصم من الديون
+            // 2. تأثير الإيرادات (المتبقي الفعلي بعد خصم المُرحّل) - يُخصم من الديون
             let revenueImpact = {};
             invoices.forEach(inv => {
                 if (inv.receiver === 'all' || !inv.receiver) return;
-                const { balance } = calcInvoiceTotals(inv);
+                const { balance } = calcInvoiceTotals(inv, invoices);
                 if (balance <= 0) return;
                 Object.keys(partners).forEach(p => {
                     if (p !== inv.receiver) {
