@@ -1,6 +1,11 @@
-const CACHE_NAME = 'soba-cache-v3';
-const PRECACHE_URLS = ['./', './index.html', './manifest.json'];
-const TIMEOUT_MS = 3000;
+const CACHE_NAME = 'soba-cache-v5';
+const PRECACHE_URLS = [
+  './',
+  './index.html',
+  './manifest.json',
+  'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js',
+  'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js'
+];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(
@@ -24,52 +29,12 @@ self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
 
-  // تجاهل Firebase و Google Fonts
-  if (url.hostname.includes('firestore.googleapis.com')) return;
-  if (url.hostname.includes('firebaseinstallations.googleapis.com')) return;
-  if (url.hostname.includes('identitytoolkit.googleapis.com')) return;
-  if (url.hostname.includes('gstatic.com')) return;
-  if (url.hostname.includes('googleapis.com')) return;
+  // فقط استدعاءات Firebase API (البيانات) لا تُخزَّن
+  if (url.hostname === 'firestore.googleapis.com') return;
+  if (url.hostname === 'firebaseinstallations.googleapis.com') return;
+  if (url.hostname === 'identitytoolkit.googleapis.com') return;
 
-  const isHTML =
-    e.request.mode === 'navigate' ||
-    url.pathname.endsWith('.html') ||
-    url.pathname.endsWith('/') ||
-    e.request.destination === 'document';
-
-  if (isHTML) {
-    // HTML: شبكة مع timeout 3 ثواني، ثم كاش
-    e.respondWith(
-      new Promise((resolve) => {
-        let settled = false;
-        const timer = setTimeout(() => {
-          if (!settled) {
-            settled = true;
-            caches.match(e.request).then(c => resolve(c || caches.match('./index.html')));
-          }
-        }, TIMEOUT_MS);
-
-        fetch(e.request).then(res => {
-          if (!settled && res && res.status === 200) {
-            settled = true;
-            clearTimeout(timer);
-            const clone = res.clone();
-            caches.open(CACHE_NAME).then(c => c.put(e.request, clone)).catch(() => {});
-            resolve(res);
-          }
-        }).catch(() => {
-          if (!settled) {
-            settled = true;
-            clearTimeout(timer);
-            caches.match(e.request).then(c => resolve(c || caches.match('./index.html')));
-          }
-        });
-      })
-    );
-    return;
-  }
-
-  // باقي الملفات: cache-first
+  // كل شيء آخر: cache-first مع تحديث في الخلفية
   e.respondWith(
     caches.match(e.request).then(cached => {
       const networkFetch = fetch(e.request)
